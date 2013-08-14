@@ -1,0 +1,25 @@
+GeneralLibraryCategory:
+    category01:
+        name: Affilliates
+        description: Affilliates
+    category02:
+        name: Owners
+        description: Owners
+    category03:
+        name: Customers
+        description: Customers
+    category04:
+        name: Company
+        description: Company
+    category05:
+        name: Government
+        description: Government
+    category06:
+        name: Suppliers
+        description: Suppliers
+    category07:
+        name: Officers & Employees
+        description: Officers & Employees
+    category08:
+        name: Franchisee
+        description: Franchisee

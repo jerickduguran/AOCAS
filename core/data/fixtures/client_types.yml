@@ -1,0 +1,10 @@
+ClientType:
+    type01:
+        name: Customer
+        description: Customer Client
+    type02:
+        name: Supplier
+        description: Supplier Client
+    type03:
+        name: Procpect
+        description: Previous Client

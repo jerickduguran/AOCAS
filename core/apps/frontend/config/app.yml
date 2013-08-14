@@ -1,0 +1,13 @@
+# You can find more information about this file on the symfony website:
+# http://www.symfony-project.org/reference/1_4/en/11-App
+
+# default values
+all:
+  upload:
+    companylogo: uploads/logo/
+    banklogo: uploads/logo/bank
+    tempuploaddir: uploads/temps/
+    companylogowidth: 100
+    companylogoheight: 100
+    limit: 1MB
+    phototype: ['image/jpeg', 'image/jpg','image/pjpeg','image/png','image/gif'] 

@@ -1,0 +1,4 @@
+all:
+    stylesheets: [wizard/smart_wizard.css]
+    javascripts: [jquery.smartWizard-2.0.min.js,bpopup.min.js,jquery.wizard.custom.js]
+    layout: layout-setup

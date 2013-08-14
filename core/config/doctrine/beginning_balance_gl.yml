@@ -1,0 +1,21 @@
+GeneralLedgerBeginningBalance:
+    actAs: { Timestampable: ~ }
+    columns:
+        chart_of_account_id: { type: integer(11) }
+        project_id: { type: integer(11) }
+        department_id: { type: integer(11) } 
+        debit:  { type: decimal(12), scale: 2, default: 0.00, notnull: true }
+        credit:  { type: decimal(12), scale: 2, default: 0.00, notnull: true }
+    relations:
+        ChartOfAccount:
+            local: chart_of_account_id
+            foreign: id
+            onDelete: SET NULL
+        Project:
+            local: project_id
+            foreign: id
+            onDelete: SET NULL
+        Department:
+            local: department_id
+            foreign: id
+            onDelete: SET NULL

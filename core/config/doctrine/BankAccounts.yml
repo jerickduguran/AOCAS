@@ -1,0 +1,23 @@
+BankAccount:
+    actAs: { Timestampable: ~ }
+    columns:
+        code: {type: string(10), notnull: true, default:'' } 
+        bank_id: { type: int(11) }	
+        account_name: {type: string(50), notnull: true, default:'' } 
+        account_number: {type: string(60),notnull: true } 
+        currency_id: {type: int(11) } 
+        status: {type: boolean, notnull:true, default: false }
+    relations:
+       Bank:
+          local: bank_id
+          foreign: id
+          onDelete: SET NULL 
+
+Bank:
+    actAs: { Timestampable: ~ }
+    columns:
+        code: {type: string(10), notnull: true, default:'' } 
+        name: {type: string(50), notnull: true, default:'' } 
+        description: {type: string }  
+        logo: {type: string(150) } 
+        status: {type: boolean, notnull:true, default: false } 

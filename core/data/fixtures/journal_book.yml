@@ -1,0 +1,22 @@
+JournalBook:
+    b1:
+        code: BK00001
+        name: Income Book
+    b2:
+        code: BK00002
+        name: Accounts Payable Book
+    b3:
+        code: BK00003
+        name: Cash Disbursement Book
+    b4:
+        code: BK00004
+        name: Cash Receipts Book
+    b5:
+        code: BK00005
+        name: Debit/Credit Memo
+    b6:
+        code: BK00006
+        name: Journal Book
+    b7:
+        code: BK00007
+        name: Petty Cash Book

@@ -1,0 +1,50 @@
+ParticularTemplate:
+    actAs: { Timestampable: ~ }
+    columns:	
+        code: { type: string(50), notnull: true, default: '', unique: true }
+        name: { type: string(50),} notnull: true, default: '' }	
+        particulars: { type: string } 
+        header_message: { type: string } 
+        footer_message: { type: string } 
+        particulars: { type: string } 
+        project_id: { type: int(11) }		
+        department_id: { type: int(11) }	
+    relations:
+        Project:
+            local: project_id
+            foreign: id
+            onDelete: SET NULL
+        Department:
+            local: department_id
+            foreign: id
+            onDelete: SET NULL 	 
+        JournalBook:
+            class: JournalBook
+            local: particular_template_id
+            foreign: journal_book_id 
+            refClass: JournalBookParticularTemplate
+            onDelete: CASCADE
+
+ParticularTemplateEntry: 
+    actAs: { Timestampable: ~ }
+    columns:
+        particular_template_id: { type: int(11), notnull: true }		
+        title: { type: string(150) }		
+        amount: { type: decimal(12), scale: 2, default: 0.00, notnull: true }
+        vat_application: { type: enum, values: ['VAT_EXEMPT','VAT_ZERO_PERCENT','VAT_INCLUSIVE','VAT_EXCLUSIVE'], default: 'VAT_INCLUSIVE'}	 
+        tax_expanded_withheld_id: { type: int(11) }
+        tax_final_withheld_id: { type: int(11) }	 
+        total: { type: decimal(12), scale: 2, default: 0.00, notnull: true }	  
+    relations: 
+        ParticularTemplate:
+            local: particular_template_id
+            foreign: id
+            onDelete: CASCADE
+        TaxExpandedWithheld:
+            local: tax_expanded_withheld_id
+            foreign: id
+            onDelete: CASCADE
+        TaxFinalWithheld:
+            local: tax_final_withheld_id
+            foreign: id
+            onDelete: CASCADE

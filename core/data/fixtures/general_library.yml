@@ -1,0 +1,53 @@
+Industry:
+    i1:
+        code: IT
+        title: Information Technology
+        description: 
+    i2:
+        code: Audit
+        title: Auditing
+        description:
+    i3:
+        code: Accounting
+        title: Accounting
+        description:
+
+GeneralLibraryTerms:
+    term01:
+        name: 0 Days
+        term_value: 0
+        description:
+    term02:
+        name: 30 Days
+        term_value: 30
+        description:
+    term03:
+        name: 60 Days
+        term_value: 60
+        description:
+    term04:
+        name: 90 Days
+        term_value: 90
+        description:
+    term05:
+        name: COD
+        term_value: 0
+        description:
+    term06:
+        name: Others
+        term_value: 
+        description:
+
+GeneralLibrary:
+    gl1:
+        client_type_id: 1
+        name: Caltex Philippines
+        code: 	CL-CALTEXPH	
+    gl2:
+        client_type_id: 2
+        name: Mitsubishi Cars, Philippines
+        code: 	CL-MCP	
+    gl3:
+        client_type_id: 3
+        name: Proctle and Gumble Philippines
+        code: 	CL-PG

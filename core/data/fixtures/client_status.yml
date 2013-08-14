@@ -1,0 +1,7 @@
+ClientStatus:
+    status01:
+        name: Active
+        name: Active Client
+    status02:
+        name: Inactive
+        name: Inactive Client

@@ -1,0 +1,20 @@
+# You can find more information about this file on the symfony website:
+# http://www.symfony-project.org/reference/1_4/en/13-View
+
+default:
+  http_metas:
+    content-type: text/html
+
+  metas:
+    title:        GCROSS - ONLINE ACCOUNTING SYSTEM
+    description:  
+    #keywords:     symfony, project
+    #language:     en
+    #robots:       index, follow
+
+  stylesheets:    [style.css,style-menu.css,notif.css,ui-gcross/jquery-ui-1.10.3.custom.min.css,jqgrid/ui.jqgrid.css]
+
+  javascripts:    [jquery-1.9.1.min.js,jqgrid/i18n/grid.locale-en.js,jqgrid/jquery.jqGrid.min.js,jqgrid/jquery.jqgrid.custom.js,jquery-ui-1.10.3.custom.min.js,jquery.ui.datepicker.js]
+
+  has_layout:     true
+  layout:         layout

@@ -1,0 +1,14 @@
+TermsOfPayment:
+    term01:
+        title: 0 Day
+        number_of_days: 0
+    term02:
+        title: 30 Day
+        number_of_days: 30
+    term03:
+        title: 60 Day
+        number_of_days: 30
+    term04:
+        title: 90 Days
+        number_of_days: 30
+    

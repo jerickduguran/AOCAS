@@ -1,0 +1,13 @@
+Country:
+    country01:
+        code: PH
+        name: Philippines
+    country02:
+        code: AU
+        name: Australia
+    country03:
+        code: SG
+        name: Singapore
+    country04:
+        code: US
+        name: United States

@@ -1,0 +1,131 @@
+Invoice:
+    actAs: { Timestampable: ~ }
+    columns:
+        book_id: { type: int(11), notnull: true, default: '0' }		
+        status: { type: enum, values: ['UNPAID','PAID','DUE','OVERDUE'], default: 'UNPAID' }		
+        invoice_number: { type: string(50), notnull: true, default: '', unique: true }
+        general_library_id: { type: int(11) }	 
+        currency_id: { type: int(11) }
+        purchase_order_number: { type: string(50) }	 
+        date_receive: { type: date }	 
+        period: { type: date }
+        terms_of_payment_id: { type: int(11) }	   
+        due_date: { type: date }	   
+        header_message: { type: string }
+        footer_message: { type: string } 
+        total_amount: { type: decimal(12), scale: 2, default: 0.00, notnull: true }	
+    relations:
+        Book:
+            local: book_id
+            foreign: id
+            onDelete: CASCADE
+        GeneralLibrary:
+            local: general_library_id
+            foreign: id
+            onDelete: SET NULL
+        Currency:
+            local: currency_id
+            foreign: id
+            onDelete: SET NULL
+        TermsOfPayment:
+            local: terms_of_payment_id
+            foreign: id
+            onDelete: SET NULL
+
+InvoiceParticularEntry:
+    actAs: { Timestampable: ~ }
+    columns:
+        invoice_id: { type: int(11), notnull: true }		
+        title: { type: string(150) }		
+        amount: { type: decimal(12), scale: 2, default: 0.00, notnull: true }
+        vat_application: { type: enum, values: ['VAT_EXEMPT','VAT_ZERO_PERCENT','VAT_INCLUSIVE','VAT_EXCLUSIVE'], default: 'VAT_INCLUSIVE'}	 
+        tax_expanded_withheld_id: { type: int(11) }
+        tax_final_withheld_id: { type: int(11) }	 
+        total: { type: decimal(12), scale: 2, default: 0.00, notnull: true }	  
+    relations: 
+        Invoice:
+            local: invoice_id
+            foreign: id
+            onDelete: CASCADE
+        TaxExpandedWithheld:
+            local: tax_expanded_withheld_id
+            foreign: id
+            onDelete: CASCADE
+        TaxFinalWithheld:
+            local: tax_final_withheld_id
+            foreign: id
+            onDelete: CASCADE
+
+InvoiceAccountEntry:
+    actAs: { Timestampable: ~ }
+    columns:
+        invoice_id: { type: int(11), notnull: true}			
+        chart_of_account_id: { type: int(11) }		
+        project_id: { type: int(11) }
+        department_id: { type: int(11) }
+        dn_reference: { type: string(50) }
+        general_library_id: { type: int(11) }	 
+        debit: { type: decimal(12), scale: 2, default: 0.00, notnull: true }
+        credit: { type: decimal(12), scale: 2, default: 0.00, notnull: true }
+    relations:
+        Invoice:
+            local: invoice_id
+            foreign: id
+            onDelete: CASCADE 
+        ChartOfAccount:
+            local: chart_of_account_id
+            foreign: id
+            onDelete: SET NULL
+        Project:
+            local: project_id
+            foreign: id
+            onDelete: SET NULL
+        Department:
+            local: department_id
+            foreign: id
+            onDelete: SET NULL
+        GeneralLibrary:
+            local: general_library_id
+            foreign: id
+            onDelete: SET NULL
+
+TermsOfPayment:
+    actAs: { Timestampable: ~ }
+    columns:
+        title: { type: int(11) }		
+        number_of_days: { type: int(11), notnull: true, default: 0 }
+
+InvoiceAccountEntryOutputVat:
+    actAs: { Timestampable: ~ }
+    columns:
+        invoice_number: { type: int(11) }		
+        chart_of_account_id: { type: int(11) }		
+        general_library_id: { type: int(11) }		
+        tin_number: { type: string(60) }	
+    relations:
+        ChartOfAccount:
+            local: chart_of_account_id
+            foreign: id
+            onDelete: SET NULL
+        GeneralLibrary:
+            local: general_library_id
+            foreign: id
+            onDelete: SET NULL
+
+InvoiceAccountEntryOutputVatEntry:
+    actAs: { Timestampable: ~ }
+    columns:
+        invoice_account_entry_output_vat_id: { type: int(11) }		
+        tax_rate_id: { type: int(11) }		
+        gross_purchased: { type: decimal(12), scale: 2, default: 0.00, notnull: true }		
+        vat_received: { type: decimal(12), scale: 2, default: 0.00, notnull: true }		
+        net_sales: { type: decimal(12), scale: 2, default: 0.00, notnull: true }
+    relations:
+        InvoiceAccountEntryOutputVat:
+            local: invoice_account_entry_output_vat_id
+            foreign: id
+            onDelete: CASCADE	
+        TaxRate:
+            local: tax_rate_id
+            foreign: id
+            onDelete: CASCADE			

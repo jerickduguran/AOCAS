@@ -1,0 +1,6 @@
+Book:
+    actAs: { Timestampable: ~ }
+    columns:	
+        code: { type: string(50), notnull: true, default: '', unique: true }
+        name: { type: string(50),} notnull: true, default: '' }	 
+        description: { type: string }	 

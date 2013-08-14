@@ -1,0 +1,9 @@
+Currency:
+  PHP: 
+    title: Philippine Peso
+    symbol: PHP
+    is_base: true
+    unit_per_base: 1.00
+  USD: 
+    title: US Dollar
+    symbol: USD

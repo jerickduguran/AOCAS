@@ -1,0 +1,57 @@
+<?php
+
+/**
+ * JournalBookTemplate form.
+ *
+ * @package    Gcross Accounting System
+ * @subpackage form
+ * @author     Jerick Y. Duguran & Mary Ann I. Altar
+ * @version    SVN: $Id: sfDoctrineFormTemplate.php 23810 2009-11-12 11:07:44Z Kris.Wallsmith $
+ */
+class JournalBookTemplateForm extends BaseJournalBookTemplateForm
+{
+  public function configure()
+  { 
+   $this->setWidgets(array(
+      'id'                  => new sfWidgetFormInputHidden(),
+      'code'                => new sfWidgetFormInputText(),
+      'name'                => new sfWidgetFormInputText(),
+      'particulars'         => new sfWidgetFormTextarea(),
+      'project_id'          => new sfWidgetFormDoctrineChoice(array('model' => $this->getRelatedModelName('Project'), 'add_empty' => true)),
+      'department_id'       => new sfWidgetFormDoctrineChoice(array('model' => $this->getRelatedModelName('Department'), 'add_empty' => true)),
+      'general_library_id'  => new sfWidgetFormDoctrineChoice(array('model' => $this->getRelatedModelName('GeneralLibrary'), 'add_empty' => true)),
+      'chart_of_account_id' => new sfWidgetFormDoctrineChoice(array('model' => $this->getRelatedModelName('ChartOfAccount'), 'add_empty' => true)),
+      'debit'               => new sfWidgetFormInputText(),
+      'credit'              => new sfWidgetFormInputText(), 
+      'journal_book_list'   => new sfWidgetFormDoctrineChoice(array('multiple' => true, 'model' => 'JournalBook','expanded'=> true)),
+    ));
+
+    $this->setValidators(array(
+      'id'                  => new sfValidatorChoice(array('choices' => array($this->getObject()->get('id')), 'empty_value' => $this->getObject()->get('id'), 'required' => false)),
+      'code'                => new sfValidatorString(array('max_length' => 50, 'required' => false)),
+      'name'                => new sfValidatorString(array('max_length' => 50, 'required' => false)),
+      'particulars'         => new sfValidatorString(array('required' => false)),
+      'project_id'          => new sfValidatorDoctrineChoice(array('model' => $this->getRelatedModelName('Project'), 'required' => false)),
+      'department_id'       => new sfValidatorDoctrineChoice(array('model' => $this->getRelatedModelName('Department'), 'required' => false)),
+      'general_library_id'  => new sfValidatorDoctrineChoice(array('model' => $this->getRelatedModelName('GeneralLibrary'), 'required' => false)),
+      'chart_of_account_id' => new sfValidatorDoctrineChoice(array('model' => $this->getRelatedModelName('ChartOfAccount'), 'required' => false)),
+      'debit'               => new sfValidatorNumber(array('required' => false)),
+      'credit'              => new sfValidatorNumber(array('required' => false)), 
+      'journal_book_list'   => new sfValidatorDoctrineChoice(array('multiple' => true, 'model' => 'JournalBook', 'required' => false)),
+    ));
+
+	
+	$this->setWidget("entry_type", new sfWidgetFormSelect(array("choices" => array(""=>"","DEBIT"=>"DEBIT","CREDIT"=>"CREDIT"),'default'=> $this->isNew() ? '' : $this->getObject()->getChartOfAccount()->getEntryType())));
+	$this->setWidget("entry_value", new sfWidgetFormInputText(array('default'=> $this->isNew() ? '' : $this->getObject()->getValueByEntryType())));
+	$this->validatorSchema['entry_type'] = new sfValidatorChoice(array('choices' => array_keys(array("DEBIT"=>"DEBIT","CREDIT"=>"CREDIT"))),array("required"=>true));
+	$this->validatorSchema['entry_value'] = new sfValidatorString(array("required"=>false));
+	
+
+    $this->validatorSchema->setPostValidator(
+      new sfValidatorDoctrineUnique(array('model' => 'JournalBookTemplate', 'column' => array('code')))
+    );
+
+    $this->widgetSchema->setNameFormat('journal_book_template[%s]');
+
+  }
+}

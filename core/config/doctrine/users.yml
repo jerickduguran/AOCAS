@@ -1,0 +1,54 @@
+Users: 
+    actAs: { Timestampable: ~ }
+    columns:
+        code:  { type: string(255), notnull: true, default: 'USR', unique: true }
+        first_name: { type: string(60) }
+        last_name: { type: string(60) }
+        middle_name: { type: string(60) }
+        username:  { type: string(60) }
+        password: { type: string(255) } 
+        email: { type: string(255) } 
+        picture: { type: string(15) } 
+        position_id	: { type: int(11) } 
+        role_id: { type: int(11) } 
+        is_active: { type: boolean, default: false } 
+        status_id: { type: int(11) } 
+    relations:
+        UserRoles:
+            local: role_id
+            foreign: id
+            onDelete: SET NULL
+        UserPositions:
+            local: position_id
+            foreign: id
+            onDelete: SET NULL
+        UserStatus:
+            local: status_id
+            foreign: id
+            onDelete: SET NULL
+
+UserPositions:
+    actAs: { Timestampable: ~ }
+    columns:
+        code:  { type: string(3), notnull: true, default: 'PHP', unique: true }
+        title:  { type: string(50) } 
+
+UserRoles:
+    actAs: { Timestampable: ~ }
+    columns:
+        code:  { type: string(3), notnull: true, default: 'PHP', unique: true }
+        name:  { type: string(50) }
+        status: { type: string(15) } 
+
+RolePrivileges:
+    actAs: { Timestampable: ~ }
+    columns:
+        role_id:  { type: string(3), notnull: true, default: 'PHP', unique: true }
+        name:  { type: string(50) }
+        description: { type: string(15) } 
+
+UserStatus:
+    actAs: [Timestampable]
+    columns:
+        name: { type: string(60) }
+        description: { type: string(60) }

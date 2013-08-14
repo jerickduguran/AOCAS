@@ -1,0 +1,29 @@
+AccountsPayableBeginningBalance:
+    actAs: { Timestampable: ~ }
+    columns:
+        currency_id: {type: integer(11) }
+        general_library_id: { type: integer(11) }
+        project_id: { type: integer(11) }
+        department_id: { type: integer(11) } 
+        start_date: {type: date }
+        receive_date: {type: date }
+        bill_number: {type: string(50), notnull: true, default: '' }
+        amount: {type: decimal(12), scale: 2, default: 0.00, notnull: true } 
+        particulars: {type: string }
+    relations:
+        GeneralLibrary:
+            local: general_library_id
+            foreign: id
+            onDelete: SET NULL
+        Project:
+            local: project_id
+            foreign: id
+            onDelete: SET NULL
+        Department:
+            local: department_id
+            foreign: id
+            onDelete: SET NULL
+        Currency:
+            local: currency_id
+            foreign: id
+            onDelete: SET NULL

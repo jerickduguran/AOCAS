@@ -1,0 +1,49 @@
+Validation:
+    val1:
+        code: ARC
+        name: AR Codes
+        description: Accounts receivable Codes
+    val2:
+        code: BC
+        name: Bank / Cash
+        description: Bank / Cash
+    val3:
+        code: ALLC
+        name: Allocation
+        description: Allocation
+    val4:
+        code: IV
+        name: Input VAT
+        description: Input VAT
+    val5:
+        code: FA
+        name: Fix Asset
+        description: 
+    val6:
+        code: PP
+        name: Prepayment
+        description:   
+    val7:
+        code: GL
+        name: Gain / Loss
+        description:   
+    val8:
+        code: RS
+        name: Restatement
+        description:   
+    val9:
+        code: APC
+        name: AP Code
+        description:   
+    val10:
+        code: ET
+        name: Expanded Tax
+        description:   
+    val11:
+        code: FT
+        name: Final Tax
+        description:   
+    val12:
+        code: OV
+        name: Output VAT
+        description:        

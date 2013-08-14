@@ -1,0 +1,45 @@
+ChartOfAccount:
+    coc1:
+        ChartOfAccountType: type2
+        code: '00000001'
+        title: Accounts Receivable - Trade
+        description: All accounts receivable trade related
+        status: ACTIVE
+    coc2:
+        ChartOfAccountType: type2
+        code: '00000002'
+        title: Accounts Receivable - Other
+        description: All unspecified accounts receivable
+        status: ACTIVE
+    coc3:
+        ChartOfAccountType: type2
+        code: '00000003'
+        title: Computer Equipment
+        status: ACTIVE
+        description: 
+    coc4:
+        ChartOfAccountType: type1
+        code: '00000004'
+        title: Accounts Payable - Trade
+        description: All accounts payable
+        status: ACTIVE
+    coc5:
+        ChartOfAccountType: type1
+        code: '00000005'
+        title: Income Tax Payable
+        description: 
+        status: ACTIVE
+    coc6:
+        ChartOfAccountType: type1
+        code: '00000006'
+        title: Accounts Payable to BIR
+        description: All VAT applicable to BIR transactions ... 
+        status: ACTIVE
+
+ChartOfAccountValidation:
+    cv1:
+        ChartOfAccount: coc3
+        Validation: val5
+    cv2:
+        ChartOfAccount: coc6
+        Validation: val12

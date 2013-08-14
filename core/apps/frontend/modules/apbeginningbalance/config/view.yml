@@ -1,0 +1,4 @@
+newSuccess:
+    javascripts: [jquery.validate.js,gcross.dateformatter.js]
+editSuccess:
+    javascripts: [jquery.validate.js,gcross.dateformatter.js]

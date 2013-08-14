@@ -1,0 +1,43 @@
+# You can find more information about this file on the symfony website:
+# http://www.symfony-project.org/reference/1_4/en/10-Routing
+
+# default rules
+homepage:
+  url:   /
+  param: { module: dashboard, action: index }
+dashboard:
+  url:   /
+  param: { module: dashboard, action: index }
+setupwizard:
+  url:   /setup-wizard
+  param: { module: setup, action: index  }
+library:
+  url:   /general-library
+  param: { module: library, action: index  }
+#Particular templates
+particulartemplate:    
+  url:   /particular-templates
+  param: { module: particulartemplate, action: index }
+particulartemplate_new:    
+  url:   /particular-templates/new
+  param: { module: particulartemplate, action: new }
+particulartemplate_create:    
+  url:   /particular-templates/save
+  param: { module: particulartemplate, action: create }
+particulartemplate_update:    
+  url:   /particular-templates/update/:id
+  param: { module: particulartemplate, action: update }
+particulartemplate_edit:    
+  url:   /particular-templates/edit/:id
+  param: { module: particulartemplate, action: edit }
+particulartemplate_show:    
+  url:   /particular-templates/show
+  param: { module: particulartemplate, action: show }
+# generic rules
+# please, remove them by adding more specific rules
+default_index:
+  url:   /:module
+  param: { action: index }
+
+default:
+  url:   /:module/:action/*

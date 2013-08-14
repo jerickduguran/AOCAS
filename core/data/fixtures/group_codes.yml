@@ -1,0 +1,37 @@
+GroupCode:
+    gc1:
+        code: '0000000001'
+        title: Cash in-hand and In-bank
+    gc2:
+        code: '0000000002'
+        title: Receivables and Others
+    gc3:
+        code: '0000000003'
+        title: Prepayment and other current asset
+    gc4:
+        code: '0000000004'
+        title: Property and equipment
+    gc5:
+        code: '0000000005'
+        title: Accounts payable trade and others
+    gc6:
+        code: '0000000006'
+        title: Taxes Payable
+    gc7:
+        code: '0000000007'
+        title: Fund Balance
+    gc8:
+        code: '0000000008'
+        title: Accumulated Depreciation
+    gc9:
+        code: '0000000009'
+        title: Revenues
+    gc10:
+        code: '0000000010'
+        title: Expenses
+    gc11:
+        code: '0000000011'
+        title: Non-operating Expenses
+    gc12:
+        code: '0000000012'
+        title: Investments 

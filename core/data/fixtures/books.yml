@@ -1,0 +1,7 @@
+Book:
+    book1:
+        code: 00001
+        name: Book 1
+    book2:
+        code: 00002
+        name: Book 2

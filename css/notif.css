@@ -1,0 +1,5 @@
+input.error,select.error,textarea.error{border:1px dotted red}
+span.error{color:red;font-size:11px;}
+div#error{
+	color: red;
+}

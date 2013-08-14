@@ -1,0 +1,21 @@
+Department:
+    accounting: 
+        code: 10001
+        title: Accounting
+        description: description here
+    production: 
+        code: 10002
+        title: Production
+        description: description here
+    audit: 
+        code: 10003
+        title: Audit
+        description: description here
+    payroll: 
+        code: 10004
+        title: Payroll
+        description: description here
+    construction: 
+        code: 10005
+        title: Construction
+        description: description here 

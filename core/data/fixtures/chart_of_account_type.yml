@@ -1,0 +1,66 @@
+ChartOfAccountType:
+    type1:
+        code: LIABILITY
+        title: Liability
+    type2:
+        code: ASSET
+        title: Asset
+    type3:
+        code: CAPITAL
+        title: Capital
+    type4:
+        code: INCOME
+        title: Income
+    type5:
+        code: EXPENSE
+        title: Expense
+
+ChartOfAccountTypeValidation:
+    val1:
+        ChartOfAccountType: type2
+        Validation: val1
+    val2:
+        ChartOfAccountType: type2
+        Validation: val2
+    val3:
+        ChartOfAccountType: type2
+        Validation: val3
+    val4:
+        ChartOfAccountType: type2
+        Validation: val4
+    val5:
+        ChartOfAccountType: type2
+        Validation: val5
+    val6:
+        ChartOfAccountType: type2
+        Validation: val6
+    val7:
+        ChartOfAccountType: type2
+        Validation: val7
+    val8:
+        ChartOfAccountType: type2
+        Validation: val8
+    val9:
+        ChartOfAccountType: type1
+        Validation: val9
+    val10:
+        ChartOfAccountType: type1
+        Validation: val2
+    val11:
+        ChartOfAccountType: type1
+        Validation: val10
+    val12:
+        ChartOfAccountType: type1
+        Validation: val11
+    val13:
+        ChartOfAccountType: type1
+        Validation: val12
+    val4:
+        ChartOfAccountType: type1
+        Validation: val3
+    val5:
+        ChartOfAccountType: type1
+        Validation: val7
+    val6:
+        ChartOfAccountType: type1
+        Validation: val8 

@@ -1,0 +1,6 @@
+Category:
+    actAs: { Timestampable: ~ }
+    columns:
+        code: {type: string(50), notnull: true, default:'' }
+        title: {type: string(50), notnull: true, default:'' }
+        description: {type: string }

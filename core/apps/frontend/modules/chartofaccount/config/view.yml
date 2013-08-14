@@ -1,0 +1,4 @@
+newSuccess:
+    javascripts: [jquery.validate.js]
+editSuccess:
+    javascripts: [jquery.validate.js]

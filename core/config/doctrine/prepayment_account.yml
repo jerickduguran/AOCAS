@@ -1,0 +1,12 @@
+PrepaymentAccount:
+    actAs: { Timestampable: ~ }
+    columns:
+        chart_of_account_id: { type: int(11) }	 
+        code: { type: string(50), notnull: true, default: '', unique: true }
+        title: { type: string(50),} notnull: true, default: '' }	
+        description: { type: string } 
+    relations:
+        ChartOfAccount:
+            local: chart_of_account_id
+            foreign: id
+            onDelete: SET NULL 

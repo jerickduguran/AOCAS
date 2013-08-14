@@ -1,0 +1,11 @@
+OrganizationType:
+    org1:
+        title: Accounting / Audit
+    org2:
+        title: Information Technology
+    org3:
+        title: Law Firm
+    org4:
+        title: Marketing
+    org5:
+        title: Government

@@ -1,0 +1,6 @@
+indexSuccess:
+    javascripts: [jquery.validate.js,gcross.dateformatter.js,bpopup.min.js]
+newSuccess:
+    javascripts: [jquery.validate.js,gcross.dateformatter.js,bpopup.min.js]
+editSuccess:
+    javascripts: [jquery.validate.js,gcross.dateformatter.js]
