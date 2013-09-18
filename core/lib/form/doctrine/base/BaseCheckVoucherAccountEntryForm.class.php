@@ -16,7 +16,7 @@ abstract class BaseCheckVoucherAccountEntryForm extends BaseFormDoctrine
   {
     $this->setWidgets(array(
       'id'                  => new sfWidgetFormInputHidden(),
-      'check_voucher_id'    => new sfWidgetFormInputText(),
+      'check_voucher_id'    => new sfWidgetFormDoctrineChoice(array('model' => $this->getRelatedModelName('CheckVoucher'), 'add_empty' => false)),
       'chart_of_account_id' => new sfWidgetFormDoctrineChoice(array('model' => $this->getRelatedModelName('ChartOfAccount'), 'add_empty' => true)),
       'general_library_id'  => new sfWidgetFormDoctrineChoice(array('model' => $this->getRelatedModelName('GeneralLibrary'), 'add_empty' => true)),
       'dn_reference'        => new sfWidgetFormInputText(),
@@ -28,7 +28,7 @@ abstract class BaseCheckVoucherAccountEntryForm extends BaseFormDoctrine
 
     $this->setValidators(array(
       'id'                  => new sfValidatorChoice(array('choices' => array($this->getObject()->get('id')), 'empty_value' => $this->getObject()->get('id'), 'required' => false)),
-      'check_voucher_id'    => new sfValidatorPass(),
+      'check_voucher_id'    => new sfValidatorDoctrineChoice(array('model' => $this->getRelatedModelName('CheckVoucher'))),
       'chart_of_account_id' => new sfValidatorDoctrineChoice(array('model' => $this->getRelatedModelName('ChartOfAccount'), 'required' => false)),
       'general_library_id'  => new sfValidatorDoctrineChoice(array('model' => $this->getRelatedModelName('GeneralLibrary'), 'required' => false)),
       'dn_reference'        => new sfValidatorString(array('max_length' => 50, 'required' => false)),

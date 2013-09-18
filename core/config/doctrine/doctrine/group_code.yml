@@ -1,0 +1,13 @@
+GroupCode:
+    actAs: { Timestampable: ~ }
+    columns: 
+        code:  { type: string(50), notnull: true, default: '', unique: true }
+        title:  { type: string(60),notnull:true,default: ''}
+        description:  { type: string }
+    relations:
+        ChartOfAccount:
+            class: ChartOfAccount
+            local: group_code_id
+            foreign: chart_of_account_id
+            refClass: ChartOfAccountGroupCode
+            onDelete: CASCADE		

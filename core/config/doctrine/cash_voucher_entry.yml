@@ -1,0 +1,21 @@
+CashVoucherEntry: 
+  actAs: { Timestampable: ~ }
+  columns:  
+        check_voucher_id: { type: int(11) }	  	 
+        general_library_id: { type: int(11) }	 
+        chart_of_account_id: { type: int(11) }	  
+        amount: { type: decimal(12), scale: 2, default: 0.00, notnull: true }
+        date: { type: date }		
+  relations: 
+    ChartOfAccount:
+      local: chart_of_account_id
+      foreign: id
+      onDelete: CASCADE
+    CheckVoucher:
+      local: check_voucher_id
+      foreign: id
+      onDelete: SET NULL
+    GeneralLibrary:
+      local: general_library_id
+      foreign: id
+      onDelete: SET NULL

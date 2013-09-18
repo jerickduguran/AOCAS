@@ -9,21 +9,33 @@
  * @property string $name
  * @property string $description
  * @property Doctrine_Collection $CheckVoucher
- * @property Doctrine_Collection $Invoice
+ * @property Doctrine_Collection $AccountsPayableVoucher
+ * @property Doctrine_Collection $DebitCreditMemo
  * @property Doctrine_Collection $Receipt
+ * @property Doctrine_Collection $Invoice
+ * @property Doctrine_Collection $JournalVoucher
+ * @property Doctrine_Collection $PettyCashVoucher
  * 
- * @method string              getCode()         Returns the current record's "code" value
- * @method string              getName()         Returns the current record's "name" value
- * @method string              getDescription()  Returns the current record's "description" value
- * @method Doctrine_Collection getCheckVoucher() Returns the current record's "CheckVoucher" collection
- * @method Doctrine_Collection getInvoice()      Returns the current record's "Invoice" collection
- * @method Doctrine_Collection getReceipt()      Returns the current record's "Receipt" collection
- * @method Book                setCode()         Sets the current record's "code" value
- * @method Book                setName()         Sets the current record's "name" value
- * @method Book                setDescription()  Sets the current record's "description" value
- * @method Book                setCheckVoucher() Sets the current record's "CheckVoucher" collection
- * @method Book                setInvoice()      Sets the current record's "Invoice" collection
- * @method Book                setReceipt()      Sets the current record's "Receipt" collection
+ * @method string              getCode()                   Returns the current record's "code" value
+ * @method string              getName()                   Returns the current record's "name" value
+ * @method string              getDescription()            Returns the current record's "description" value
+ * @method Doctrine_Collection getCheckVoucher()           Returns the current record's "CheckVoucher" collection
+ * @method Doctrine_Collection getAccountsPayableVoucher() Returns the current record's "AccountsPayableVoucher" collection
+ * @method Doctrine_Collection getDebitCreditMemo()        Returns the current record's "DebitCreditMemo" collection
+ * @method Doctrine_Collection getReceipt()                Returns the current record's "Receipt" collection
+ * @method Doctrine_Collection getInvoice()                Returns the current record's "Invoice" collection
+ * @method Doctrine_Collection getJournalVoucher()         Returns the current record's "JournalVoucher" collection
+ * @method Doctrine_Collection getPettyCashVoucher()       Returns the current record's "PettyCashVoucher" collection
+ * @method Book                setCode()                   Sets the current record's "code" value
+ * @method Book                setName()                   Sets the current record's "name" value
+ * @method Book                setDescription()            Sets the current record's "description" value
+ * @method Book                setCheckVoucher()           Sets the current record's "CheckVoucher" collection
+ * @method Book                setAccountsPayableVoucher() Sets the current record's "AccountsPayableVoucher" collection
+ * @method Book                setDebitCreditMemo()        Sets the current record's "DebitCreditMemo" collection
+ * @method Book                setReceipt()                Sets the current record's "Receipt" collection
+ * @method Book                setInvoice()                Sets the current record's "Invoice" collection
+ * @method Book                setJournalVoucher()         Sets the current record's "JournalVoucher" collection
+ * @method Book                setPettyCashVoucher()       Sets the current record's "PettyCashVoucher" collection
  * 
  * @package    Gcross Accounting System
  * @subpackage model
@@ -58,11 +70,27 @@ abstract class BaseBook extends sfDoctrineRecord
              'local' => 'id',
              'foreign' => 'book_id'));
 
-        $this->hasMany('Invoice', array(
+        $this->hasMany('AccountsPayableVoucher', array(
+             'local' => 'id',
+             'foreign' => 'book_id'));
+
+        $this->hasMany('DebitCreditMemo', array(
              'local' => 'id',
              'foreign' => 'book_id'));
 
         $this->hasMany('Receipt', array(
+             'local' => 'id',
+             'foreign' => 'book_id'));
+
+        $this->hasMany('Invoice', array(
+             'local' => 'id',
+             'foreign' => 'book_id'));
+
+        $this->hasMany('JournalVoucher', array(
+             'local' => 'id',
+             'foreign' => 'book_id'));
+
+        $this->hasMany('PettyCashVoucher', array(
              'local' => 'id',
              'foreign' => 'book_id'));
 

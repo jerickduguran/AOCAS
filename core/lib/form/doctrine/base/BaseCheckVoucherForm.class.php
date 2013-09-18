@@ -17,7 +17,6 @@ abstract class BaseCheckVoucherForm extends BaseFormDoctrine
     $this->setWidgets(array(
       'id'                 => new sfWidgetFormInputHidden(),
       'book_id'            => new sfWidgetFormDoctrineChoice(array('model' => $this->getRelatedModelName('Book'), 'add_empty' => false)),
-      'status'             => new sfWidgetFormChoice(array('choices' => array('FULL' => 'FULL', 'PARTIAL' => 'PARTIAL'))),
       'voucher_number'     => new sfWidgetFormInputText(),
       'general_library_id' => new sfWidgetFormDoctrineChoice(array('model' => $this->getRelatedModelName('GeneralLibrary'), 'add_empty' => true)),
       'currency_id'        => new sfWidgetFormDoctrineChoice(array('model' => $this->getRelatedModelName('Currency'), 'add_empty' => true)),
@@ -28,6 +27,7 @@ abstract class BaseCheckVoucherForm extends BaseFormDoctrine
       'footer_message'     => new sfWidgetFormTextarea(),
       'si_dr_number'       => new sfWidgetFormTextarea(),
       'total_amount'       => new sfWidgetFormInputText(),
+      'status'             => new sfWidgetFormChoice(array('choices' => array('FULL' => 'FULL', 'PARTIAL' => 'PARTIAL'))),
       'created_at'         => new sfWidgetFormDateTime(),
       'updated_at'         => new sfWidgetFormDateTime(),
     ));
@@ -35,7 +35,6 @@ abstract class BaseCheckVoucherForm extends BaseFormDoctrine
     $this->setValidators(array(
       'id'                 => new sfValidatorChoice(array('choices' => array($this->getObject()->get('id')), 'empty_value' => $this->getObject()->get('id'), 'required' => false)),
       'book_id'            => new sfValidatorDoctrineChoice(array('model' => $this->getRelatedModelName('Book'), 'required' => false)),
-      'status'             => new sfValidatorChoice(array('choices' => array(0 => 'FULL', 1 => 'PARTIAL'), 'required' => false)),
       'voucher_number'     => new sfValidatorString(array('max_length' => 50, 'required' => false)),
       'general_library_id' => new sfValidatorDoctrineChoice(array('model' => $this->getRelatedModelName('GeneralLibrary'), 'required' => false)),
       'currency_id'        => new sfValidatorDoctrineChoice(array('model' => $this->getRelatedModelName('Currency'), 'required' => false)),
@@ -46,6 +45,7 @@ abstract class BaseCheckVoucherForm extends BaseFormDoctrine
       'footer_message'     => new sfValidatorString(array('required' => false)),
       'si_dr_number'       => new sfValidatorString(array('required' => false)),
       'total_amount'       => new sfValidatorNumber(array('required' => false)),
+      'status'             => new sfValidatorChoice(array('choices' => array(0 => 'FULL', 1 => 'PARTIAL'), 'required' => false)),
       'created_at'         => new sfValidatorDateTime(),
       'updated_at'         => new sfValidatorDateTime(),
     ));

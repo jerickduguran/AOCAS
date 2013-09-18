@@ -13,5 +13,6 @@
 class Validation extends BaseValidation
 {
 	const CODE_TYPE_OUTPUTVAT = "OV";	
+	const CODE_TYPE_EXPANDED  = "ET";	
 	
 }

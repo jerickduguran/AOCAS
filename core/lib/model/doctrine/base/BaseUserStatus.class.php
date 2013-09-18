@@ -7,14 +7,14 @@
  * 
  * @property string $name
  * @property string $description
- * @property Doctrine_Collection $Users
+ * @property Doctrine_Collection $User
  * 
  * @method string              getName()        Returns the current record's "name" value
  * @method string              getDescription() Returns the current record's "description" value
- * @method Doctrine_Collection getUsers()       Returns the current record's "Users" collection
+ * @method Doctrine_Collection getUser()        Returns the current record's "User" collection
  * @method UserStatus          setName()        Sets the current record's "name" value
  * @method UserStatus          setDescription() Sets the current record's "description" value
- * @method UserStatus          setUsers()       Sets the current record's "Users" collection
+ * @method UserStatus          setUser()        Sets the current record's "User" collection
  * 
  * @package    Gcross Accounting System
  * @subpackage model
@@ -39,7 +39,7 @@ abstract class BaseUserStatus extends sfDoctrineRecord
     public function setUp()
     {
         parent::setUp();
-        $this->hasMany('Users', array(
+        $this->hasMany('User', array(
              'local' => 'id',
              'foreign' => 'status_id'));
 

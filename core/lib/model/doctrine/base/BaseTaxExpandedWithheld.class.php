@@ -9,24 +9,36 @@
  * @property string $nature_income_payment
  * @property decimal $tax_rate_percent
  * @property Doctrine_Collection $CheckVoucherParticularEntry
- * @property Doctrine_Collection $InvoiceParticularEntry
+ * @property Doctrine_Collection $AccountsPayableVoucherParticularEntry
+ * @property Doctrine_Collection $DebitCreditMemoParticularEntry
  * @property Doctrine_Collection $ParticularTemplateEntry
  * @property Doctrine_Collection $ReceiptParticularEntry
+ * @property Doctrine_Collection $InvoiceParticularEntry
+ * @property Doctrine_Collection $JournalVoucherParticularEntry
+ * @property Doctrine_Collection $PettyCashVoucherParticularEntry
  * 
- * @method string              getCode()                        Returns the current record's "code" value
- * @method string              getNatureIncomePayment()         Returns the current record's "nature_income_payment" value
- * @method decimal             getTaxRatePercent()              Returns the current record's "tax_rate_percent" value
- * @method Doctrine_Collection getCheckVoucherParticularEntry() Returns the current record's "CheckVoucherParticularEntry" collection
- * @method Doctrine_Collection getInvoiceParticularEntry()      Returns the current record's "InvoiceParticularEntry" collection
- * @method Doctrine_Collection getParticularTemplateEntry()     Returns the current record's "ParticularTemplateEntry" collection
- * @method Doctrine_Collection getReceiptParticularEntry()      Returns the current record's "ReceiptParticularEntry" collection
- * @method TaxExpandedWithheld setCode()                        Sets the current record's "code" value
- * @method TaxExpandedWithheld setNatureIncomePayment()         Sets the current record's "nature_income_payment" value
- * @method TaxExpandedWithheld setTaxRatePercent()              Sets the current record's "tax_rate_percent" value
- * @method TaxExpandedWithheld setCheckVoucherParticularEntry() Sets the current record's "CheckVoucherParticularEntry" collection
- * @method TaxExpandedWithheld setInvoiceParticularEntry()      Sets the current record's "InvoiceParticularEntry" collection
- * @method TaxExpandedWithheld setParticularTemplateEntry()     Sets the current record's "ParticularTemplateEntry" collection
- * @method TaxExpandedWithheld setReceiptParticularEntry()      Sets the current record's "ReceiptParticularEntry" collection
+ * @method string              getCode()                                  Returns the current record's "code" value
+ * @method string              getNatureIncomePayment()                   Returns the current record's "nature_income_payment" value
+ * @method decimal             getTaxRatePercent()                        Returns the current record's "tax_rate_percent" value
+ * @method Doctrine_Collection getCheckVoucherParticularEntry()           Returns the current record's "CheckVoucherParticularEntry" collection
+ * @method Doctrine_Collection getAccountsPayableVoucherParticularEntry() Returns the current record's "AccountsPayableVoucherParticularEntry" collection
+ * @method Doctrine_Collection getDebitCreditMemoParticularEntry()        Returns the current record's "DebitCreditMemoParticularEntry" collection
+ * @method Doctrine_Collection getParticularTemplateEntry()               Returns the current record's "ParticularTemplateEntry" collection
+ * @method Doctrine_Collection getReceiptParticularEntry()                Returns the current record's "ReceiptParticularEntry" collection
+ * @method Doctrine_Collection getInvoiceParticularEntry()                Returns the current record's "InvoiceParticularEntry" collection
+ * @method Doctrine_Collection getJournalVoucherParticularEntry()         Returns the current record's "JournalVoucherParticularEntry" collection
+ * @method Doctrine_Collection getPettyCashVoucherParticularEntry()       Returns the current record's "PettyCashVoucherParticularEntry" collection
+ * @method TaxExpandedWithheld setCode()                                  Sets the current record's "code" value
+ * @method TaxExpandedWithheld setNatureIncomePayment()                   Sets the current record's "nature_income_payment" value
+ * @method TaxExpandedWithheld setTaxRatePercent()                        Sets the current record's "tax_rate_percent" value
+ * @method TaxExpandedWithheld setCheckVoucherParticularEntry()           Sets the current record's "CheckVoucherParticularEntry" collection
+ * @method TaxExpandedWithheld setAccountsPayableVoucherParticularEntry() Sets the current record's "AccountsPayableVoucherParticularEntry" collection
+ * @method TaxExpandedWithheld setDebitCreditMemoParticularEntry()        Sets the current record's "DebitCreditMemoParticularEntry" collection
+ * @method TaxExpandedWithheld setParticularTemplateEntry()               Sets the current record's "ParticularTemplateEntry" collection
+ * @method TaxExpandedWithheld setReceiptParticularEntry()                Sets the current record's "ReceiptParticularEntry" collection
+ * @method TaxExpandedWithheld setInvoiceParticularEntry()                Sets the current record's "InvoiceParticularEntry" collection
+ * @method TaxExpandedWithheld setJournalVoucherParticularEntry()         Sets the current record's "JournalVoucherParticularEntry" collection
+ * @method TaxExpandedWithheld setPettyCashVoucherParticularEntry()       Sets the current record's "PettyCashVoucherParticularEntry" collection
  * 
  * @package    Gcross Accounting System
  * @subpackage model
@@ -62,7 +74,11 @@ abstract class BaseTaxExpandedWithheld extends sfDoctrineRecord
              'local' => 'id',
              'foreign' => 'tax_expanded_withheld_id'));
 
-        $this->hasMany('InvoiceParticularEntry', array(
+        $this->hasMany('AccountsPayableVoucherParticularEntry', array(
+             'local' => 'id',
+             'foreign' => 'tax_expanded_withheld_id'));
+
+        $this->hasMany('DebitCreditMemoParticularEntry', array(
              'local' => 'id',
              'foreign' => 'tax_expanded_withheld_id'));
 
@@ -71,6 +87,18 @@ abstract class BaseTaxExpandedWithheld extends sfDoctrineRecord
              'foreign' => 'tax_expanded_withheld_id'));
 
         $this->hasMany('ReceiptParticularEntry', array(
+             'local' => 'id',
+             'foreign' => 'tax_expanded_withheld_id'));
+
+        $this->hasMany('InvoiceParticularEntry', array(
+             'local' => 'id',
+             'foreign' => 'tax_expanded_withheld_id'));
+
+        $this->hasMany('JournalVoucherParticularEntry', array(
+             'local' => 'id',
+             'foreign' => 'tax_expanded_withheld_id'));
+
+        $this->hasMany('PettyCashVoucherParticularEntry', array(
              'local' => 'id',
              'foreign' => 'tax_expanded_withheld_id'));
 

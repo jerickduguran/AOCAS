@@ -13,11 +13,15 @@
  * @property date $date
  * @property string $notes
  * @property Doctrine_Collection $CheckVoucher
+ * @property Doctrine_Collection $AccountsPayableVoucher
  * @property Doctrine_Collection $AccountsReceivableBeginningBalance
  * @property Doctrine_Collection $AccountsPayableBeginningBalance
+ * @property Doctrine_Collection $DebitCreditMemo
  * @property Doctrine_Collection $FinancialSetting
- * @property Doctrine_Collection $Invoice
  * @property Doctrine_Collection $Receipt
+ * @property Doctrine_Collection $Invoice
+ * @property Doctrine_Collection $JournalVoucher
+ * @property Doctrine_Collection $PettyCashVoucher
  * 
  * @method string              getSymbol()                             Returns the current record's "symbol" value
  * @method string              getTitle()                              Returns the current record's "title" value
@@ -27,11 +31,15 @@
  * @method date                getDate()                               Returns the current record's "date" value
  * @method string              getNotes()                              Returns the current record's "notes" value
  * @method Doctrine_Collection getCheckVoucher()                       Returns the current record's "CheckVoucher" collection
+ * @method Doctrine_Collection getAccountsPayableVoucher()             Returns the current record's "AccountsPayableVoucher" collection
  * @method Doctrine_Collection getAccountsReceivableBeginningBalance() Returns the current record's "AccountsReceivableBeginningBalance" collection
  * @method Doctrine_Collection getAccountsPayableBeginningBalance()    Returns the current record's "AccountsPayableBeginningBalance" collection
+ * @method Doctrine_Collection getDebitCreditMemo()                    Returns the current record's "DebitCreditMemo" collection
  * @method Doctrine_Collection getFinancialSetting()                   Returns the current record's "FinancialSetting" collection
- * @method Doctrine_Collection getInvoice()                            Returns the current record's "Invoice" collection
  * @method Doctrine_Collection getReceipt()                            Returns the current record's "Receipt" collection
+ * @method Doctrine_Collection getInvoice()                            Returns the current record's "Invoice" collection
+ * @method Doctrine_Collection getJournalVoucher()                     Returns the current record's "JournalVoucher" collection
+ * @method Doctrine_Collection getPettyCashVoucher()                   Returns the current record's "PettyCashVoucher" collection
  * @method Currency            setSymbol()                             Sets the current record's "symbol" value
  * @method Currency            setTitle()                              Sets the current record's "title" value
  * @method Currency            setDescription()                        Sets the current record's "description" value
@@ -40,11 +48,15 @@
  * @method Currency            setDate()                               Sets the current record's "date" value
  * @method Currency            setNotes()                              Sets the current record's "notes" value
  * @method Currency            setCheckVoucher()                       Sets the current record's "CheckVoucher" collection
+ * @method Currency            setAccountsPayableVoucher()             Sets the current record's "AccountsPayableVoucher" collection
  * @method Currency            setAccountsReceivableBeginningBalance() Sets the current record's "AccountsReceivableBeginningBalance" collection
  * @method Currency            setAccountsPayableBeginningBalance()    Sets the current record's "AccountsPayableBeginningBalance" collection
+ * @method Currency            setDebitCreditMemo()                    Sets the current record's "DebitCreditMemo" collection
  * @method Currency            setFinancialSetting()                   Sets the current record's "FinancialSetting" collection
- * @method Currency            setInvoice()                            Sets the current record's "Invoice" collection
  * @method Currency            setReceipt()                            Sets the current record's "Receipt" collection
+ * @method Currency            setInvoice()                            Sets the current record's "Invoice" collection
+ * @method Currency            setJournalVoucher()                     Sets the current record's "JournalVoucher" collection
+ * @method Currency            setPettyCashVoucher()                   Sets the current record's "PettyCashVoucher" collection
  * 
  * @package    Gcross Accounting System
  * @subpackage model
@@ -101,6 +113,10 @@ abstract class BaseCurrency extends sfDoctrineRecord
              'local' => 'id',
              'foreign' => 'currency_id'));
 
+        $this->hasMany('AccountsPayableVoucher', array(
+             'local' => 'id',
+             'foreign' => 'currency_id'));
+
         $this->hasMany('AccountsReceivableBeginningBalance', array(
              'local' => 'id',
              'foreign' => 'currency_id'));
@@ -109,7 +125,15 @@ abstract class BaseCurrency extends sfDoctrineRecord
              'local' => 'id',
              'foreign' => 'currency_id'));
 
+        $this->hasMany('DebitCreditMemo', array(
+             'local' => 'id',
+             'foreign' => 'currency_id'));
+
         $this->hasMany('FinancialSetting', array(
+             'local' => 'id',
+             'foreign' => 'currency_id'));
+
+        $this->hasMany('Receipt', array(
              'local' => 'id',
              'foreign' => 'currency_id'));
 
@@ -117,7 +141,11 @@ abstract class BaseCurrency extends sfDoctrineRecord
              'local' => 'id',
              'foreign' => 'currency_id'));
 
-        $this->hasMany('Receipt', array(
+        $this->hasMany('JournalVoucher', array(
+             'local' => 'id',
+             'foreign' => 'currency_id'));
+
+        $this->hasMany('PettyCashVoucher', array(
              'local' => 'id',
              'foreign' => 'currency_id'));
 

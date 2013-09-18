@@ -1,0 +1,10 @@
+Currency:
+    actAs: { Timestampable: ~ }
+    columns:
+        symbol: { type: string(3), notnull: true, unique: true, default: '' }
+        title:  { type: string(50), notnull:true, default: '' }
+        description:  { type: string(100) } 
+        is_base: { type: boolean, notnull:true, default: false }
+        unit_per_base: { type: decimal(12), scale: 2, default: 0.00, notnull: true } 
+        date: {type: date }
+        notes: {type: string(100) }

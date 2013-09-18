@@ -68,7 +68,7 @@ class orActions extends sfActions
   }
 
   protected function processForm(sfWebRequest $request, sfForm $form)
-  {
+  { 
     $form->bind($request->getParameter($form->getName()), $request->getFiles($form->getName()));
     if ($form->isValid())
     {
@@ -384,7 +384,7 @@ class orActions extends sfActions
 											  $data->getReceiptNumber(), 
 											  $data->getTotalAmount(), 
 											  $data->getCurrency()->getTitle(), 
-											  date('m/d/Y H:i:s',strtotime($data->getDueDate())),
+											  date('m/d/Y',strtotime($data->getDueDate())),
 											  $data->getStatus(), 
 											  date('m/d/Y H:i:s',strtotime($data->getCreatedAt())));
 		$i++;
@@ -566,8 +566,8 @@ class orActions extends sfActions
 			$response['content'] = $this->getPartial("cashentry",array("form"=>$form,'receipt'=>$receipt));
 		}else if($type == Receipt::MODE_CHECK){ 
 			$response['is_valid'] = true;
-			$form = new ReceiptForm(); 
-			$response['content'] = $this->getPartial("checkentry",array("form"=>$form,'reciept'=>$reciept));
+			$form = new ReceiptCheckEntryListForm($receipt);  
+			$response['content'] = $this->getPartial("checkentry",array("form"=>$form,'receipt'=>$receipt));
 		}else{
 			//return invalid request
 		}
@@ -593,16 +593,59 @@ class orActions extends sfActions
 	
   }
   
+  public function executeAddCheckEntry(sfWebRequest $request)
+  {
+	$this->forward404unless($request->isXmlHttpRequest() || $request->isMethod(sfRequest::POST));	
+	$response = array('is_valid'=>false);
+	
+	$number = intval($request->getParameter("num",1));
+
+	$this->form = new ReceiptCheckEntryListForm(); 
+	$this->form->addNewCheckEntry($number);
+
+	$response_data 	    = array('added' => true); 
+	$response_data['new'] = $this->getPartial('newcheckentry',array('form' => $this->form, 'number' => $number)); 
+
+	return $this->renderText(json_encode($response_data)); 
+	
+  }
+  
   public function executeSavecashentries(sfWebRequest $request)
   {
 	$this->forward404unless($request->isXmlHttpRequest() || $request->isMethod(sfRequest::POST));	
 	
-	$response_data = array('saved'=>false); 	
+	$response_data = array('save'=>false); 	
 	$receipt  = Doctrine_Core::getTable('Receipt')->findOneById($request->getParameter("id",0));	
 	$form 	  = new ReceiptCashEntryListForm($receipt);
-	$data 	  = $request->getParameter($form->getName());  	 
+	$data 	  = $request->getParameter($form->getName());  
+	 
+	$form->bind($data, $request->getFiles($form->getName()));
+     if ($form->isValid())
+     {
+       $or = $form->save(); 
+	   $response_data['save'] = true;
+     }else{  
+		$errors = "";
+		foreach($form->getErrorSchema()->getErrors() as $field=>$error){
+			$errors .= $field." _ ".$error;
+		}
+		$response_data['errors'] = $errors;
+	 }
+	 
+	return $this->renderText(json_encode($response_data)); 
+  
+  }
+  
+  public function executeSavecheckentries(sfWebRequest $request)
+  {
+	$this->forward404unless($request->isXmlHttpRequest() || $request->isMethod(sfRequest::POST));	
 	
-	 $form->bind($data, $request->getFiles($form->getName()));
+	$response_data = array('save'=>false); 	
+	$receipt  = Doctrine_Core::getTable('Receipt')->findOneById($request->getParameter("id",0));	
+	$form 	  = new ReceiptCheckEntryListForm($receipt);
+	$data 	  = $request->getParameter($form->getName());  
+	 
+	$form->bind($data, $request->getFiles($form->getName()));
      if ($form->isValid())
      {
        $or = $form->save(); 

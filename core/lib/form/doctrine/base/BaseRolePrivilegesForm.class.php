@@ -32,10 +32,6 @@ abstract class BaseRolePrivilegesForm extends BaseFormDoctrine
       'updated_at'  => new sfValidatorDateTime(),
     ));
 
-    $this->validatorSchema->setPostValidator(
-      new sfValidatorDoctrineUnique(array('model' => 'RolePrivileges', 'column' => array('role_id')))
-    );
-
     $this->widgetSchema->setNameFormat('role_privileges[%s]');
 
     $this->errorSchema = new sfValidatorErrorSchema($this->validatorSchema);

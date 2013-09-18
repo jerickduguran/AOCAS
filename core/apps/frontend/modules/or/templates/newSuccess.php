@@ -392,7 +392,7 @@ Receipt: New
 				
 <div style="display:none;">
 	<div class="outputvat_popup"></div>
-	<div class="cashcheckentry_popup"></div>
+	<div class="cashcheckentry_popup"></div> 
 </div>
 <script type="text/javascript">
  
@@ -402,6 +402,7 @@ Receipt: New
 	$(document).ready(function(){
 	
 		$("#<?php echo $form['period']->renderId();?>").datepicker({dateFormat: "MM d, yy"});
+		$("#<?php echo $form['date_receive']->renderId();?>").datepicker({dateFormat: "yy/mm/dd"});
 		$("#<?php echo $form['total_amount']->renderId();?>").gcrossNumberToWords({word_element: 'total_amount_in_words'});	
 	
 		$.validator.setDefaults({
@@ -527,11 +528,19 @@ Receipt: New
 				dataType: 'json',
 				success: function(resp){ 
 					var resp_data =  eval(resp);
-					if(resp_data.is_valid){
-					$('.cashcheckentry_popup').html(resp_data.content);
-					$('.cashcheckentry_popup .popupCheck').bPopup({modalColor: '#C821A1',modalClose: false,closeClass:'closeCashEntry'},  function() {
-						$(".popupCheck").css("height","auto");
-					});	 
+					if(resp_data.is_valid){			
+					$('.cashcheckentry_popup').html(resp_data.content); 
+					$('.cashcheckentry_popup .popupCheck').bPopup({modalColor: '#C821A1',modalClose: false,closeClass:'closeCashCheckEntry',
+						onClose: function() {
+							$(".popupCheck").remove();
+							$(".cashcheckentry_popup").empty();
+						}},
+						function() {
+							$(".popupCheck").css("height","auto");						
+							$(".datepicker_s").each(function(){
+								$(this).datepicker({dateFormat: "yy/mm/dd"}); 
+							});
+						});	 
 					}
 				}
 			});

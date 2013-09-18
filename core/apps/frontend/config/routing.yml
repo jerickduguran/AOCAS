@@ -33,6 +33,21 @@ particulartemplate_edit:
 particulartemplate_show:    
   url:   /particular-templates/show
   param: { module: particulartemplate, action: show }
+login:    
+  url:   /login
+  param: { module: user, action: login }
+authenticate:    
+  url:   /authenticate
+  param: { module: user, action: loginpost }
+logout:    
+  url:   /logout
+  param: { module: user, action: logout }
+reports:
+  url: /reports
+  param: { module: reports, action: index }
+report_financial:
+  url: /reports-financial
+  param: { module: reports, action: financial }
 # generic rules
 # please, remove them by adding more specific rules
 default_index:

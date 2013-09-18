@@ -13,7 +13,6 @@ abstract class BaseInvoiceAccountEntryOutputVatFormFilter extends BaseFormFilter
   public function setup()
   {
     $this->setWidgets(array(
-      'invoice_number'      => new sfWidgetFormFilterInput(),
       'chart_of_account_id' => new sfWidgetFormDoctrineChoice(array('model' => $this->getRelatedModelName('ChartOfAccount'), 'add_empty' => true)),
       'general_library_id'  => new sfWidgetFormDoctrineChoice(array('model' => $this->getRelatedModelName('GeneralLibrary'), 'add_empty' => true)),
       'tin_number'          => new sfWidgetFormFilterInput(),
@@ -22,7 +21,6 @@ abstract class BaseInvoiceAccountEntryOutputVatFormFilter extends BaseFormFilter
     ));
 
     $this->setValidators(array(
-      'invoice_number'      => new sfValidatorPass(array('required' => false)),
       'chart_of_account_id' => new sfValidatorDoctrineChoice(array('required' => false, 'model' => $this->getRelatedModelName('ChartOfAccount'), 'column' => 'id')),
       'general_library_id'  => new sfValidatorDoctrineChoice(array('required' => false, 'model' => $this->getRelatedModelName('GeneralLibrary'), 'column' => 'id')),
       'tin_number'          => new sfValidatorPass(array('required' => false)),
@@ -48,7 +46,6 @@ abstract class BaseInvoiceAccountEntryOutputVatFormFilter extends BaseFormFilter
   {
     return array(
       'id'                  => 'Number',
-      'invoice_number'      => 'Text',
       'chart_of_account_id' => 'ForeignKey',
       'general_library_id'  => 'ForeignKey',
       'tin_number'          => 'Text',

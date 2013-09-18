@@ -1,0 +1,107 @@
+PettyCashVoucher:
+    actAs: { Timestampable: ~ }
+    columns:
+        book_id: { type: int(11), notnull: true, default: '0' }		 	
+        voucher_number: { type: string(50), notnull: true, default: '', unique: true }
+        general_library_id: { type: int(11) }	 
+        currency_id: { type: int(11) }  
+        replenishment_date: { type: date }	 
+        period: { type: date }     
+        header_message: { type: string }
+        footer_message: { type: string }  
+        total_amount: { type: decimal(12), scale: 2, default: 0.00, notnull: true }	
+        status: { type: enum, values: ['UNPAID','PARTIAL_PAID','FULL_PAID'], default: 'UNPAID' }		
+    relations:
+        Book:
+            local: book_id
+            foreign: id
+            onDelete: CASCADE
+        GeneralLibrary:
+            local: general_library_id
+            foreign: id
+            onDelete: SET NULL
+        Currency:
+            local: currency_id
+            foreign: id
+            onDelete: SET NULL 
+
+PettyCashVoucherParticularEntry:
+    actAs: { Timestampable: ~ }
+    columns:
+        petty_cash_voucher_id: { type: int(11), notnull: true }		
+        title: { type: string(150) }		
+        amount: { type: decimal(12), scale: 2, default: 0.00, notnull: true }
+        vat_application: { type: enum, values: ['VAT_EXEMPT','VAT_ZERO_PERCENT','VAT_INCLUSIVE','VAT_EXCLUSIVE'], default: 'VAT_INCLUSIVE'}	 
+        tax_expanded_withheld_id: { type: int(11) }
+        tax_final_withheld_id: { type: int(11) }	 
+        total: { type: decimal(12), scale: 2, default: 0.00, notnull: true }	  
+    relations: 
+        PettyCashVoucher:
+            local: petty_cash_voucher_id
+            foreign: id
+            onDelete: CASCADE
+        TaxExpandedWithheld:
+            local: tax_expanded_withheld_id
+            foreign: id
+            onDelete: CASCADE
+        TaxFinalWithheld:
+            local: tax_final_withheld_id
+            foreign: id
+            onDelete: CASCADE
+
+PettyCashVoucherAccountEntry:
+    actAs: { Timestampable: ~ }
+    columns:
+        petty_cash_voucher_id: { type: int(11), notnull: true}			
+        chart_of_account_id: { type: int(11) }		
+        general_library_id: { type: int(11) }	  
+        dn_reference: { type: string(50) }
+        debit: { type: decimal(12), scale: 2, default: 0.00, notnull: true }
+        credit: { type: decimal(12), scale: 2, default: 0.00, notnull: true }
+    relations:
+        PettyCashVoucher:
+            local: petty_cash_voucher_id
+            foreign: id
+            onDelete: CASCADE 
+        ChartOfAccount:
+            local: chart_of_account_id
+            foreign: id
+            onDelete: SET NULL 
+        GeneralLibrary:
+            local: general_library_id
+            foreign: id
+            onDelete: SET NULL 
+
+PettyCashVoucherAccountEntryOutputVat:
+    actAs: { Timestampable: ~ }
+    columns:
+        chart_of_account_id: { type: int(11) }		
+        general_library_id: { type: int(11) }		
+        tin_number: { type: string(60) }	
+    relations:
+        ChartOfAccount:
+            local: chart_of_account_id
+            foreign: id
+            onDelete: SET NULL
+        GeneralLibrary:
+            local: general_library_id
+            foreign: id
+            onDelete: SET NULL
+
+PettyCashVoucherAccountEntryOutputVatEntry:
+    actAs: { Timestampable: ~ }
+    columns:
+        petty_cash_voucher_account_entry_output_vat_id: { type: int(11) }		
+        tax_rate_id: { type: int(11) }		
+        gross_purchased: { type: decimal(12), scale: 2, default: 0.00, notnull: true }		
+        vat_received: { type: decimal(12), scale: 2, default: 0.00, notnull: true }		
+        net_sales: { type: decimal(12), scale: 2, default: 0.00, notnull: true }
+    relations:
+        PettyCashVoucherAccountEntryOutputVat:
+            local: petty_cash_voucher_account_entry_output_vat_id
+            foreign: id
+            onDelete: CASCADE	
+        TaxRate:
+            local: tax_rate_id
+            foreign: id
+            onDelete: CASCADE		 

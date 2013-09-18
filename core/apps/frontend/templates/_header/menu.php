@@ -1,4 +1,9 @@
 <?php $module = sfContext::getInstance()->getRequest()->getParameter("module","dashboard");?>
+<style>
+	.profile ul li a,.profile ul li{
+		color: #FFFFFF;
+	}
+</style>
 <div id='cssmenu'>
 	<ul>
 	   <li <?php echo decorateMenu('dashboard');?>>   		
@@ -65,11 +70,11 @@
 			<ul>	
 				<li><a href="<?php echo url_for("invoice/index");?>">Invoice</a></li>
 				<li><a href="<?php echo url_for("or/index");?>">Official Receipt</a></li>
-				<li><a href="<?php echo url_for("or/index");?>">Check Voucher</a></li>
-				<li><a href="<?php echo url_for("or/index");?>">Journal Voucher</a></li>
-				<li><a href="<?php echo url_for("or/index");?>">Accounts Payable Voucher</a></li>
-				<li><a href="<?php echo url_for("or/index");?>">Petty Cash Voucher</a></li>
-				<li><a href="<?php echo url_for("or/index");?>">Debit Credit Memo</a></li> 
+				<li><a href="<?php echo url_for("checkvoucher/index");?>">Check Voucher</a></li>
+				<li><a href="<?php echo url_for("journalvoucher/index");?>">Journal Voucher</a></li>
+				<li><a href="<?php echo url_for("apvoucher/index");?>">Accounts Payable Voucher</a></li>
+				<li><a href="<?php echo url_for("pettycashvoucher/index");?>">Petty Cash Voucher</a></li>
+				<li><a href="<?php echo url_for("dcmemo/index");?>">Debit Credit Memo</a></li> 
 			</ul>
 	   </li>
 	   <li <?php echo decorateMenu('posting',true);?>><a href=''><span>Posting</span></a>
@@ -86,16 +91,8 @@
 	   </li>
 	   <li class='has-sub '><a href=''><span>Reports</span></a>
 			<ul>
-				<li><a href="#"><span>General Ledger Reports</span></a></li>
+				<li><a href="<?php echo url_for("@reports");?>"><span>All Reports</span></a></li> 
 				<li><a href="#"><span>Accounts Receivable Reports</span></a></li>
-				<li><a href="#"><span>Accounts Payable Reports</span></a></li>
-				<li><a href="#"><span>Other Accounts Reports</span></a></li>
-				<li><a href="#"><span>All Books</span></a></li>
-				<li><a href="#"><span>Input/Output VAT</span></a></li>
-				<li><a href="#"><span>Print Check</span></a></li>
-				<li><a href="#"><span>Multi Currency Voucher Reports</span></a></li>
-				<li><a href="#"><span>Additional Reports</span></a></li>
-				<li><a href="#"><span>Other Reports</span></a></li>
 			</ul>
 	   </li>
 	   <li><a href=''><span>Utilities</span></a></li>

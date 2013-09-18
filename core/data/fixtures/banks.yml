@@ -1,0 +1,49 @@
+Bank:
+    chinabank:
+        code: CNB
+        name: China Bank
+        description:
+        logo:
+        status: true
+    metrobank:
+        code: MB
+        name: Metro Bank
+        description:
+        logo:
+        status: true
+    bpi:
+        code: BPI
+        name: Bank Of The Philippine Islands
+        description:
+        logo:
+        status: true
+    UB:
+        code: UB
+        name: Union Bank
+        description:
+        logo:
+        status: true
+    bdo:
+        code: BDO
+        name: Banco de Oro
+        description:
+        logo:
+        status: true
+    ucpb:
+        code: UCPB
+        name: United Coconut Planters Bank
+        description:
+        logo:
+        status: true
+    PSB:
+        code: PSB
+        name: PS Bank
+        description:
+        logo:
+        status: true
+    MLB:
+        code: MLB
+        name: May Bank
+        description:
+        logo:
+        status: true

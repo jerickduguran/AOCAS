@@ -47,4 +47,17 @@ class ChartOfAccount extends BaseChartOfAccount
 		}																												 
 		return true;
 	}
+	
+	public function isExpandedVat()
+	{ 
+		if(!$validation = Doctrine_core::getTable("Validation")->findOneByCode(Validation::CODE_TYPE_EXPANDED)){
+			return false;
+		}
+		
+	    if(!$record = Doctrine_Core::getTable("ChartOfAccountValidation")->findOneByChartOfAccountIdAndValidationId($this->getId(),$validation->getId())){
+
+			return false;
+		}																												 
+		return true;
+	}
 }

@@ -13,25 +13,24 @@ class InvoiceAccountEntryOutputVatForm extends BaseInvoiceAccountEntryOutputVatF
   public function configure()
   {
 	  $this->setWidgets(array(
-      'id'                  => new sfWidgetFormInputHidden(),
-      'invoice_number'      => new sfWidgetFormInputHidden(),
-      'chart_of_account_id' => new sfWidgetFormInputHidden(),
-      'general_library_id'  => new sfWidgetFormDoctrineChoice(array('model' => $this->getRelatedModelName('GeneralLibrary'), 'add_empty' => true)),
-      'tin_number'          => new sfWidgetFormInputText(), 
+      'id'                       => new sfWidgetFormInputHidden(),
+     // 'invoice_account_entry_id' => new sfWidgetFormInputHidden(),
+      'general_library_id'       => new sfWidgetFormDoctrineChoice(array('model' => $this->getRelatedModelName('GeneralLibrary'), 'add_empty' => true)),
+      'tin_number'               => new sfWidgetFormInputText(), 
     ));
 
     $this->setValidators(array(
-      'id'                  => new sfValidatorChoice(array('choices' => array($this->getObject()->get('id')), 'empty_value' => $this->getObject()->get('id'), 'required' => false)),
-      'invoice_number'      => new sfValidatorPass(array('required' => false)),
-      'chart_of_account_id' => new sfValidatorDoctrineChoice(array('model' => $this->getRelatedModelName('ChartOfAccount'), 'required' => false)),
-      'general_library_id'  => new sfValidatorDoctrineChoice(array('model' => $this->getRelatedModelName('GeneralLibrary'), 'required' => false)),
-      'tin_number'          => new sfValidatorString(array('max_length' => 60, 'required' => false)), 
+      'id'                       => new sfValidatorChoice(array('choices' => array($this->getObject()->get('id')), 'empty_value' => $this->getObject()->get('id'), 'required' => false)),
+      //'invoice_account_entry_id' => new sfValidatorDoctrineChoice(array('model' => $this->getRelatedModelName('InvoiceAccountEntry'), 'required' => false)),
+      'general_library_id'       => new sfValidatorDoctrineChoice(array('model' => $this->getRelatedModelName('GeneralLibrary'), 'required' => false)),
+      'tin_number'               => new sfValidatorString(array('max_length' => 60, 'required' => false)), 
     ));
 
     $this->widgetSchema->setNameFormat('invoice_account_entry_output_vat[%s]');
  
 	$this->embedRelation("InvoiceAccountEntryOutputVatEntry");
   }
+  
 	public function addNewEntry($number = 1)
 	{
 		$new_entry = new BaseForm(); 

@@ -3,4 +3,4 @@ indexSuccess:
 newSuccess:
     javascripts: [jquery.validate.js,gcross.dateformatter.js,bpopup.min.js]
 editSuccess:
-    javascripts: [jquery.validate.js,gcross.dateformatter.js]
+    javascripts: [jquery.validate.js,gcross.dateformatter.js,bpopup.min.js]

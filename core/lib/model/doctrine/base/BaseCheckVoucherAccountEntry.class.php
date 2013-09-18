@@ -11,6 +11,7 @@
  * @property string $dn_reference
  * @property decimal $debit
  * @property decimal $credit
+ * @property CheckVoucher $CheckVoucher
  * @property ChartOfAccount $ChartOfAccount
  * @property GeneralLibrary $GeneralLibrary
  * 
@@ -20,6 +21,7 @@
  * @method string                   getDnReference()         Returns the current record's "dn_reference" value
  * @method decimal                  getDebit()               Returns the current record's "debit" value
  * @method decimal                  getCredit()              Returns the current record's "credit" value
+ * @method CheckVoucher             getCheckVoucher()        Returns the current record's "CheckVoucher" value
  * @method ChartOfAccount           getChartOfAccount()      Returns the current record's "ChartOfAccount" value
  * @method GeneralLibrary           getGeneralLibrary()      Returns the current record's "GeneralLibrary" value
  * @method CheckVoucherAccountEntry setCheckVoucherId()      Sets the current record's "check_voucher_id" value
@@ -28,6 +30,7 @@
  * @method CheckVoucherAccountEntry setDnReference()         Sets the current record's "dn_reference" value
  * @method CheckVoucherAccountEntry setDebit()               Sets the current record's "debit" value
  * @method CheckVoucherAccountEntry setCredit()              Sets the current record's "credit" value
+ * @method CheckVoucherAccountEntry setCheckVoucher()        Sets the current record's "CheckVoucher" value
  * @method CheckVoucherAccountEntry setChartOfAccount()      Sets the current record's "ChartOfAccount" value
  * @method CheckVoucherAccountEntry setGeneralLibrary()      Sets the current record's "GeneralLibrary" value
  * 
@@ -77,6 +80,11 @@ abstract class BaseCheckVoucherAccountEntry extends sfDoctrineRecord
     public function setUp()
     {
         parent::setUp();
+        $this->hasOne('CheckVoucher', array(
+             'local' => 'check_voucher_id',
+             'foreign' => 'id',
+             'onDelete' => 'CASCADE'));
+
         $this->hasOne('ChartOfAccount', array(
              'local' => 'chart_of_account_id',
              'foreign' => 'id',

@@ -1,0 +1,127 @@
+GeneralLibrary:
+    actAs: { Timestampable: ~ }
+    columns:	
+        client_type_id: { type: int(11) }
+        status_id: { type: int(5) }
+        category_id: { type: int(11) } 
+        code: { type: string(8), notnull: true, default: '', unique: true }
+        name: { type: string(50), notnull: true, default: '' }
+        building_no: { type: string(50) }
+        street_1: { type: string(50) }
+        street_2: { type: string(50) }
+        city: { type: string(50) }
+        postal_code: { type: string(50) }
+        province: { type: string(50) }
+        country_id: { type: int(11) }
+        attention: { type: string(50) }
+        position: { type: string(50) }
+        telephone_no: { type: string(50) }
+        fax_no: { type: string(50) }
+        mobile_no: { type: string(50) }
+        email: { type: string(50), notnull: true, default: '' } 
+        website: { type: string(150)} 
+    relations:
+        ClientStatus:
+            local: status_id
+            foreign: id
+            onDelete: SET NULL
+        ClientType:
+            local: client_type_id
+            foreign: id
+            onDelete: SET NULL
+        GeneralLibraryCategory:
+            local: category_id
+            foreign: id
+            onDelete: SET NULL
+        Country:
+            local: country_id
+            foreign: id
+            onDelete: SET NULL
+
+GeneralLibraryAdditionInfo:
+    actAs: { Timestampable: ~ }
+    columns:	
+        general_library_id: { type: int(11) }
+        industry_id: { type: int(11) }
+        term_id: { type: int(11) }
+        no_days: { type: int(11), notnull:true, default: 0 }
+        percent_discount: { type: decimal(12), scale: 2, default: 0.00, notnull: true }
+        credit_limit_amount: { type: decimal(12), scale: 2, default: 0.00, notnull: true }
+        restricted: { type: boolean,  default: true }
+        remarks: { type: string(50), notnull: true, default: '' }
+        vat_no: { type: string(50), notnull: true, default: '' }
+        tin: { type: string(50), notnull: true, default: '' }
+    relations:
+        Industry:
+            local: industry_id
+            foreign: id
+            onDelete: SET NULL
+            type: one
+            foreignType: one
+        GeneralLibrary:
+            local: general_library_id
+            foreign: id
+            onDelete: CASCADE
+            type: one
+            foreignType: one
+        GeneralLibraryTerms:
+            local: term_id
+            foreign: id
+            onDelete: SET NULL
+            type: one
+            foreignType: one
+
+GeneralLibraryBillingInfo:
+    actAs: { Timestampable: ~ }
+    columns:
+        general_library_id: { type: int(11) }
+        drawing_no: { type: string(50), notnull: true, default: '' }
+        specs_no: { type: string(50), notnull: true, default: '' }
+        bill_to: { type: string(50), notnull: true, default: '' }
+        building_no: { type: string(50), notnull: true, default: '' }
+        street_1: { type: string(50), notnull: true, default: '' }
+        street_2: { type: string(50), notnull: true, default: '' }
+        city: { type: string(50), notnull: true, default: '' }
+        postal_code: { type: string(50), notnull: true, default: '' }
+        province: { type: string(50), notnull: true, default: '' }
+        country_id: { type: int(11) }
+        attention: { type: string(50), notnull: true, default: '' }
+    relations:
+        GeneralLibrary:
+            local: general_library_id
+            foreign: id
+            onDelete: CASCADE
+            type: one
+            foreignType: one
+        Country:
+            local: country_id
+            foreign: id
+            onDelete: SET NULL
+            foreignType: one
+            type: one
+
+GeneralLibraryCategory:
+    actAs: { Timestampable: ~ }
+    columns:
+        name: { type: string(60), notnull: true, default: '' }
+        description: { type: string } 
+
+ClientType:
+    actAs: { Timestampable: ~ }
+    columns:
+        name: { type: string(60), notnull: true, default: '' }
+        description: { type: string } 
+
+ClientStatus:
+    actAs: { Timestampable: ~ }
+    columns:
+        name: { type: string(60), notnull: true, default: '' }
+        description: { type: string }  
+
+GeneralLibraryTerms:
+    actAs: { Timestampable: ~ }
+    columns:
+        name: { type: string(60), notnull: true, default: '' }
+        term_value: { type: int(11), notnull: true, default: 0 }
+        actual_value: { type: int(11), notnull: true, default: 0 }
+        description: { type: string }

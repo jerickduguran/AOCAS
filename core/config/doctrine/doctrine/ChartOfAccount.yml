@@ -1,0 +1,100 @@
+ChartOfAccount:
+    actAs: { Timestampable: ~ }
+    columns: 
+        chart_of_account_type_id: { type: int(11) }
+        code: { type: string(50), notnull: true, default: '', unique: true }
+        title: { type: string(50) notnull: true, default: '' }	
+        description: { type: string }
+        status: { type: enum, values: ['ACTIVE','INACTIVE'], default: 'ACTIVE' }	
+    relations: 
+        ChartOfAccountType:
+            local: chart_of_account_type_id
+            foreign: id
+            onDelete: CASCADE
+        GroupCode:
+            class: GroupCode
+            local: chart_of_account_id
+            foreign: group_code_id 
+            refClass: ChartOfAccountGroupCode
+            onDelete: CASCADE
+
+ChartOfAccountType:
+    actAs: { Timestampable: ~ }
+    columns:  
+        code: { type: string(50), notnull: true, default: '' }	
+        title: { type: string(50) notnull: true, default: '' }	
+        description: { type: string }
+        status: { type: enum, values: ['ACTIVE','INACTIVE'], default: 'ACTIVE' }	
+    relations: 
+        Validation:
+            class: Validation
+            local: chart_of_account_type_id
+            foreign: validation_id
+            refClass: ChartOfAccountTypeValidation
+            onDelete: CASCADE	
+
+ChartOfAccountGroupCode:
+    actAs: { Timestampable: ~ }
+    columns: 
+        chart_of_account_id: { type: int(11), primary: true, notnull: true  }
+        group_code_id: { type: int(11), primary: true, notnull: true  } 
+    relations: 
+        ChartOfAccount:
+            local: chart_of_account_id
+            foreign: id
+            onDelete: CASCADE
+        GroupCode:
+            local: group_code_id
+            foreign: id
+            onDelete: CASCADE
+
+ChartOfAccountValidation:
+    actAs: { Timestampable: ~ }
+    columns: 
+        chart_of_account_id: { type: int(11), primary: true, notnull: true  }
+        validation_id: { type: int(11), primary: true, notnull: true  } 
+    relations: 
+        ChartOfAccount:
+            local: chart_of_account_id
+            foreign: id
+            onDelete: CASCADE
+        Validation:
+            local: validation_id
+            foreign: id
+            onDelete: CASCADE
+
+Validation:
+    actAs: { Timestampable: ~ }
+    columns: 
+        code: { type: string(60), notnull: true, default: '', unique: true }		
+        name: { type: string(60), notnull: true, default: '' }		
+        description: { type: string }
+        status: { type: boolean, default: 1, notnull: true }
+    relations:
+        ChartOfAccount:
+            class: ChartOfAccount
+            local: validation_id
+            foreign: chart_of_account_id
+            refClass: ChartOfAccountValidation
+            onDelete: CASCADE
+        ChartOfAccountType:
+            class: ChartOfAccountType
+            local: validation_id
+            foreign: chart_of_account_type_id
+            refClass: ChartOfAccountTypeValidation
+            onDelete: CASCADE
+
+ChartOfAccountTypeValidation:
+    actAs: { Timestampable: ~ }
+    columns: 
+        chart_of_account_type_id: { type: int(11), primary: true, notnull: true  }
+        validation_id: { type: int(11), primary: true, notnull: true  } 
+    relations:
+        ChartOfAccountType:
+            local: chart_of_account_type_id
+            foreign: id
+            onDelete: CASCADE
+        Validation:
+            local: validation_id
+            foreign: id
+            onDelete: CASCADE

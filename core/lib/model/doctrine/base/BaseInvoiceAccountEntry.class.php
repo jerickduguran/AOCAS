@@ -7,44 +7,44 @@
  * 
  * @property int $invoice_id
  * @property int $chart_of_account_id
+ * @property int $general_library_id
+ * @property string $dn_reference
  * @property int $project_id
  * @property int $department_id
- * @property string $dn_reference
- * @property int $general_library_id
  * @property decimal $debit
  * @property decimal $credit
  * @property Invoice $Invoice
  * @property ChartOfAccount $ChartOfAccount
+ * @property GeneralLibrary $GeneralLibrary
  * @property Project $Project
  * @property Department $Department
- * @property GeneralLibrary $GeneralLibrary
  * 
  * @method int                 getInvoiceId()           Returns the current record's "invoice_id" value
  * @method int                 getChartOfAccountId()    Returns the current record's "chart_of_account_id" value
+ * @method int                 getGeneralLibraryId()    Returns the current record's "general_library_id" value
+ * @method string              getDnReference()         Returns the current record's "dn_reference" value
  * @method int                 getProjectId()           Returns the current record's "project_id" value
  * @method int                 getDepartmentId()        Returns the current record's "department_id" value
- * @method string              getDnReference()         Returns the current record's "dn_reference" value
- * @method int                 getGeneralLibraryId()    Returns the current record's "general_library_id" value
  * @method decimal             getDebit()               Returns the current record's "debit" value
  * @method decimal             getCredit()              Returns the current record's "credit" value
  * @method Invoice             getInvoice()             Returns the current record's "Invoice" value
  * @method ChartOfAccount      getChartOfAccount()      Returns the current record's "ChartOfAccount" value
+ * @method GeneralLibrary      getGeneralLibrary()      Returns the current record's "GeneralLibrary" value
  * @method Project             getProject()             Returns the current record's "Project" value
  * @method Department          getDepartment()          Returns the current record's "Department" value
- * @method GeneralLibrary      getGeneralLibrary()      Returns the current record's "GeneralLibrary" value
  * @method InvoiceAccountEntry setInvoiceId()           Sets the current record's "invoice_id" value
  * @method InvoiceAccountEntry setChartOfAccountId()    Sets the current record's "chart_of_account_id" value
+ * @method InvoiceAccountEntry setGeneralLibraryId()    Sets the current record's "general_library_id" value
+ * @method InvoiceAccountEntry setDnReference()         Sets the current record's "dn_reference" value
  * @method InvoiceAccountEntry setProjectId()           Sets the current record's "project_id" value
  * @method InvoiceAccountEntry setDepartmentId()        Sets the current record's "department_id" value
- * @method InvoiceAccountEntry setDnReference()         Sets the current record's "dn_reference" value
- * @method InvoiceAccountEntry setGeneralLibraryId()    Sets the current record's "general_library_id" value
  * @method InvoiceAccountEntry setDebit()               Sets the current record's "debit" value
  * @method InvoiceAccountEntry setCredit()              Sets the current record's "credit" value
  * @method InvoiceAccountEntry setInvoice()             Sets the current record's "Invoice" value
  * @method InvoiceAccountEntry setChartOfAccount()      Sets the current record's "ChartOfAccount" value
+ * @method InvoiceAccountEntry setGeneralLibrary()      Sets the current record's "GeneralLibrary" value
  * @method InvoiceAccountEntry setProject()             Sets the current record's "Project" value
  * @method InvoiceAccountEntry setDepartment()          Sets the current record's "Department" value
- * @method InvoiceAccountEntry setGeneralLibrary()      Sets the current record's "GeneralLibrary" value
  * 
  * @package    Gcross Accounting System
  * @subpackage model
@@ -65,11 +65,7 @@ abstract class BaseInvoiceAccountEntry extends sfDoctrineRecord
              'type' => 'int',
              'length' => 11,
              ));
-        $this->hasColumn('project_id', 'int', 11, array(
-             'type' => 'int',
-             'length' => 11,
-             ));
-        $this->hasColumn('department_id', 'int', 11, array(
+        $this->hasColumn('general_library_id', 'int', 11, array(
              'type' => 'int',
              'length' => 11,
              ));
@@ -77,7 +73,11 @@ abstract class BaseInvoiceAccountEntry extends sfDoctrineRecord
              'type' => 'string',
              'length' => 50,
              ));
-        $this->hasColumn('general_library_id', 'int', 11, array(
+        $this->hasColumn('project_id', 'int', 11, array(
+             'type' => 'int',
+             'length' => 11,
+             ));
+        $this->hasColumn('department_id', 'int', 11, array(
              'type' => 'int',
              'length' => 11,
              ));
@@ -110,6 +110,11 @@ abstract class BaseInvoiceAccountEntry extends sfDoctrineRecord
              'foreign' => 'id',
              'onDelete' => 'SET NULL'));
 
+        $this->hasOne('GeneralLibrary', array(
+             'local' => 'general_library_id',
+             'foreign' => 'id',
+             'onDelete' => 'SET NULL'));
+
         $this->hasOne('Project', array(
              'local' => 'project_id',
              'foreign' => 'id',
@@ -117,11 +122,6 @@ abstract class BaseInvoiceAccountEntry extends sfDoctrineRecord
 
         $this->hasOne('Department', array(
              'local' => 'department_id',
-             'foreign' => 'id',
-             'onDelete' => 'SET NULL'));
-
-        $this->hasOne('GeneralLibrary', array(
-             'local' => 'general_library_id',
              'foreign' => 'id',
              'onDelete' => 'SET NULL'));
 

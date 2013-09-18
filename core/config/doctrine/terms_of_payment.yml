@@ -1,0 +1,5 @@
+TermsOfPayment:
+    actAs: { Timestampable: ~ }
+    columns: 
+        title:  { type: string(150),notnull:true,default: ''}
+        number_of_days:  { type: int(5), notnull:true, default: 0 } 

@@ -73,13 +73,16 @@ class chartofaccountActions extends sfActions
 
   protected function processForm(sfWebRequest $request, sfForm $form)
   {
+	$user_obj = $this->getUser();
+	
     $form->bind($request->getParameter($form->getName()), $request->getFiles($form->getName()));
     if ($form->isValid())
     {
       $chart_of_account = $form->save();
-
+	  $user_obj->setFlash('success',"Record Successfully saved.");
       $this->redirect('chartofaccount/edit?id='.$chart_of_account->getId());
     }
+	$user_obj->setFlash('error',"Error while saving the form."); 
   }
   
   public function  executeSave(sfWebRequest $request)
@@ -236,8 +239,10 @@ class chartofaccountActions extends sfActions
 							ca.title,
 							ca.status,  
 							ca.created_at,
-							ca.updated_at")  
+							ca.updated_at,
+							cat.id ")  
 				  ->where($where)
+				  ->leftJoin("ca.ChartOfAccountType cat")
 				  ->having($having)
 				  ->orderby($sort_field.' '.$sort_order)
 				  ->limit($limit)
@@ -252,6 +257,7 @@ class chartofaccountActions extends sfActions
 	foreach($data_collection as $data){
 		$response['rows'][$i]['id']	  =	$data->getId();
 		$response['rows'][$i]['cell'] = array($data->getCode(), 
+											  $data->getChartOfAccountType()->getTitle(),
 											  $data->getTitle(),
 											  $data->getStatus(), 
 											  date('m/d/Y H:i:s',strtotime($data->getCreatedAt())),
@@ -361,18 +367,22 @@ class chartofaccountActions extends sfActions
 	header("Content-Disposition: attachment; filename=\"$filename\""); 
 	header("Content-Type: application/vnd.ms-excel"); 
 
-	echo "CODE \t ACCOUNT TYPE \t TITLE \t STATUS \t CREATED AT \t UPDATED AT \r\n";
+	echo "CODE \t ACCOUNT TYPE \t TITLE \t DESCRIPTION \t STATUS \t CREATED AT \t UPDATED AT \r\n";
 	if(count($report_data) > 0 ){ 	
 		$conn = Doctrine_Manager::connection();	 
 		foreach($report_data as $result){
 			$query = "SELECT ca.id,
 							 ca.code,
-							 ca.account_type_id,
+							 cat.id,
 							 ca.title,
 							 ca.status, 
+							 ca.description, 
 							 ca.created_at,
-							 ca.updated_at
+							 ca.updated_at,
+							 cat.title as account_type
 						FROM chart_of_account ca  
+						LEFT JOIN chart_of_account_type cat
+							ON cat.id=ca.chart_of_account_type_id
 						WHERE ca.id={$result['id']}
 						LIMIT 1";
 		
@@ -380,7 +390,9 @@ class chartofaccountActions extends sfActions
 				foreach($entry_data as $data){
 				    $data = array_map("utf8_decode", $data);
 					echo $data['code']." \t "; 
+					echo $data['account_type']." \t "; 
 					echo $data['title']." \t "; 
+					echo $data['description']." \t "; 
 					echo $data['status']." \t "; 	
 					echo date('m/d/Y H:i:s',strtotime($data['created_at']))." \t ";			
 					echo date('m/d/Y H:i:s',strtotime($data['updated_at']))." \t \r\n";		

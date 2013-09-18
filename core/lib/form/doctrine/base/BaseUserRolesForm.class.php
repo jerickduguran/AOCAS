@@ -32,10 +32,6 @@ abstract class BaseUserRolesForm extends BaseFormDoctrine
       'updated_at' => new sfValidatorDateTime(),
     ));
 
-    $this->validatorSchema->setPostValidator(
-      new sfValidatorDoctrineUnique(array('model' => 'UserRoles', 'column' => array('code')))
-    );
-
     $this->widgetSchema->setNameFormat('user_roles[%s]');
 
     $this->errorSchema = new sfValidatorErrorSchema($this->validatorSchema);

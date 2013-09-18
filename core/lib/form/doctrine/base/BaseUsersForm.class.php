@@ -26,7 +26,7 @@ abstract class BaseUsersForm extends BaseFormDoctrine
       'picture'     => new sfWidgetFormInputText(),
       'position_id' => new sfWidgetFormDoctrineChoice(array('model' => $this->getRelatedModelName('UserPositions'), 'add_empty' => true)),
       'role_id'     => new sfWidgetFormDoctrineChoice(array('model' => $this->getRelatedModelName('UserRoles'), 'add_empty' => true)),
-      'is_active'   => new sfWidgetFormInputCheckbox(),
+      'is_active'   => new sfWidgetFormInputText(),
       'status_id'   => new sfWidgetFormDoctrineChoice(array('model' => $this->getRelatedModelName('UserStatus'), 'add_empty' => true)),
       'created_at'  => new sfWidgetFormDateTime(),
       'updated_at'  => new sfWidgetFormDateTime(),
@@ -44,15 +44,11 @@ abstract class BaseUsersForm extends BaseFormDoctrine
       'picture'     => new sfValidatorString(array('max_length' => 15, 'required' => false)),
       'position_id' => new sfValidatorDoctrineChoice(array('model' => $this->getRelatedModelName('UserPositions'), 'required' => false)),
       'role_id'     => new sfValidatorDoctrineChoice(array('model' => $this->getRelatedModelName('UserRoles'), 'required' => false)),
-      'is_active'   => new sfValidatorBoolean(array('required' => false)),
+      'is_active'   => new sfValidatorInteger(array('required' => false)),
       'status_id'   => new sfValidatorDoctrineChoice(array('model' => $this->getRelatedModelName('UserStatus'), 'required' => false)),
       'created_at'  => new sfValidatorDateTime(),
       'updated_at'  => new sfValidatorDateTime(),
     ));
-
-    $this->validatorSchema->setPostValidator(
-      new sfValidatorDoctrineUnique(array('model' => 'Users', 'column' => array('code')))
-    );
 
     $this->widgetSchema->setNameFormat('users[%s]');
 

@@ -1,18 +1,17 @@
 
 <div class="popupVATBody" style="height:427px;">	
-<form action="<?php url_for("invoice/saveaccountentry");?>" method="POST"> 
+<form id="saveoutputvatentry" action="<?php echo url_for("invoice/saveaccountentry?invoiceid=".$invoice_account_entry->getInvoice()->getId());?>" method="POST"> 
 <?php echo $form->renderHiddenFields();?>
     <div class="popupVAT">
     	 <h3>Output VAT Schedule Detailed Entry Setup</h3> 
                     
         <div class="transactionEntry">
             <div class="transactionName">
-                Transaction No. 
+                Transaction No.  
             </div>
             <div class="transactionDivider">:</div>
-            <div class="transactionInfo">
-               <?php echo $form['invoice_number']->render(array('value'=>$data['invoice_number']));?>
-			   <?php echo $data['invoice_number'];?>
+            <div class="transactionInfo"> 
+			   <?php echo $invoice_account_entry->getInvoice()->getInvoiceNumber();?>
             </div>
         </div>
                     
@@ -21,9 +20,8 @@
                 Account Code
             </div>
             <div class="transactionDivider">:</div>
-            <div class="transactionInfo"> 
-               <?php echo $form['chart_of_account_id']->render(array('value'=>$data['account']->getId()));?>
-			   <?php echo $data['account']->getCode();?> - <?php echo $data['account']->getTitle();?>
+            <div class="transactionInfo">  
+			   <?php echo $invoice_account_entry->getChartOfAccount()->getCode();?> - <?php echo $invoice_account_entry->getChartOfAccount()->getTitle();?>
             </div>
         </div>
                     
@@ -42,7 +40,7 @@
              </div>
              <div class="transactionDivider">:</div>
              <div class="transactionInfo">
-             	<?php echo $form['general_library_id']->render(array('selected'=>$data['general_library'] ? $data['general_library']->getId() : ''));?>
+             	<?php echo $form['general_library_id']->render(array('selected'=>$invoice_account_entry->getGeneralLibraryId() ? $invoice_account_entry->getGeneralLibraryId() : ''));?>
              </div>
         </div>
         <div class="transactionEntry2">
@@ -51,7 +49,7 @@
             </div>
             <div class="transactionDivider">:</div>
             <div class="transactionInfo">
-                    <input type="text"/>
+                    <?php echo $form['tin_number']->render();?>
             </div>
         </div>  
         <div class="popupEntry account_outputvat_entry_wrap">
@@ -139,7 +137,7 @@
     </div>
     <div class="formControlBtn" align="right">
         <a href="javascript:void(0);" class="btnCancel">Reset</a>
-        <a href="javascript:void(0);" class="btnSave">Done</a>      
+        <a href="javascript:void(0);" class="btnSave saveoutputvat">Done</a>      
         <a href="javascript:void(0);" class="btnSave closeAccountEntry">Cancel</a>      
     </div>
  </form>
@@ -149,9 +147,24 @@
  
     var new_output_entry_count = <?php echo $total_entries;?>;
 	$(document).ready(function(){
+	 
 		 $(".add_new_outputvat_entry").click(function(e){
 			addNewOutpoutVatEntry(new_output_entry_count); 
 		 });
+		 
+		 $(".saveoutputvat").click(function(){
+			var form = $("form#saveoutputvatentry");
+				$.ajax({
+					url: form.attr('action'),
+					method: "POST",
+					data: form.serialize(),
+					type: "json",
+					success: function(resp){
+						alert(resp.data);
+					}
+				});
+		 });
+		 
 	});
 	function addNewOutpoutVatEntry()
 	{

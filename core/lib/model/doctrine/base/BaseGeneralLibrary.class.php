@@ -31,98 +31,140 @@
  * @property Doctrine_Collection $CheckVoucher
  * @property Doctrine_Collection $CheckVoucherAccountEntry
  * @property Doctrine_Collection $CheckVoucherAccountEntryOutputVat
+ * @property Doctrine_Collection $AccountsPayableVoucher
+ * @property Doctrine_Collection $AccountsPayableVoucherAccountEntry
+ * @property Doctrine_Collection $AccountsPayableVoucherAccountEntryOutputVat
  * @property Doctrine_Collection $AccountsReceivableBeginningBalance
  * @property Doctrine_Collection $AccountsPayableBeginningBalance
+ * @property Doctrine_Collection $CashVoucherEntry
+ * @property Doctrine_Collection $CheckVoucherEntry
+ * @property Doctrine_Collection $DebitCreditMemo
+ * @property Doctrine_Collection $DebitCreditMemoAccountEntry
+ * @property Doctrine_Collection $DebitCreditMemoAccountEntryOutputVat
  * @property GeneralLibraryAdditionInfo $GeneralLibraryAdditionInfo
  * @property GeneralLibraryBillingInfo $GeneralLibraryBillingInfo
- * @property Doctrine_Collection $Invoice
- * @property Doctrine_Collection $InvoiceAccountEntry
- * @property Doctrine_Collection $InvoiceAccountEntryOutputVat
  * @property Doctrine_Collection $JournalBookTemplateEntry
  * @property Doctrine_Collection $Receipt
  * @property Doctrine_Collection $ReceiptAccountEntry
  * @property Doctrine_Collection $ReceiptAccountEntryOutputVat
  * @property Doctrine_Collection $ReceiptCashEntry
  * @property Doctrine_Collection $ReceiptCheckEntry
+ * @property Doctrine_Collection $Invoice
+ * @property Doctrine_Collection $InvoiceAccountEntry
+ * @property Doctrine_Collection $InvoiceAccountEntryOutputVat
+ * @property Doctrine_Collection $JournalVoucher
+ * @property Doctrine_Collection $JournalVoucherAccountEntry
+ * @property Doctrine_Collection $JournalVoucherAccountEntryOutputVat
+ * @property Doctrine_Collection $PettyCashVoucher
+ * @property Doctrine_Collection $PettyCashVoucherAccountEntry
+ * @property Doctrine_Collection $PettyCashVoucherAccountEntryOutputVat
  * 
- * @method int                        getClientTypeId()                       Returns the current record's "client_type_id" value
- * @method int                        getStatusId()                           Returns the current record's "status_id" value
- * @method int                        getCategoryId()                         Returns the current record's "category_id" value
- * @method string                     getCode()                               Returns the current record's "code" value
- * @method string                     getName()                               Returns the current record's "name" value
- * @method string                     getBuildingNo()                         Returns the current record's "building_no" value
- * @method string                     getStreet1()                            Returns the current record's "street_1" value
- * @method string                     getStreet2()                            Returns the current record's "street_2" value
- * @method string                     getCity()                               Returns the current record's "city" value
- * @method string                     getPostalCode()                         Returns the current record's "postal_code" value
- * @method string                     getProvince()                           Returns the current record's "province" value
- * @method int                        getCountryId()                          Returns the current record's "country_id" value
- * @method string                     getAttention()                          Returns the current record's "attention" value
- * @method string                     getPosition()                           Returns the current record's "position" value
- * @method string                     getTelephoneNo()                        Returns the current record's "telephone_no" value
- * @method string                     getFaxNo()                              Returns the current record's "fax_no" value
- * @method string                     getMobileNo()                           Returns the current record's "mobile_no" value
- * @method string                     getEmail()                              Returns the current record's "email" value
- * @method string                     getWebsite()                            Returns the current record's "website" value
- * @method ClientStatus               getClientStatus()                       Returns the current record's "ClientStatus" value
- * @method ClientType                 getClientType()                         Returns the current record's "ClientType" value
- * @method GeneralLibraryCategory     getGeneralLibraryCategory()             Returns the current record's "GeneralLibraryCategory" value
- * @method Country                    getCountry()                            Returns the current record's "Country" value
- * @method Doctrine_Collection        getCheckVoucher()                       Returns the current record's "CheckVoucher" collection
- * @method Doctrine_Collection        getCheckVoucherAccountEntry()           Returns the current record's "CheckVoucherAccountEntry" collection
- * @method Doctrine_Collection        getCheckVoucherAccountEntryOutputVat()  Returns the current record's "CheckVoucherAccountEntryOutputVat" collection
- * @method Doctrine_Collection        getAccountsReceivableBeginningBalance() Returns the current record's "AccountsReceivableBeginningBalance" collection
- * @method Doctrine_Collection        getAccountsPayableBeginningBalance()    Returns the current record's "AccountsPayableBeginningBalance" collection
- * @method GeneralLibraryAdditionInfo getGeneralLibraryAdditionInfo()         Returns the current record's "GeneralLibraryAdditionInfo" value
- * @method GeneralLibraryBillingInfo  getGeneralLibraryBillingInfo()          Returns the current record's "GeneralLibraryBillingInfo" value
- * @method Doctrine_Collection        getInvoice()                            Returns the current record's "Invoice" collection
- * @method Doctrine_Collection        getInvoiceAccountEntry()                Returns the current record's "InvoiceAccountEntry" collection
- * @method Doctrine_Collection        getInvoiceAccountEntryOutputVat()       Returns the current record's "InvoiceAccountEntryOutputVat" collection
- * @method Doctrine_Collection        getJournalBookTemplateEntry()           Returns the current record's "JournalBookTemplateEntry" collection
- * @method Doctrine_Collection        getReceipt()                            Returns the current record's "Receipt" collection
- * @method Doctrine_Collection        getReceiptAccountEntry()                Returns the current record's "ReceiptAccountEntry" collection
- * @method Doctrine_Collection        getReceiptAccountEntryOutputVat()       Returns the current record's "ReceiptAccountEntryOutputVat" collection
- * @method Doctrine_Collection        getReceiptCashEntry()                   Returns the current record's "ReceiptCashEntry" collection
- * @method Doctrine_Collection        getReceiptCheckEntry()                  Returns the current record's "ReceiptCheckEntry" collection
- * @method GeneralLibrary             setClientTypeId()                       Sets the current record's "client_type_id" value
- * @method GeneralLibrary             setStatusId()                           Sets the current record's "status_id" value
- * @method GeneralLibrary             setCategoryId()                         Sets the current record's "category_id" value
- * @method GeneralLibrary             setCode()                               Sets the current record's "code" value
- * @method GeneralLibrary             setName()                               Sets the current record's "name" value
- * @method GeneralLibrary             setBuildingNo()                         Sets the current record's "building_no" value
- * @method GeneralLibrary             setStreet1()                            Sets the current record's "street_1" value
- * @method GeneralLibrary             setStreet2()                            Sets the current record's "street_2" value
- * @method GeneralLibrary             setCity()                               Sets the current record's "city" value
- * @method GeneralLibrary             setPostalCode()                         Sets the current record's "postal_code" value
- * @method GeneralLibrary             setProvince()                           Sets the current record's "province" value
- * @method GeneralLibrary             setCountryId()                          Sets the current record's "country_id" value
- * @method GeneralLibrary             setAttention()                          Sets the current record's "attention" value
- * @method GeneralLibrary             setPosition()                           Sets the current record's "position" value
- * @method GeneralLibrary             setTelephoneNo()                        Sets the current record's "telephone_no" value
- * @method GeneralLibrary             setFaxNo()                              Sets the current record's "fax_no" value
- * @method GeneralLibrary             setMobileNo()                           Sets the current record's "mobile_no" value
- * @method GeneralLibrary             setEmail()                              Sets the current record's "email" value
- * @method GeneralLibrary             setWebsite()                            Sets the current record's "website" value
- * @method GeneralLibrary             setClientStatus()                       Sets the current record's "ClientStatus" value
- * @method GeneralLibrary             setClientType()                         Sets the current record's "ClientType" value
- * @method GeneralLibrary             setGeneralLibraryCategory()             Sets the current record's "GeneralLibraryCategory" value
- * @method GeneralLibrary             setCountry()                            Sets the current record's "Country" value
- * @method GeneralLibrary             setCheckVoucher()                       Sets the current record's "CheckVoucher" collection
- * @method GeneralLibrary             setCheckVoucherAccountEntry()           Sets the current record's "CheckVoucherAccountEntry" collection
- * @method GeneralLibrary             setCheckVoucherAccountEntryOutputVat()  Sets the current record's "CheckVoucherAccountEntryOutputVat" collection
- * @method GeneralLibrary             setAccountsReceivableBeginningBalance() Sets the current record's "AccountsReceivableBeginningBalance" collection
- * @method GeneralLibrary             setAccountsPayableBeginningBalance()    Sets the current record's "AccountsPayableBeginningBalance" collection
- * @method GeneralLibrary             setGeneralLibraryAdditionInfo()         Sets the current record's "GeneralLibraryAdditionInfo" value
- * @method GeneralLibrary             setGeneralLibraryBillingInfo()          Sets the current record's "GeneralLibraryBillingInfo" value
- * @method GeneralLibrary             setInvoice()                            Sets the current record's "Invoice" collection
- * @method GeneralLibrary             setInvoiceAccountEntry()                Sets the current record's "InvoiceAccountEntry" collection
- * @method GeneralLibrary             setInvoiceAccountEntryOutputVat()       Sets the current record's "InvoiceAccountEntryOutputVat" collection
- * @method GeneralLibrary             setJournalBookTemplateEntry()           Sets the current record's "JournalBookTemplateEntry" collection
- * @method GeneralLibrary             setReceipt()                            Sets the current record's "Receipt" collection
- * @method GeneralLibrary             setReceiptAccountEntry()                Sets the current record's "ReceiptAccountEntry" collection
- * @method GeneralLibrary             setReceiptAccountEntryOutputVat()       Sets the current record's "ReceiptAccountEntryOutputVat" collection
- * @method GeneralLibrary             setReceiptCashEntry()                   Sets the current record's "ReceiptCashEntry" collection
- * @method GeneralLibrary             setReceiptCheckEntry()                  Sets the current record's "ReceiptCheckEntry" collection
+ * @method int                        getClientTypeId()                                Returns the current record's "client_type_id" value
+ * @method int                        getStatusId()                                    Returns the current record's "status_id" value
+ * @method int                        getCategoryId()                                  Returns the current record's "category_id" value
+ * @method string                     getCode()                                        Returns the current record's "code" value
+ * @method string                     getName()                                        Returns the current record's "name" value
+ * @method string                     getBuildingNo()                                  Returns the current record's "building_no" value
+ * @method string                     getStreet1()                                     Returns the current record's "street_1" value
+ * @method string                     getStreet2()                                     Returns the current record's "street_2" value
+ * @method string                     getCity()                                        Returns the current record's "city" value
+ * @method string                     getPostalCode()                                  Returns the current record's "postal_code" value
+ * @method string                     getProvince()                                    Returns the current record's "province" value
+ * @method int                        getCountryId()                                   Returns the current record's "country_id" value
+ * @method string                     getAttention()                                   Returns the current record's "attention" value
+ * @method string                     getPosition()                                    Returns the current record's "position" value
+ * @method string                     getTelephoneNo()                                 Returns the current record's "telephone_no" value
+ * @method string                     getFaxNo()                                       Returns the current record's "fax_no" value
+ * @method string                     getMobileNo()                                    Returns the current record's "mobile_no" value
+ * @method string                     getEmail()                                       Returns the current record's "email" value
+ * @method string                     getWebsite()                                     Returns the current record's "website" value
+ * @method ClientStatus               getClientStatus()                                Returns the current record's "ClientStatus" value
+ * @method ClientType                 getClientType()                                  Returns the current record's "ClientType" value
+ * @method GeneralLibraryCategory     getGeneralLibraryCategory()                      Returns the current record's "GeneralLibraryCategory" value
+ * @method Country                    getCountry()                                     Returns the current record's "Country" value
+ * @method Doctrine_Collection        getCheckVoucher()                                Returns the current record's "CheckVoucher" collection
+ * @method Doctrine_Collection        getCheckVoucherAccountEntry()                    Returns the current record's "CheckVoucherAccountEntry" collection
+ * @method Doctrine_Collection        getCheckVoucherAccountEntryOutputVat()           Returns the current record's "CheckVoucherAccountEntryOutputVat" collection
+ * @method Doctrine_Collection        getAccountsPayableVoucher()                      Returns the current record's "AccountsPayableVoucher" collection
+ * @method Doctrine_Collection        getAccountsPayableVoucherAccountEntry()          Returns the current record's "AccountsPayableVoucherAccountEntry" collection
+ * @method Doctrine_Collection        getAccountsPayableVoucherAccountEntryOutputVat() Returns the current record's "AccountsPayableVoucherAccountEntryOutputVat" collection
+ * @method Doctrine_Collection        getAccountsReceivableBeginningBalance()          Returns the current record's "AccountsReceivableBeginningBalance" collection
+ * @method Doctrine_Collection        getAccountsPayableBeginningBalance()             Returns the current record's "AccountsPayableBeginningBalance" collection
+ * @method Doctrine_Collection        getCashVoucherEntry()                            Returns the current record's "CashVoucherEntry" collection
+ * @method Doctrine_Collection        getCheckVoucherEntry()                           Returns the current record's "CheckVoucherEntry" collection
+ * @method Doctrine_Collection        getDebitCreditMemo()                             Returns the current record's "DebitCreditMemo" collection
+ * @method Doctrine_Collection        getDebitCreditMemoAccountEntry()                 Returns the current record's "DebitCreditMemoAccountEntry" collection
+ * @method Doctrine_Collection        getDebitCreditMemoAccountEntryOutputVat()        Returns the current record's "DebitCreditMemoAccountEntryOutputVat" collection
+ * @method GeneralLibraryAdditionInfo getGeneralLibraryAdditionInfo()                  Returns the current record's "GeneralLibraryAdditionInfo" value
+ * @method GeneralLibraryBillingInfo  getGeneralLibraryBillingInfo()                   Returns the current record's "GeneralLibraryBillingInfo" value
+ * @method Doctrine_Collection        getJournalBookTemplateEntry()                    Returns the current record's "JournalBookTemplateEntry" collection
+ * @method Doctrine_Collection        getReceipt()                                     Returns the current record's "Receipt" collection
+ * @method Doctrine_Collection        getReceiptAccountEntry()                         Returns the current record's "ReceiptAccountEntry" collection
+ * @method Doctrine_Collection        getReceiptAccountEntryOutputVat()                Returns the current record's "ReceiptAccountEntryOutputVat" collection
+ * @method Doctrine_Collection        getReceiptCashEntry()                            Returns the current record's "ReceiptCashEntry" collection
+ * @method Doctrine_Collection        getReceiptCheckEntry()                           Returns the current record's "ReceiptCheckEntry" collection
+ * @method Doctrine_Collection        getInvoice()                                     Returns the current record's "Invoice" collection
+ * @method Doctrine_Collection        getInvoiceAccountEntry()                         Returns the current record's "InvoiceAccountEntry" collection
+ * @method Doctrine_Collection        getInvoiceAccountEntryOutputVat()                Returns the current record's "InvoiceAccountEntryOutputVat" collection
+ * @method Doctrine_Collection        getJournalVoucher()                              Returns the current record's "JournalVoucher" collection
+ * @method Doctrine_Collection        getJournalVoucherAccountEntry()                  Returns the current record's "JournalVoucherAccountEntry" collection
+ * @method Doctrine_Collection        getJournalVoucherAccountEntryOutputVat()         Returns the current record's "JournalVoucherAccountEntryOutputVat" collection
+ * @method Doctrine_Collection        getPettyCashVoucher()                            Returns the current record's "PettyCashVoucher" collection
+ * @method Doctrine_Collection        getPettyCashVoucherAccountEntry()                Returns the current record's "PettyCashVoucherAccountEntry" collection
+ * @method Doctrine_Collection        getPettyCashVoucherAccountEntryOutputVat()       Returns the current record's "PettyCashVoucherAccountEntryOutputVat" collection
+ * @method GeneralLibrary             setClientTypeId()                                Sets the current record's "client_type_id" value
+ * @method GeneralLibrary             setStatusId()                                    Sets the current record's "status_id" value
+ * @method GeneralLibrary             setCategoryId()                                  Sets the current record's "category_id" value
+ * @method GeneralLibrary             setCode()                                        Sets the current record's "code" value
+ * @method GeneralLibrary             setName()                                        Sets the current record's "name" value
+ * @method GeneralLibrary             setBuildingNo()                                  Sets the current record's "building_no" value
+ * @method GeneralLibrary             setStreet1()                                     Sets the current record's "street_1" value
+ * @method GeneralLibrary             setStreet2()                                     Sets the current record's "street_2" value
+ * @method GeneralLibrary             setCity()                                        Sets the current record's "city" value
+ * @method GeneralLibrary             setPostalCode()                                  Sets the current record's "postal_code" value
+ * @method GeneralLibrary             setProvince()                                    Sets the current record's "province" value
+ * @method GeneralLibrary             setCountryId()                                   Sets the current record's "country_id" value
+ * @method GeneralLibrary             setAttention()                                   Sets the current record's "attention" value
+ * @method GeneralLibrary             setPosition()                                    Sets the current record's "position" value
+ * @method GeneralLibrary             setTelephoneNo()                                 Sets the current record's "telephone_no" value
+ * @method GeneralLibrary             setFaxNo()                                       Sets the current record's "fax_no" value
+ * @method GeneralLibrary             setMobileNo()                                    Sets the current record's "mobile_no" value
+ * @method GeneralLibrary             setEmail()                                       Sets the current record's "email" value
+ * @method GeneralLibrary             setWebsite()                                     Sets the current record's "website" value
+ * @method GeneralLibrary             setClientStatus()                                Sets the current record's "ClientStatus" value
+ * @method GeneralLibrary             setClientType()                                  Sets the current record's "ClientType" value
+ * @method GeneralLibrary             setGeneralLibraryCategory()                      Sets the current record's "GeneralLibraryCategory" value
+ * @method GeneralLibrary             setCountry()                                     Sets the current record's "Country" value
+ * @method GeneralLibrary             setCheckVoucher()                                Sets the current record's "CheckVoucher" collection
+ * @method GeneralLibrary             setCheckVoucherAccountEntry()                    Sets the current record's "CheckVoucherAccountEntry" collection
+ * @method GeneralLibrary             setCheckVoucherAccountEntryOutputVat()           Sets the current record's "CheckVoucherAccountEntryOutputVat" collection
+ * @method GeneralLibrary             setAccountsPayableVoucher()                      Sets the current record's "AccountsPayableVoucher" collection
+ * @method GeneralLibrary             setAccountsPayableVoucherAccountEntry()          Sets the current record's "AccountsPayableVoucherAccountEntry" collection
+ * @method GeneralLibrary             setAccountsPayableVoucherAccountEntryOutputVat() Sets the current record's "AccountsPayableVoucherAccountEntryOutputVat" collection
+ * @method GeneralLibrary             setAccountsReceivableBeginningBalance()          Sets the current record's "AccountsReceivableBeginningBalance" collection
+ * @method GeneralLibrary             setAccountsPayableBeginningBalance()             Sets the current record's "AccountsPayableBeginningBalance" collection
+ * @method GeneralLibrary             setCashVoucherEntry()                            Sets the current record's "CashVoucherEntry" collection
+ * @method GeneralLibrary             setCheckVoucherEntry()                           Sets the current record's "CheckVoucherEntry" collection
+ * @method GeneralLibrary             setDebitCreditMemo()                             Sets the current record's "DebitCreditMemo" collection
+ * @method GeneralLibrary             setDebitCreditMemoAccountEntry()                 Sets the current record's "DebitCreditMemoAccountEntry" collection
+ * @method GeneralLibrary             setDebitCreditMemoAccountEntryOutputVat()        Sets the current record's "DebitCreditMemoAccountEntryOutputVat" collection
+ * @method GeneralLibrary             setGeneralLibraryAdditionInfo()                  Sets the current record's "GeneralLibraryAdditionInfo" value
+ * @method GeneralLibrary             setGeneralLibraryBillingInfo()                   Sets the current record's "GeneralLibraryBillingInfo" value
+ * @method GeneralLibrary             setJournalBookTemplateEntry()                    Sets the current record's "JournalBookTemplateEntry" collection
+ * @method GeneralLibrary             setReceipt()                                     Sets the current record's "Receipt" collection
+ * @method GeneralLibrary             setReceiptAccountEntry()                         Sets the current record's "ReceiptAccountEntry" collection
+ * @method GeneralLibrary             setReceiptAccountEntryOutputVat()                Sets the current record's "ReceiptAccountEntryOutputVat" collection
+ * @method GeneralLibrary             setReceiptCashEntry()                            Sets the current record's "ReceiptCashEntry" collection
+ * @method GeneralLibrary             setReceiptCheckEntry()                           Sets the current record's "ReceiptCheckEntry" collection
+ * @method GeneralLibrary             setInvoice()                                     Sets the current record's "Invoice" collection
+ * @method GeneralLibrary             setInvoiceAccountEntry()                         Sets the current record's "InvoiceAccountEntry" collection
+ * @method GeneralLibrary             setInvoiceAccountEntryOutputVat()                Sets the current record's "InvoiceAccountEntryOutputVat" collection
+ * @method GeneralLibrary             setJournalVoucher()                              Sets the current record's "JournalVoucher" collection
+ * @method GeneralLibrary             setJournalVoucherAccountEntry()                  Sets the current record's "JournalVoucherAccountEntry" collection
+ * @method GeneralLibrary             setJournalVoucherAccountEntryOutputVat()         Sets the current record's "JournalVoucherAccountEntryOutputVat" collection
+ * @method GeneralLibrary             setPettyCashVoucher()                            Sets the current record's "PettyCashVoucher" collection
+ * @method GeneralLibrary             setPettyCashVoucherAccountEntry()                Sets the current record's "PettyCashVoucherAccountEntry" collection
+ * @method GeneralLibrary             setPettyCashVoucherAccountEntryOutputVat()       Sets the current record's "PettyCashVoucherAccountEntryOutputVat" collection
  * 
  * @package    Gcross Accounting System
  * @subpackage model
@@ -254,6 +296,18 @@ abstract class BaseGeneralLibrary extends sfDoctrineRecord
              'local' => 'id',
              'foreign' => 'general_library_id'));
 
+        $this->hasMany('AccountsPayableVoucher', array(
+             'local' => 'id',
+             'foreign' => 'general_library_id'));
+
+        $this->hasMany('AccountsPayableVoucherAccountEntry', array(
+             'local' => 'id',
+             'foreign' => 'general_library_id'));
+
+        $this->hasMany('AccountsPayableVoucherAccountEntryOutputVat', array(
+             'local' => 'id',
+             'foreign' => 'general_library_id'));
+
         $this->hasMany('AccountsReceivableBeginningBalance', array(
              'local' => 'id',
              'foreign' => 'general_library_id'));
@@ -262,23 +316,31 @@ abstract class BaseGeneralLibrary extends sfDoctrineRecord
              'local' => 'id',
              'foreign' => 'general_library_id'));
 
+        $this->hasMany('CashVoucherEntry', array(
+             'local' => 'id',
+             'foreign' => 'general_library_id'));
+
+        $this->hasMany('CheckVoucherEntry', array(
+             'local' => 'id',
+             'foreign' => 'general_library_id'));
+
+        $this->hasMany('DebitCreditMemo', array(
+             'local' => 'id',
+             'foreign' => 'general_library_id'));
+
+        $this->hasMany('DebitCreditMemoAccountEntry', array(
+             'local' => 'id',
+             'foreign' => 'general_library_id'));
+
+        $this->hasMany('DebitCreditMemoAccountEntryOutputVat', array(
+             'local' => 'id',
+             'foreign' => 'general_library_id'));
+
         $this->hasOne('GeneralLibraryAdditionInfo', array(
              'local' => 'id',
              'foreign' => 'general_library_id'));
 
         $this->hasOne('GeneralLibraryBillingInfo', array(
-             'local' => 'id',
-             'foreign' => 'general_library_id'));
-
-        $this->hasMany('Invoice', array(
-             'local' => 'id',
-             'foreign' => 'general_library_id'));
-
-        $this->hasMany('InvoiceAccountEntry', array(
-             'local' => 'id',
-             'foreign' => 'general_library_id'));
-
-        $this->hasMany('InvoiceAccountEntryOutputVat', array(
              'local' => 'id',
              'foreign' => 'general_library_id'));
 
@@ -303,6 +365,42 @@ abstract class BaseGeneralLibrary extends sfDoctrineRecord
              'foreign' => 'general_library_id'));
 
         $this->hasMany('ReceiptCheckEntry', array(
+             'local' => 'id',
+             'foreign' => 'general_library_id'));
+
+        $this->hasMany('Invoice', array(
+             'local' => 'id',
+             'foreign' => 'general_library_id'));
+
+        $this->hasMany('InvoiceAccountEntry', array(
+             'local' => 'id',
+             'foreign' => 'general_library_id'));
+
+        $this->hasMany('InvoiceAccountEntryOutputVat', array(
+             'local' => 'id',
+             'foreign' => 'general_library_id'));
+
+        $this->hasMany('JournalVoucher', array(
+             'local' => 'id',
+             'foreign' => 'general_library_id'));
+
+        $this->hasMany('JournalVoucherAccountEntry', array(
+             'local' => 'id',
+             'foreign' => 'general_library_id'));
+
+        $this->hasMany('JournalVoucherAccountEntryOutputVat', array(
+             'local' => 'id',
+             'foreign' => 'general_library_id'));
+
+        $this->hasMany('PettyCashVoucher', array(
+             'local' => 'id',
+             'foreign' => 'general_library_id'));
+
+        $this->hasMany('PettyCashVoucherAccountEntry', array(
+             'local' => 'id',
+             'foreign' => 'general_library_id'));
+
+        $this->hasMany('PettyCashVoucherAccountEntryOutputVat', array(
              'local' => 'id',
              'foreign' => 'general_library_id'));
 

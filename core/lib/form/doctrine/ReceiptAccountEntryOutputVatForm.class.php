@@ -26,10 +26,8 @@ class ReceiptAccountEntryOutputVatForm extends BaseReceiptAccountEntryOutputVatF
       'chart_of_account_id' => new sfValidatorDoctrineChoice(array('model' => $this->getRelatedModelName('ChartOfAccount'), 'required' => false)),
       'general_library_id'  => new sfValidatorDoctrineChoice(array('model' => $this->getRelatedModelName('GeneralLibrary'), 'required' => false)),
       'tin_number'          => new sfValidatorString(array('max_length' => 60, 'required' => false)), 
-    ));
-
-    $this->widgetSchema->setNameFormat('receipt_account_entry_output_vat[%s]');
-
+    )); 
+	
     $this->widgetSchema->setNameFormat('receipt_account_entry_output_vat[%s]');
  
 	$this->embedRelation("ReceiptAccountEntryOutputVatEntry");

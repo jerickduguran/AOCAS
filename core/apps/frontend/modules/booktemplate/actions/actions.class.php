@@ -242,13 +242,11 @@ class booktemplateActions extends sfActions
 	}else{
 		//use default
 	}
-	$data_collection = Doctrine_Core::getTable('JournalBookTemplateupoper')
+	$data_collection = Doctrine_Core::getTable('JournalBookTemplate')
 				  ->createQuery('b') 
 				  ->select("b.id,
 							b.code,
-							b.name,
-							b.debit,
-							b.credit,
+							b.name, 
 							p.title,
 							d.title,
 							b.created_at,
@@ -271,9 +269,7 @@ class booktemplateActions extends sfActions
 		$response['rows'][$i]['id']	  =	$data->getId();
 		$response['rows'][$i]['cell'] = array($data->getId(),
 											  $data->getCode(),
-											  $data->getName(),
-											  $data->getDebit(),
-											  $data->getCredit(),
+											  $data->getName(), 
 											  $data->getProject()->getTitle(),
 											  $data->getDepartment()->getTitle(),
 											  date('m/d/Y H:i:s',strtotime($data->getCreatedAt())),

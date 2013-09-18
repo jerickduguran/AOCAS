@@ -1,0 +1,20 @@
+TaxExpandedWithheld:
+    actAs: { Timestampable: ~ }
+    columns:
+        code:  { type: string(50), notnull: true, default: '', unique: true }
+        nature_income_payment:  { type: string }
+        tax_rate_percent: { type: decimal(4), scale:2 }
+
+TaxFinalWithheld:
+    actAs: { Timestampable: ~ }
+    columns:
+        code:  { type: string(50), notnull: true, default: '', unique: true }
+        nature_income_payment:  { type: string }
+        tax_rate_percent: { type: decimal(4), scale:2 }
+
+TaxRate:    
+    actAs: { Timestampable: ~ }
+    columns:
+        rate:  {  type: decimal(4), scale:2 }
+        effectivity_date:  { type: date }  
+        type:  { type: enum, values:['INPUT','OUTPUT'], default: 'INPUT', notnull: true }  

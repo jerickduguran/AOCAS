@@ -84,7 +84,7 @@ Invoice: New
                            		Date Received:
                             </div>
                             <div class="transBodyInfo">
-                                <?php echo $form['date_receive']->render();?>
+                                <?php echo $form['date_receive']->render(array('class'=>'datepicker_s'));?>
                             </div>  
                         </div> 
                         
@@ -102,7 +102,7 @@ Invoice: New
                            		Due Date:
                             </div>
                             <div class="transBodyInfo">
-                                <?php echo $form['due_date']->render();?>
+                                <?php echo $form['due_date']->render(array('class'=>'datepicker_s'));?>
                             </div>  
                         </div> 
 						
@@ -206,6 +206,7 @@ Invoice: New
 										</div> 
 										<div class="entryAction">
 											<?php //echo image_tag("icons/DeleteRed.png");?>
+											<?php echo !$p_entry_form->isNew() ? image_tag("icons/trash.png",array("class" => "addoutputvatentry")) : '';?>
 											<?php echo $total_part != 1 ? image_tag("icons/trash.png",array("class" => "removenewparticular")) : '';?>
 										</div> 
 									</div> 
@@ -277,16 +278,21 @@ Invoice: New
 					<div class="particularHeader">   
 						<div class="account_part"> 
 							<div class="entryControl">
-								<div class="entryChartInvoice">    
+								<div class="entryChartOR">    
 									<div class="formEntryTitle">
 										Account Code
 									</div>         
 								</div>
-								<div class="entryChart">
+								<div class="entryRef">
 									<div class="formEntryTitle">
 										General Reference
 									</div>                
 								</div> 
+								<div class="entryRef">
+									<div class="formEntryTitle">
+										DN Ref
+									</div>                
+								</div>
 								<div class="entryDC"> 
 									<div class="formEntryTitle">
 										Debit
@@ -308,13 +314,16 @@ Invoice: New
 								<?php foreach($form['InvoiceAccountEntry'] as $a_enrty_form):?>
 									<?php $total_acct ++;?>
 									<div class="entryBorder account_entry_row" id="row-<?php echo $total_acct;?>">
-										<div class="entryChartInvoice"> 
+										<div class="entryChartOR"> 
 											<div> 
-											<?php echo $a_enrty_form['chart_of_account_id']->render(array('class'=>'entrySelect'));?> 
+											<?php echo $a_enrty_form['chart_of_account_id']->render(array('class'=>'entrySelect  invoice-account-entry-coa'));?> 
 											</div> 
 										</div>                     
-										<div class="entryChart">  
+										<div class="entryRef">  
 												<?php echo $a_enrty_form['general_library_id']->render(array('class'=>'entrySelect'));?>  
+										</div>                
+										<div class="entryRef">  
+												<?php echo $a_enrty_form['dn_reference']->render(array('class'=>'entryBox'));?>  
 										</div>  
 										<div class="entryDC"> 
 											<?php echo $a_enrty_form['debit']->render(array('class'=>'entryBox'));?>  
@@ -334,14 +343,17 @@ Invoice: New
 									<?php foreach($form['account_entries'] as $a_enrty_form):?>
 										<?php $total_acct++;?>
 										<div class="entryBorder account_entry_row" id="row-<?php echo $total_acct;?>">
-											<div class="entryChartInvoice"> 
+											<div class="entryChartOR"> 
 												<div> 
 												<?php echo $a_enrty_form['chart_of_account_id']->render(array('class'=>'entrySelect invoice-account-entry-coa'));?> 
 												</div> 
 											</div>                     
-											<div class="entryChart">  
+											<div class="entryRef">  
 													<?php echo $a_enrty_form['general_library_id']->render(array('class'=>'entrySelect'));?>  
-											</div> 
+											</div>            
+											<div class="entryRef">  
+													<?php echo $a_enrty_form['dn_reference']->render(array('class'=>'entryBox'));?>  
+											</div>  
 											<div class="entryDC"> 
 												<?php echo $a_enrty_form['debit']->render(array('class'=>''));?>  
 											</div>
@@ -406,7 +418,9 @@ Invoice: New
 	
 		$("#<?php echo $form['period']->renderId();?>").datepicker({dateFormat: "MM d, yy"});
 		$("#<?php echo $form['total_amount']->renderId();?>").gcrossNumberToWords({word_element: 'total_amount_in_words'});	
-	
+		$(".datepicker_s").each(function(){
+			$(this).datepicker({dateFormat: "yy-mm-dd"});
+		});
 		$.validator.setDefaults({
 			errorElement: 'span'
 		}); 

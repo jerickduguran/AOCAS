@@ -1,0 +1,33 @@
+CheckVoucherEntry: 
+  actAs: { Timestampable: ~ }
+  columns: 
+        check_number: { type: string(150) }	 
+        check_date: { type: date }	 
+        check_voucher_id: { type: int(11) }	 
+        bank_id: { type: int(11) }	 
+        general_library_id: { type: int(11) }	 
+        chart_of_account_id: { type: int(11) }	 
+        is_cleared: { type: boolean, notnull:true, default: false } 
+        is_cleared_date: { type: date }	 
+        is_cancelled: { type: boolean, notnull:true, default: false }	 
+        is_cancelled_date: { type: date }	 
+        is_released: { type: boolean, notnull:true, default: false }	 
+        is_released_date: { type: date }	 
+        amount: { type: decimal(12), scale: 2, default: 0.00, notnull: true }	  
+  relations:
+    Bank:
+      local: bank_id
+      foreign: id
+      onDelete: SET NULL
+    ChartOfAccount:
+      local: chart_of_account_id
+      foreign: id
+      onDelete: SET NULL
+    CheckVoucher:
+      local: check_voucher_id
+      foreign: id
+      onDelete: SET NULL
+    GeneralLibrary:
+      local: general_library_id
+      foreign: id
+      onDelete: SET NULL

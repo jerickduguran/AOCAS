@@ -24,7 +24,7 @@ abstract class BaseTermsOfPaymentForm extends BaseFormDoctrine
 
     $this->setValidators(array(
       'id'             => new sfValidatorChoice(array('choices' => array($this->getObject()->get('id')), 'empty_value' => $this->getObject()->get('id'), 'required' => false)),
-      'title'          => new sfValidatorPass(array('required' => false)),
+      'title'          => new sfValidatorString(array('max_length' => 150, 'required' => false)),
       'number_of_days' => new sfValidatorPass(array('required' => false)),
       'created_at'     => new sfValidatorDateTime(),
       'updated_at'     => new sfValidatorDateTime(),

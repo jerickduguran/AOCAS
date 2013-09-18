@@ -11,6 +11,7 @@
  * @property string $logo
  * @property boolean $status
  * @property Doctrine_Collection $BankAccount
+ * @property Doctrine_Collection $CheckVoucherEntry
  * @property Doctrine_Collection $ReceiptCheckEntry
  * 
  * @method string              getCode()              Returns the current record's "code" value
@@ -19,6 +20,7 @@
  * @method string              getLogo()              Returns the current record's "logo" value
  * @method boolean             getStatus()            Returns the current record's "status" value
  * @method Doctrine_Collection getBankAccount()       Returns the current record's "BankAccount" collection
+ * @method Doctrine_Collection getCheckVoucherEntry() Returns the current record's "CheckVoucherEntry" collection
  * @method Doctrine_Collection getReceiptCheckEntry() Returns the current record's "ReceiptCheckEntry" collection
  * @method Bank                setCode()              Sets the current record's "code" value
  * @method Bank                setName()              Sets the current record's "name" value
@@ -26,6 +28,7 @@
  * @method Bank                setLogo()              Sets the current record's "logo" value
  * @method Bank                setStatus()            Sets the current record's "status" value
  * @method Bank                setBankAccount()       Sets the current record's "BankAccount" collection
+ * @method Bank                setCheckVoucherEntry() Sets the current record's "CheckVoucherEntry" collection
  * @method Bank                setReceiptCheckEntry() Sets the current record's "ReceiptCheckEntry" collection
  * 
  * @package    Gcross Accounting System
@@ -68,6 +71,10 @@ abstract class BaseBank extends sfDoctrineRecord
     {
         parent::setUp();
         $this->hasMany('BankAccount', array(
+             'local' => 'id',
+             'foreign' => 'bank_id'));
+
+        $this->hasMany('CheckVoucherEntry', array(
              'local' => 'id',
              'foreign' => 'bank_id'));
 

@@ -1,0 +1,11 @@
+FinancialSetting:
+    actAs: { Timestampable: ~ }
+    columns:
+        currency_id:  { type: int(11) }
+        financial_yearend_day:  { type: int(2) }
+        financial_yearend_month:  { type: int(2) }
+    relations:
+        Currency:
+            local: currency_id
+            foreign: id
+            onDelete: SET NULL

@@ -17,7 +17,7 @@ class ReceiptParticularEntryForm extends BaseReceiptParticularEntryForm
      // 'receipt_id'               => new sfWidgetFormDoctrineChoice(array('model' => $this->getRelatedModelName('Receipt'), 'add_empty' => false)),
       'title'                    => new sfWidgetFormInputText(),
       'amount'                   => new sfWidgetFormInputText(),
-      'vat_application'          => new sfWidgetFormChoice(array('choices' => array('VAT_EXEMPT' => 'VAT_EXEMPT', 'VAT_ZERO_PERCENT' => 'VAT_ZERO_PERCENT', 'VAT_INCLUSIVE' => 'VAT_INCLUSIVE', 'VAT_EXCLUSIVE' => 'VAT_EXCLUSIVE'))),
+      'vat_application'          => new sfWidgetFormChoice(array('choices' => array(''=>'','VAT_ZERO_PERCENT' => 'Zero Rated VAT', 'VAT_EXEMPT' => 'VAT Exempt', 'VAT_INCLUSIVE' => 'VAT Inclusive', 'VAT_EXCLUSIVE' => 'VAT Exclusive'))),
       'tax_expanded_withheld_id' => new sfWidgetFormDoctrineChoice(array('model' => $this->getRelatedModelName('TaxExpandedWithheld'), 'add_empty' => true)),
       'tax_final_withheld_id'    => new sfWidgetFormDoctrineChoice(array('model' => $this->getRelatedModelName('TaxFinalWithheld'), 'add_empty' => true)),
       'total'                    => new sfWidgetFormInputText(), 

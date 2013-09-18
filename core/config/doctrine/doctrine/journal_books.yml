@@ -1,0 +1,42 @@
+JournalBook:
+    actAs: { Timestampable: ~ }
+    columns:	
+        code:  { type: string(50), notnull: true, default: '', unique: true }
+        name:  { type: string(60),notnull:true,default: ''}
+        description:  { type: string } 
+        sanumber_label:  { type: string } 
+        label:  { type: string } 
+        person_label:  { type: string } 
+        date_enabled:  { type: boolean, default: false } 
+        ref_doc:  { type: boolean, default: false } 
+        date:  { type: string }  
+        ref_doc:  { type: string }  
+        configurations: { type:string }
+    relations:
+        ParticularTemplate:
+            class: ParticularTemplate
+            local: journal_book_id
+            foreign: particular_template_id 
+            refClass: JournalBookParticularTemplate
+            onDelete: CASCADE
+        JournalBookTemplate:
+            class: JournalBookTemplate
+            local: journal_book_id
+            foreign:  journal_book_template_id
+            refClass: JournalBookBookTemplate
+            onDelete: CASCADE
+
+JournalBookParticularTemplate: 
+    actAs: { Timestampable: ~ }
+    columns:	
+        journal_book_id: { type: integer(11), notnull:true, default: ''}
+        particular_template_id: { type: integer(11), notnull:true, default: ''} 
+    relations:
+        JournalBook:
+            local: journal_book_id
+            foreign: id
+            onDelete: CASCADE
+        ParticularTemplate:
+            local: particular_template_id
+            foreign: id
+            onDelete: CASCADE

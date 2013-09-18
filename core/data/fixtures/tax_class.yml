@@ -1,0 +1,45 @@
+TaxFinalWithheld:
+    tax1:
+        code: 989845
+        nature_income_payment:  ATC 01
+        tax_rate_percent: 0.99
+    tax2:
+        code: 989822
+        nature_income_payment:  ATC 02
+        tax_rate_percent: 2.99
+    tax3:
+        code: 989833
+        nature_income_payment:  ATC 03
+        tax_rate_percent: 3.99
+    tax4:
+        code: 989824
+        nature_income_payment:  ATC 04
+        tax_rate_percent: 4.99
+
+TaxExpandedWithheld:
+    tax1:
+        code: 989845
+        nature_income_payment:  EWT 01
+        tax_rate_percent: 0.99
+    tax2:
+        code: 989822
+        nature_income_payment:  EWT 02
+        tax_rate_percent: 2.99
+    tax3:
+        code: 989833
+        nature_income_payment:  EWT 03
+        tax_rate_percent: 3.99
+    tax4:
+        code: 989824
+        nature_income_payment:  EWT 04
+        tax_rate_percent: 4.99
+
+TaxRate:
+    rate1:
+        rate: 12.50
+        effectivity_date: 2013-01-01
+        type: INPUT
+    rate1:
+        rate: 12.50
+        effectivity_date: 2013-01-01
+        type: OUTPUT

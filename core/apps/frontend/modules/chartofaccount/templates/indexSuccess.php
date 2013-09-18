@@ -29,8 +29,8 @@ $(function(){
     colNames:['Code','Account Type','Title', 'Status','Created At','Updated At','Action'],
     colModel :[  
       {name:'code', index:'code', width:55 }, 
-      {name:'account_type_id', index:'account_type_id', width:90 }, 
-      {name:'title', index:'title', width:80, align:'left'}, 
+      {name:'account_type_id', index:'account_type_id', width:70 }, 
+      {name:'title', index:'title', width:140, align:'left'}, 
       {name:'status', index:'status', width:60, align:'center',stype: 'select',searchoptions: { 	value:":;ACTIVE:ACTIVE;INACTIVE:INACTIVE"}}, 
       {name:'created_at', index:'created_at', width:80, align:'center', stype: "range",
 				searchoptions: {
@@ -69,7 +69,7 @@ $(function(){
 					}
 				}
 			}, 
-      {name:'updated_at',index:'updated_at', width:133, align: "center", enableClear: true, stype: "range",
+      {name:'updated_at',index:'updated_at', width:90, align: "center", enableClear: true, stype: "range",
 			searchoptions: {
 				dataInit: function (elem) {   	 								
 					//Init Datepicker for this element

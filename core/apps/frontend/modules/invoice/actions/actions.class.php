@@ -298,7 +298,7 @@ class invoiceActions extends sfActions
 											  $data->getInvoiceNumber(), 
 											  $data->getTotalAmount(), 
 											  $data->getCurrency()->getTitle(), 
-											  date('m/d/Y H:i:s',strtotime($data->getDueDate())),
+											  date('m/d/Y ',strtotime($data->getDueDate())),
 											  $data->getStatus(), 
 											  date('m/d/Y H:i:s',strtotime($data->getCreatedAt())));
 		$i++;
@@ -494,12 +494,35 @@ class invoiceActions extends sfActions
   public function executeCheckAccountType(sfWebRequest $request)
   {
 	$this->forward404unless($request->isXmlHttpRequest() || $request->isMethod(sfRequest::POST));	
-    $account_id 				= $request->getParameter("account_id",0);
+  
+	$account_id 				= $request->getParameter("account_id",0); 
+    $selected_account_id 		= $request->getParameter("selected_account_id",0); 
+    $current_account_id 		= $request->getParameter("current_account_id",0); 
     $client_id 			     	= $request->getParameter("client",0);
+	$invoice_number 			= $request->getParameter("invoice_number",0);
 	$response_data 				= array();
 	$response_data['has_data']	= false;
-	if($account = Doctrine_Core::getTable("ChartOfAccount")->findOneById($account_id)){
-		if($account->isOutputVat()){
+	
+	if($invoice_account_entry = Doctrine_Core::getTable("InvoiceAccountEntry")->findOneById($account_id))
+	{  	
+		if($invoice_account_entry->getChartOfAccount()->isOutputVat()){
+			$response_data['has_data']	= true;
+			
+			$form						= new InvoiceAccountEntryOutputVatForm();
+			$form->setDefault('general_library_id',$client_id); 
+			$form->setDefault('invoice_account_entry_id',$invoice_account_entry->getId()); 
+			
+			$account_outputvat_entries	= '';
+			$data 						= array();
+			$data['invoice_number']     = $invoice_number;
+			$data['general_library'] 	= false; 
+			if($general_library = Doctrine_Core::getTable("GeneralLibrary")->findOneById($client_id)){
+				$data['general_library'] = $general_library;
+			}
+			
+			$response_data['data'] 		= $this->getPartial("outputvatentries",array('invoice_account_entry' => $invoice_account_entry,"account_outputvat_entries" => $account_outputvat_entries,'form'=>$form));
+		}
+		elseif($invoice_account_entry->getChartOfAccount()->isExpandedVat()){
 			$response_data['has_data']	= true;
 			$form						= new InvoiceAccountEntryOutputVatForm();
 			$form->setDefault('general_library_id',$client_id);
@@ -514,8 +537,8 @@ class invoiceActions extends sfActions
 				$data['general_library'] = $general_library;
 			}
 			
-			$response_data['data'] 		= $this->getPartial("outputvatentries",array('data' => $data,"account_outputvat_entries" => $account_outputvat_entries,'form'=>$form));
-		}
+			$response_data['data'] 		= $this->getPartial("expandedvatentries",array('data' => $data,"account_outputvat_entries" => $account_outputvat_entries,'form'=>$form));
+		} 
 	} 
 	return $this->renderText(json_encode($response_data)); 
   }
@@ -560,11 +583,35 @@ class invoiceActions extends sfActions
      
        $this->redirect('invoice/new?invoice_id='.$invoice->getId());
      }else{
-	 print '<pre>';
+		print '<pre>';
 		foreach($form->getErrorSchema()->getErrors() as $field=>$error){
 			echo $field." _ ".$error."<br/>";
 		}
 		die('x');
 	 }
+  }
+  public function executeSaveaccountentry(sfWebRequest $request)
+  {
+	$response_data = array('is_valid' => false);
+	
+	$form 	  = new InvoiceAccountEntryOutputVatForm();  
+	
+	//print '<pre>';
+	//print_r($request->getParameter($form->getName()));
+	//die('x');
+	$form->bind($request->getParameter($form->getName()), $request->getFiles($form->getName()));
+   
+   if ($form->isValid())
+    {
+      $invoice = $form->save(); 
+	  $response_data['is_valid'] = true;
+    }else{
+		print '<pre>';
+		foreach($form->getErrorSchema()->getErrors() as $field=>$error){
+			echo $field." _ ".$error."<br/>";
+		}
+		die('x');
+	} 
+	return $this->renderText(json_encode($response_data));   
   }
 }

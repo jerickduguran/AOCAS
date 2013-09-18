@@ -25,8 +25,7 @@ class ReceiptCashEntryListForm extends BaseReceiptForm
 	
 	//$this->addNewParticularEntry();
 	//$this->addNewAccountEntry();  
-	$this->embedRelation("ReceiptCashEntry"); 
-	$this->embedRelation("ReceiptCheckEntry"); 
+	$this->embedRelation("ReceiptCashEntry");  
   }
    
    public function addNewCashEntry($number = 1)
@@ -67,7 +66,7 @@ class ReceiptCashEntryListForm extends BaseReceiptForm
 
 		  $new_particular_entries->embedForm($key,$particular_entry_form);
 		}  
-		$this->embedForm('cash_entries',$new_particular_entries); 
+		$this->embedForm('cash_entries',$new_particular_entries);  
 	}
 	 
 	//Account Entries

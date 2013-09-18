@@ -30,10 +30,6 @@ abstract class BaseUserPositionsForm extends BaseFormDoctrine
       'updated_at' => new sfValidatorDateTime(),
     ));
 
-    $this->validatorSchema->setPostValidator(
-      new sfValidatorDoctrineUnique(array('model' => 'UserPositions', 'column' => array('code')))
-    );
-
     $this->widgetSchema->setNameFormat('user_positions[%s]');
 
     $this->errorSchema = new sfValidatorErrorSchema($this->validatorSchema);

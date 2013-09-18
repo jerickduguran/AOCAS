@@ -1,0 +1,59 @@
+JournalBookTemplate:
+    actAs: { Timestampable: ~ }
+    columns:	
+        code: { type: string(50), notnull: true, default: '', unique: true }
+        name: { type: string(50),} notnull: true, default: '' }	 
+        project_id: { type: int(11) }		
+        department_id: { type: int(11) }	 
+    relations:
+        Project:
+            local: project_id
+            foreign: id
+            onDelete: SET NULL
+        Department:
+            local: department_id
+            foreign: id
+            onDelete: SET NULL 	 
+        JournalBook:
+            class: JournalBook
+            local: journal_book_template_id
+            foreign:  journal_book_id
+            refClass: JournalBookBookTemplate
+            onDelete: CASCADE 
+
+JournalBookBookTemplate: 
+    actAs: { Timestampable: ~ }	
+    columns:	
+        journal_book_id: { type: integer(11), notnull:true, default: ''}
+        journal_book_template_id: { type: integer(11), notnull:true, default: ''} 
+    relations:
+        JournalBook:
+            local: journal_book_id
+            foreign: id
+            onDelete: CASCADE
+        JournalBookTemplate:
+            local: journal_book_template_id
+            foreign: id
+            onDelete: CASCADE
+
+JournalBookTemplateEntry: 
+    actAs: { Timestampable: ~ }
+    columns:
+        journal_book_template_id: { type: int(11), notnull: true }		
+        chart_of_account_id: { type: int(11) }		
+        general_library_id: { type: int(11) }		 	
+        debit:  { type: decimal(12), scale: 2, default: 0.00, notnull: true }
+        credit:  { type: decimal(12), scale: 2, default: 0.00, notnull: true }  
+    relations: 
+        JournalBookTemplate:
+            local: journal_book_template_id
+            foreign: id
+            onDelete: CASCADE
+        ChartOfAccount:
+            local: chart_of_account_id
+            foreign: id
+            onDelete: CASCADE
+        GeneralLibrary:
+            local: general_library_id
+            foreign: id
+            onDelete: CASCADE

@@ -1,8 +1,7 @@
 CheckVoucher:
     actAs: { Timestampable: ~ }
     columns:
-        book_id: { type: int(11), notnull: true, default: '0' }		
-        status: { type: enum, values: ['UNPAID','PARTIAL_PAID','FULL PAID'], default: 'UNPAID' }		
+        book_id: { type: int(11), notnull: true, default: '0' }		 		
         voucher_number: { type: string(50), notnull: true, default: '', unique: true }
         general_library_id: { type: int(11) }	 
         currency_id: { type: int(11) }  
@@ -62,7 +61,7 @@ CheckVoucherAccountEntry:
         debit: { type: decimal(12), scale: 2, default: 0.00, notnull: true }
         credit: { type: decimal(12), scale: 2, default: 0.00, notnull: true }
     relations:
-        Check:
+        CheckVoucher:
             local: check_voucher_id
             foreign: id
             onDelete: CASCADE 

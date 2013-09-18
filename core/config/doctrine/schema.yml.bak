@@ -1,0 +1,7913 @@
+AccountsPayableBeginningBalance:
+  connection: doctrine
+  tableName: accounts_payable_beginning_balance
+  columns:
+    id:
+      type: integer(8)
+      fixed: false
+      unsigned: false
+      primary: true
+      autoincrement: true
+    currency_id:
+      type: integer(8)
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: false
+      autoincrement: false
+    general_library_id:
+      type: integer(8)
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: false
+      autoincrement: false
+    project_id:
+      type: integer(8)
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: false
+      autoincrement: false
+    department_id:
+      type: integer(8)
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: false
+      autoincrement: false
+    start_date:
+      type: date(25)
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: false
+      autoincrement: false
+    receive_date:
+      type: date(25)
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: false
+      autoincrement: false
+    bill_number:
+      type: string(50)
+      fixed: false
+      unsigned: false
+      primary: false
+      default: ''
+      notnull: true
+      autoincrement: false
+    amount:
+      type: 'decimal(12, 2)'
+      fixed: false
+      unsigned: false
+      primary: false
+      default: '0.00'
+      notnull: true
+      autoincrement: false
+    particulars:
+      type: string()
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: false
+      autoincrement: false
+    created_at:
+      type: timestamp(25)
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: true
+      autoincrement: false
+    updated_at:
+      type: timestamp(25)
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: true
+      autoincrement: false
+  relations:
+    Currency:
+      local: currency_id
+      foreign: id
+      type: one
+    Department:
+      local: department_id
+      foreign: id
+      type: one
+    Project:
+      local: project_id
+      foreign: id
+      type: one
+    GeneralLibrary:
+      local: general_library_id
+      foreign: id
+      type: one
+AccountsPayableVoucher:
+  connection: doctrine
+  tableName: accounts_payable_voucher
+  columns:
+    id:
+      type: integer(8)
+      fixed: false
+      unsigned: false
+      primary: true
+      autoincrement: true
+    book_id:
+      type: integer(8)
+      fixed: false
+      unsigned: false
+      primary: false
+      default: '0'
+      notnull: true
+      autoincrement: false
+    voucher_number:
+      type: string(50)
+      fixed: false
+      unsigned: false
+      primary: false
+      default: ''
+      notnull: true
+      autoincrement: false
+    general_library_id:
+      type: integer(8)
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: false
+      autoincrement: false
+    currency_id:
+      type: integer(8)
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: false
+      autoincrement: false
+    si_dr_number:
+      type: string(150)
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: false
+      autoincrement: false
+    purchase_order_number:
+      type: string(150)
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: false
+      autoincrement: false
+    date_received:
+      type: date(25)
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: false
+      autoincrement: false
+    period:
+      type: date(25)
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: false
+      autoincrement: false
+    due_date:
+      type: date(25)
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: false
+      autoincrement: false
+    terms_of_payment_id:
+      type: integer(8)
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: false
+      autoincrement: false
+    header_message:
+      type: string()
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: false
+      autoincrement: false
+    footer_message:
+      type: string()
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: false
+      autoincrement: false
+    total_amount:
+      type: 'decimal(12, 2)'
+      fixed: false
+      unsigned: false
+      primary: false
+      default: '0.00'
+      notnull: true
+      autoincrement: false
+    status:
+      type: enum(7)
+      fixed: false
+      unsigned: false
+      values:
+        - FULL
+        - PARTIAL
+      primary: false
+      default: FULL
+      notnull: false
+      autoincrement: false
+    created_at:
+      type: timestamp(25)
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: true
+      autoincrement: false
+    updated_at:
+      type: timestamp(25)
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: true
+      autoincrement: false
+  relations:
+    Book:
+      local: book_id
+      foreign: id
+      type: one
+    Currency:
+      local: currency_id
+      foreign: id
+      type: one
+    GeneralLibrary:
+      local: general_library_id
+      foreign: id
+      type: one
+    TermsOfPayment:
+      local: terms_of_payment_id
+      foreign: id
+      type: one
+    AccountsPayableVoucherAccountEntry:
+      local: id
+      foreign: accounts_payable_voucher_id
+      type: many
+    AccountsPayableVoucherParticularEntry:
+      local: id
+      foreign: accounts_payable_voucher_id
+      type: many
+AccountsPayableVoucherAccountEntry:
+  connection: doctrine
+  tableName: accounts_payable_voucher_account_entry
+  columns:
+    id:
+      type: integer(8)
+      fixed: false
+      unsigned: false
+      primary: true
+      autoincrement: true
+    accounts_payable_voucher_id:
+      type: integer(8)
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: true
+      autoincrement: false
+    chart_of_account_id:
+      type: integer(8)
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: false
+      autoincrement: false
+    general_library_id:
+      type: integer(8)
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: false
+      autoincrement: false
+    dn_reference:
+      type: string(50)
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: false
+      autoincrement: false
+    debit:
+      type: 'decimal(12, 2)'
+      fixed: false
+      unsigned: false
+      primary: false
+      default: '0.00'
+      notnull: true
+      autoincrement: false
+    credit:
+      type: 'decimal(12, 2)'
+      fixed: false
+      unsigned: false
+      primary: false
+      default: '0.00'
+      notnull: true
+      autoincrement: false
+    created_at:
+      type: timestamp(25)
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: true
+      autoincrement: false
+    updated_at:
+      type: timestamp(25)
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: true
+      autoincrement: false
+  relations:
+    AccountsPayableVoucher:
+      local: accounts_payable_voucher_id
+      foreign: id
+      type: one
+    ChartOfAccount:
+      local: chart_of_account_id
+      foreign: id
+      type: one
+    GeneralLibrary:
+      local: general_library_id
+      foreign: id
+      type: one
+AccountsPayableVoucherAccountEntryOutputVat:
+  connection: doctrine
+  tableName: accounts_payable_voucher_account_entry_output_vat
+  columns:
+    id:
+      type: integer(8)
+      fixed: false
+      unsigned: false
+      primary: true
+      autoincrement: true
+    accounts_payable_voucher_number:
+      type: integer(8)
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: false
+      autoincrement: false
+    chart_of_account_id:
+      type: integer(8)
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: false
+      autoincrement: false
+    general_library_id:
+      type: integer(8)
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: false
+      autoincrement: false
+    tin_number:
+      type: string(60)
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: false
+      autoincrement: false
+    created_at:
+      type: timestamp(25)
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: true
+      autoincrement: false
+    updated_at:
+      type: timestamp(25)
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: true
+      autoincrement: false
+  relations:
+    ChartOfAccount:
+      local: chart_of_account_id
+      foreign: id
+      type: one
+    GeneralLibrary:
+      local: general_library_id
+      foreign: id
+      type: one
+    AccountsPayableVoucherAccountEntryOutputVatEntry:
+      local: id
+      foreign: accounts_payable_voucher_account_entry_output_vat_id
+      type: many
+AccountsPayableVoucherAccountEntryOutputVatEntry:
+  connection: doctrine
+  tableName: accounts_payable_voucher_account_entry_output_vat_entry
+  columns:
+    id:
+      type: integer(8)
+      fixed: false
+      unsigned: false
+      primary: true
+      autoincrement: true
+    accounts_payable_voucher_account_entry_output_vat_id:
+      type: integer(8)
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: false
+      autoincrement: false
+    tax_rate_id:
+      type: integer(8)
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: false
+      autoincrement: false
+    gross_purchased:
+      type: 'decimal(12, 2)'
+      fixed: false
+      unsigned: false
+      primary: false
+      default: '0.00'
+      notnull: true
+      autoincrement: false
+    vat_received:
+      type: 'decimal(12, 2)'
+      fixed: false
+      unsigned: false
+      primary: false
+      default: '0.00'
+      notnull: true
+      autoincrement: false
+    net_sales:
+      type: 'decimal(12, 2)'
+      fixed: false
+      unsigned: false
+      primary: false
+      default: '0.00'
+      notnull: true
+      autoincrement: false
+    created_at:
+      type: timestamp(25)
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: true
+      autoincrement: false
+    updated_at:
+      type: timestamp(25)
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: true
+      autoincrement: false
+  relations:
+    AccountsPayableVoucherAccountEntryOutputVat:
+      local: accounts_payable_voucher_account_entry_output_vat_id
+      foreign: id
+      type: one
+    TaxRate:
+      local: tax_rate_id
+      foreign: id
+      type: one
+AccountsPayableVoucherParticularEntry:
+  connection: doctrine
+  tableName: accounts_payable_voucher_particular_entry
+  columns:
+    id:
+      type: integer(8)
+      fixed: false
+      unsigned: false
+      primary: true
+      autoincrement: true
+    accounts_payable_voucher_id:
+      type: integer(8)
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: true
+      autoincrement: false
+    title:
+      type: string(150)
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: false
+      autoincrement: false
+    amount:
+      type: 'decimal(12, 2)'
+      fixed: false
+      unsigned: false
+      primary: false
+      default: '0.00'
+      notnull: true
+      autoincrement: false
+    vat_application:
+      type: enum(16)
+      fixed: false
+      unsigned: false
+      values:
+        - VAT_EXEMPT
+        - VAT_ZERO_PERCENT
+        - VAT_INCLUSIVE
+        - VAT_EXCLUSIVE
+      primary: false
+      default: VAT_INCLUSIVE
+      notnull: false
+      autoincrement: false
+    tax_expanded_withheld_id:
+      type: integer(8)
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: false
+      autoincrement: false
+    tax_final_withheld_id:
+      type: integer(8)
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: false
+      autoincrement: false
+    total:
+      type: 'decimal(12, 2)'
+      fixed: false
+      unsigned: false
+      primary: false
+      default: '0.00'
+      notnull: true
+      autoincrement: false
+    created_at:
+      type: timestamp(25)
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: true
+      autoincrement: false
+    updated_at:
+      type: timestamp(25)
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: true
+      autoincrement: false
+  relations:
+    AccountsPayableVoucher:
+      local: accounts_payable_voucher_id
+      foreign: id
+      type: one
+    TaxExpandedWithheld:
+      local: tax_expanded_withheld_id
+      foreign: id
+      type: one
+    TaxFinalWithheld:
+      local: tax_final_withheld_id
+      foreign: id
+      type: one
+AccountsReceivableBeginningBalance:
+  connection: doctrine
+  tableName: accounts_receivable_beginning_balance
+  columns:
+    id:
+      type: integer(8)
+      fixed: false
+      unsigned: false
+      primary: true
+      autoincrement: true
+    currency_id:
+      type: integer(8)
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: false
+      autoincrement: false
+    general_library_id:
+      type: integer(8)
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: false
+      autoincrement: false
+    project_id:
+      type: integer(8)
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: false
+      autoincrement: false
+    department_id:
+      type: integer(8)
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: false
+      autoincrement: false
+    start_date:
+      type: date(25)
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: false
+      autoincrement: false
+    receive_date:
+      type: date(25)
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: false
+      autoincrement: false
+    bill_number:
+      type: string(50)
+      fixed: false
+      unsigned: false
+      primary: false
+      default: ''
+      notnull: true
+      autoincrement: false
+    amount:
+      type: 'decimal(12, 2)'
+      fixed: false
+      unsigned: false
+      primary: false
+      default: '0.00'
+      notnull: true
+      autoincrement: false
+    particulars:
+      type: string()
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: false
+      autoincrement: false
+    created_at:
+      type: timestamp(25)
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: true
+      autoincrement: false
+    updated_at:
+      type: timestamp(25)
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: true
+      autoincrement: false
+  relations:
+    Currency:
+      local: currency_id
+      foreign: id
+      type: one
+    Project:
+      local: project_id
+      foreign: id
+      type: one
+    Department:
+      local: department_id
+      foreign: id
+      type: one
+    GeneralLibrary:
+      local: general_library_id
+      foreign: id
+      type: one
+Bank:
+  connection: doctrine
+  tableName: bank
+  columns:
+    id:
+      type: integer(8)
+      fixed: false
+      unsigned: false
+      primary: true
+      autoincrement: true
+    code:
+      type: string(10)
+      fixed: false
+      unsigned: false
+      primary: false
+      default: ''
+      notnull: true
+      autoincrement: false
+    name:
+      type: string(50)
+      fixed: false
+      unsigned: false
+      primary: false
+      default: ''
+      notnull: true
+      autoincrement: false
+    description:
+      type: string()
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: false
+      autoincrement: false
+    logo:
+      type: string(150)
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: false
+      autoincrement: false
+    status:
+      type: integer(1)
+      fixed: false
+      unsigned: false
+      primary: false
+      default: '0'
+      notnull: true
+      autoincrement: false
+    created_at:
+      type: timestamp(25)
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: true
+      autoincrement: false
+    updated_at:
+      type: timestamp(25)
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: true
+      autoincrement: false
+  relations:
+    BankAccount:
+      local: id
+      foreign: bank_id
+      type: many
+    CheckVoucherEntry:
+      local: id
+      foreign: bank_id
+      type: many
+    ReceiptCheckEntry:
+      local: id
+      foreign: bank_id
+      type: many
+BankAccount:
+  connection: doctrine
+  tableName: bank_account
+  columns:
+    id:
+      type: integer(8)
+      fixed: false
+      unsigned: false
+      primary: true
+      autoincrement: true
+    code:
+      type: string(10)
+      fixed: false
+      unsigned: false
+      primary: false
+      default: ''
+      notnull: true
+      autoincrement: false
+    bank_id:
+      type: integer(8)
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: false
+      autoincrement: false
+    account_name:
+      type: string(50)
+      fixed: false
+      unsigned: false
+      primary: false
+      default: ''
+      notnull: true
+      autoincrement: false
+    account_number:
+      type: string(60)
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: true
+      autoincrement: false
+    currency_id:
+      type: integer(8)
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: false
+      autoincrement: false
+    status:
+      type: integer(1)
+      fixed: false
+      unsigned: false
+      primary: false
+      default: '0'
+      notnull: true
+      autoincrement: false
+    created_at:
+      type: timestamp(25)
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: true
+      autoincrement: false
+    updated_at:
+      type: timestamp(25)
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: true
+      autoincrement: false
+  relations:
+    Bank:
+      local: bank_id
+      foreign: id
+      type: one
+Book:
+  connection: doctrine
+  tableName: book
+  columns:
+    id:
+      type: integer(8)
+      fixed: false
+      unsigned: false
+      primary: true
+      autoincrement: true
+    code:
+      type: string(50)
+      fixed: false
+      unsigned: false
+      primary: false
+      default: ''
+      notnull: true
+      autoincrement: false
+    name:
+      type: string(50)
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: false
+      autoincrement: false
+    description:
+      type: string()
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: false
+      autoincrement: false
+    created_at:
+      type: timestamp(25)
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: true
+      autoincrement: false
+    updated_at:
+      type: timestamp(25)
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: true
+      autoincrement: false
+  relations:
+    AccountsPayableVoucher:
+      local: id
+      foreign: book_id
+      type: many
+    CheckVoucher:
+      local: id
+      foreign: book_id
+      type: many
+    DebitCreditMemo:
+      local: id
+      foreign: book_id
+      type: many
+    Invoice:
+      local: id
+      foreign: book_id
+      type: many
+    JournalVoucher:
+      local: id
+      foreign: book_id
+      type: many
+    PettyCashVoucher:
+      local: id
+      foreign: book_id
+      type: many
+    PettyCashVoucherVoucher:
+      local: id
+      foreign: book_id
+      type: many
+    Receipt:
+      local: id
+      foreign: book_id
+      type: many
+Category:
+  connection: doctrine
+  tableName: category
+  columns:
+    id:
+      type: integer(8)
+      fixed: false
+      unsigned: false
+      primary: true
+      autoincrement: true
+    code:
+      type: string(50)
+      fixed: false
+      unsigned: false
+      primary: false
+      default: ''
+      notnull: true
+      autoincrement: false
+    title:
+      type: string(50)
+      fixed: false
+      unsigned: false
+      primary: false
+      default: ''
+      notnull: true
+      autoincrement: false
+    description:
+      type: string()
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: false
+      autoincrement: false
+    created_at:
+      type: timestamp(25)
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: true
+      autoincrement: false
+    updated_at:
+      type: timestamp(25)
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: true
+      autoincrement: false
+ChartOfAccount:
+  connection: doctrine
+  tableName: chart_of_account
+  columns:
+    id:
+      type: integer(8)
+      fixed: false
+      unsigned: false
+      primary: true
+      autoincrement: true
+    chart_of_account_type_id:
+      type: integer(8)
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: false
+      autoincrement: false
+    code:
+      type: string(50)
+      fixed: false
+      unsigned: false
+      primary: false
+      default: ''
+      notnull: true
+      autoincrement: false
+    title:
+      type: string(50)
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: false
+      autoincrement: false
+    description:
+      type: string()
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: false
+      autoincrement: false
+    status:
+      type: enum(8)
+      fixed: false
+      unsigned: false
+      values:
+        - ACTIVE
+        - INACTIVE
+      primary: false
+      default: ACTIVE
+      notnull: false
+      autoincrement: false
+    created_at:
+      type: timestamp(25)
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: true
+      autoincrement: false
+    updated_at:
+      type: timestamp(25)
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: true
+      autoincrement: false
+  relations:
+    ChartOfAccountType:
+      local: chart_of_account_type_id
+      foreign: id
+      type: one
+    AccountsPayableVoucherAccountEntry:
+      local: id
+      foreign: chart_of_account_id
+      type: many
+    AccountsPayableVoucherAccountEntryOutputVat:
+      local: id
+      foreign: chart_of_account_id
+      type: many
+    ChartOfAccountGroupCode:
+      local: id
+      foreign: chart_of_account_id
+      type: many
+    ChartOfAccountValidation:
+      local: id
+      foreign: chart_of_account_id
+      type: many
+    CheckVoucherAccountEntry:
+      local: id
+      foreign: chart_of_account_id
+      type: many
+    CheckVoucherAccountEntryOutputVat:
+      local: id
+      foreign: chart_of_account_id
+      type: many
+    CheckVoucherEntry:
+      local: id
+      foreign: chart_of_account_id
+      type: many
+    DebitCreditMemoAccountEntry:
+      local: id
+      foreign: chart_of_account_id
+      type: many
+    DebitCreditMemoAccountEntryOutputVat:
+      local: id
+      foreign: chart_of_account_id
+      type: many
+    FixAssetAccount:
+      local: id
+      foreign: chart_of_account_id
+      type: many
+    GeneralLedgerBeginningBalance:
+      local: id
+      foreign: chart_of_account_id
+      type: many
+    InvoiceAccountEntry:
+      local: id
+      foreign: chart_of_account_id
+      type: many
+    JournalBookTemplateEntry:
+      local: id
+      foreign: chart_of_account_id
+      type: many
+    JournalVoucherAccountEntry:
+      local: id
+      foreign: chart_of_account_id
+      type: many
+    JournalVoucherAccountEntryOutputVat:
+      local: id
+      foreign: chart_of_account_id
+      type: many
+    PettyCashVoucherAccountEntry:
+      local: id
+      foreign: chart_of_account_id
+      type: many
+    PettyCashVoucherAccountEntryOutputVat:
+      local: id
+      foreign: chart_of_account_id
+      type: many
+    PettyCashVoucherVoucherAccountEntry:
+      local: id
+      foreign: chart_of_account_id
+      type: many
+    PettyCashVoucherVoucherAccountEntryOutputVat:
+      local: id
+      foreign: chart_of_account_id
+      type: many
+    PrepaymentAccount:
+      local: id
+      foreign: chart_of_account_id
+      type: many
+    ReceiptAccountEntry:
+      local: id
+      foreign: chart_of_account_id
+      type: many
+    ReceiptAccountEntryOutputVat:
+      local: id
+      foreign: chart_of_account_id
+      type: many
+    ReceiptCashEntry:
+      local: id
+      foreign: chart_of_account_id
+      type: many
+    ReceiptCheckEntry:
+      local: id
+      foreign: chart_of_account_id
+      type: many
+ChartOfAccountGroupCode:
+  connection: doctrine
+  tableName: chart_of_account_group_code
+  columns:
+    chart_of_account_id:
+      type: integer(8)
+      fixed: false
+      unsigned: false
+      primary: true
+      autoincrement: false
+    group_code_id:
+      type: integer(8)
+      fixed: false
+      unsigned: false
+      primary: true
+      autoincrement: false
+    created_at:
+      type: timestamp(25)
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: true
+      autoincrement: false
+    updated_at:
+      type: timestamp(25)
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: true
+      autoincrement: false
+  relations:
+    ChartOfAccount:
+      local: chart_of_account_id
+      foreign: id
+      type: one
+    GroupCode:
+      local: group_code_id
+      foreign: id
+      type: one
+ChartOfAccountType:
+  connection: doctrine
+  tableName: chart_of_account_type
+  columns:
+    id:
+      type: integer(8)
+      fixed: false
+      unsigned: false
+      primary: true
+      autoincrement: true
+    code:
+      type: string(50)
+      fixed: false
+      unsigned: false
+      primary: false
+      default: ''
+      notnull: true
+      autoincrement: false
+    title:
+      type: string(50)
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: false
+      autoincrement: false
+    description:
+      type: string()
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: false
+      autoincrement: false
+    status:
+      type: enum(8)
+      fixed: false
+      unsigned: false
+      values:
+        - ACTIVE
+        - INACTIVE
+      primary: false
+      default: ACTIVE
+      notnull: false
+      autoincrement: false
+    created_at:
+      type: timestamp(25)
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: true
+      autoincrement: false
+    updated_at:
+      type: timestamp(25)
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: true
+      autoincrement: false
+  relations:
+    ChartOfAccount:
+      local: id
+      foreign: chart_of_account_type_id
+      type: many
+    ChartOfAccountTypeValidation:
+      local: id
+      foreign: chart_of_account_type_id
+      type: many
+ChartOfAccountTypeValidation:
+  connection: doctrine
+  tableName: chart_of_account_type_validation
+  columns:
+    chart_of_account_type_id:
+      type: integer(8)
+      fixed: false
+      unsigned: false
+      primary: true
+      autoincrement: false
+    validation_id:
+      type: integer(8)
+      fixed: false
+      unsigned: false
+      primary: true
+      autoincrement: false
+    created_at:
+      type: timestamp(25)
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: true
+      autoincrement: false
+    updated_at:
+      type: timestamp(25)
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: true
+      autoincrement: false
+  relations:
+    ChartOfAccountType:
+      local: chart_of_account_type_id
+      foreign: id
+      type: one
+    Validation:
+      local: validation_id
+      foreign: id
+      type: one
+ChartOfAccountValidation:
+  connection: doctrine
+  tableName: chart_of_account_validation
+  columns:
+    chart_of_account_id:
+      type: integer(8)
+      fixed: false
+      unsigned: false
+      primary: true
+      autoincrement: false
+    validation_id:
+      type: integer(8)
+      fixed: false
+      unsigned: false
+      primary: true
+      autoincrement: false
+    created_at:
+      type: timestamp(25)
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: true
+      autoincrement: false
+    updated_at:
+      type: timestamp(25)
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: true
+      autoincrement: false
+  relations:
+    ChartOfAccount:
+      local: chart_of_account_id
+      foreign: id
+      type: one
+    Validation:
+      local: validation_id
+      foreign: id
+      type: one
+CheckVoucher:
+  connection: doctrine
+  tableName: check_voucher
+  columns:
+    id:
+      type: integer(8)
+      fixed: false
+      unsigned: false
+      primary: true
+      autoincrement: true
+    book_id:
+      type: integer(8)
+      fixed: false
+      unsigned: false
+      primary: false
+      default: '0'
+      notnull: true
+      autoincrement: false
+    status:
+      type: enum(7)
+      fixed: false
+      unsigned: false
+      values:
+        - FULL
+        - PARTIAL
+      primary: false
+      default: FULL
+      notnull: false
+      autoincrement: false
+    voucher_number:
+      type: string(50)
+      fixed: false
+      unsigned: false
+      primary: false
+      default: ''
+      notnull: true
+      autoincrement: false
+    general_library_id:
+      type: integer(8)
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: false
+      autoincrement: false
+    currency_id:
+      type: integer(8)
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: false
+      autoincrement: false
+    date_received:
+      type: date(25)
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: false
+      autoincrement: false
+    period:
+      type: date(25)
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: false
+      autoincrement: false
+    due_date:
+      type: date(25)
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: false
+      autoincrement: false
+    header_message:
+      type: string()
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: false
+      autoincrement: false
+    footer_message:
+      type: string()
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: false
+      autoincrement: false
+    si_dr_number:
+      type: string(150)
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: false
+      autoincrement: false
+    total_amount:
+      type: 'decimal(12, 2)'
+      fixed: false
+      unsigned: false
+      primary: false
+      default: '0.00'
+      notnull: true
+      autoincrement: false
+    created_at:
+      type: timestamp(25)
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: true
+      autoincrement: false
+    updated_at:
+      type: timestamp(25)
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: true
+      autoincrement: false
+  relations:
+    Book:
+      local: book_id
+      foreign: id
+      type: one
+    Currency:
+      local: currency_id
+      foreign: id
+      type: one
+    GeneralLibrary:
+      local: general_library_id
+      foreign: id
+      type: one
+    CheckVoucherAccountEntry:
+      local: id
+      foreign: check_voucher_id
+      type: many
+    CheckVoucherEntry:
+      local: id
+      foreign: check_voucher_id
+      type: many
+    CheckVoucherParticularEntry:
+      local: id
+      foreign: check_voucher_id
+      type: many
+CheckVoucherAccountEntry:
+  connection: doctrine
+  tableName: check_voucher_account_entry
+  columns:
+    id:
+      type: integer(8)
+      fixed: false
+      unsigned: false
+      primary: true
+      autoincrement: true
+    check_voucher_id:
+      type: integer(8)
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: true
+      autoincrement: false
+    chart_of_account_id:
+      type: integer(8)
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: false
+      autoincrement: false
+    general_library_id:
+      type: integer(8)
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: false
+      autoincrement: false
+    dn_reference:
+      type: string(50)
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: false
+      autoincrement: false
+    debit:
+      type: 'decimal(12, 2)'
+      fixed: false
+      unsigned: false
+      primary: false
+      default: '0.00'
+      notnull: true
+      autoincrement: false
+    credit:
+      type: 'decimal(12, 2)'
+      fixed: false
+      unsigned: false
+      primary: false
+      default: '0.00'
+      notnull: true
+      autoincrement: false
+    created_at:
+      type: timestamp(25)
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: true
+      autoincrement: false
+    updated_at:
+      type: timestamp(25)
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: true
+      autoincrement: false
+  relations:
+    ChartOfAccount:
+      local: chart_of_account_id
+      foreign: id
+      type: one
+    GeneralLibrary:
+      local: general_library_id
+      foreign: id
+      type: one
+    CheckVoucher:
+      local: check_voucher_id
+      foreign: id
+      type: one
+CheckVoucherAccountEntryOutputVat:
+  connection: doctrine
+  tableName: check_voucher_account_entry_output_vat
+  columns:
+    id:
+      type: integer(8)
+      fixed: false
+      unsigned: false
+      primary: true
+      autoincrement: true
+    check_voucher_number:
+      type: integer(8)
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: false
+      autoincrement: false
+    chart_of_account_id:
+      type: integer(8)
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: false
+      autoincrement: false
+    general_library_id:
+      type: integer(8)
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: false
+      autoincrement: false
+    tin_number:
+      type: string(60)
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: false
+      autoincrement: false
+    created_at:
+      type: timestamp(25)
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: true
+      autoincrement: false
+    updated_at:
+      type: timestamp(25)
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: true
+      autoincrement: false
+  relations:
+    ChartOfAccount:
+      local: chart_of_account_id
+      foreign: id
+      type: one
+    GeneralLibrary:
+      local: general_library_id
+      foreign: id
+      type: one
+    CheckVoucherAccountEntryOutputVatEntry:
+      local: id
+      foreign: check_voucher_account_entry_output_vat_id
+      type: many
+CheckVoucherAccountEntryOutputVatEntry:
+  connection: doctrine
+  tableName: check_voucher_account_entry_output_vat_entry
+  columns:
+    id:
+      type: integer(8)
+      fixed: false
+      unsigned: false
+      primary: true
+      autoincrement: true
+    check_voucher_account_entry_output_vat_id:
+      type: integer(8)
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: false
+      autoincrement: false
+    tax_rate_id:
+      type: integer(8)
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: false
+      autoincrement: false
+    gross_purchased:
+      type: 'decimal(12, 2)'
+      fixed: false
+      unsigned: false
+      primary: false
+      default: '0.00'
+      notnull: true
+      autoincrement: false
+    vat_received:
+      type: 'decimal(12, 2)'
+      fixed: false
+      unsigned: false
+      primary: false
+      default: '0.00'
+      notnull: true
+      autoincrement: false
+    net_sales:
+      type: 'decimal(12, 2)'
+      fixed: false
+      unsigned: false
+      primary: false
+      default: '0.00'
+      notnull: true
+      autoincrement: false
+    created_at:
+      type: timestamp(25)
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: true
+      autoincrement: false
+    updated_at:
+      type: timestamp(25)
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: true
+      autoincrement: false
+  relations:
+    CheckVoucherAccountEntryOutputVat:
+      local: check_voucher_account_entry_output_vat_id
+      foreign: id
+      type: one
+    TaxRate:
+      local: tax_rate_id
+      foreign: id
+      type: one
+CheckVoucherEntry:
+  connection: doctrine
+  tableName: check_voucher_entry
+  columns:
+    id:
+      type: integer(8)
+      fixed: false
+      unsigned: false
+      primary: true
+      autoincrement: true
+    check_number:
+      type: string()
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: false
+      autoincrement: false
+    check_date:
+      type: date(25)
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: false
+      autoincrement: false
+    check_voucher_id:
+      type: integer(8)
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: false
+      autoincrement: false
+    bank_id:
+      type: integer(8)
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: false
+      autoincrement: false
+    general_library_id:
+      type: integer(8)
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: false
+      autoincrement: false
+    chart_of_account_id:
+      type: integer(8)
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: false
+      autoincrement: false
+    is_cleared:
+      type: integer(1)
+      fixed: false
+      unsigned: false
+      primary: false
+      default: '0'
+      notnull: false
+      autoincrement: false
+    is_cleared_note:
+      type: string(150)
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: false
+      autoincrement: false
+    is_released:
+      type: integer(1)
+      fixed: false
+      unsigned: false
+      primary: false
+      default: '0'
+      notnull: false
+      autoincrement: false
+    is_released_note:
+      type: string(150)
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: false
+      autoincrement: false
+    is_cancelled:
+      type: integer(1)
+      fixed: false
+      unsigned: false
+      primary: false
+      default: '0'
+      notnull: false
+      autoincrement: false
+    is_cancelled_note:
+      type: string(150)
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: false
+      autoincrement: false
+    amount:
+      type: 'decimal(12, 2)'
+      fixed: false
+      unsigned: false
+      primary: false
+      default: '0.00'
+      notnull: true
+      autoincrement: false
+    created_at:
+      type: timestamp(25)
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: true
+      autoincrement: false
+    updated_at:
+      type: timestamp(25)
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: true
+      autoincrement: false
+  relations:
+    Bank:
+      local: bank_id
+      foreign: id
+      type: one
+    ChartOfAccount:
+      local: chart_of_account_id
+      foreign: id
+      type: one
+    CheckVoucher:
+      local: check_voucher_id
+      foreign: id
+      type: one
+    GeneralLibrary:
+      local: general_library_id
+      foreign: id
+      type: one
+CheckVoucherParticularEntry:
+  connection: doctrine
+  tableName: check_voucher_particular_entry
+  columns:
+    id:
+      type: integer(8)
+      fixed: false
+      unsigned: false
+      primary: true
+      autoincrement: true
+    check_voucher_id:
+      type: integer(8)
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: true
+      autoincrement: false
+    title:
+      type: string(150)
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: false
+      autoincrement: false
+    amount:
+      type: 'decimal(12, 2)'
+      fixed: false
+      unsigned: false
+      primary: false
+      default: '0.00'
+      notnull: true
+      autoincrement: false
+    vat_application:
+      type: enum(16)
+      fixed: false
+      unsigned: false
+      values:
+        - VAT_EXEMPT
+        - VAT_ZERO_PERCENT
+        - VAT_INCLUSIVE
+        - VAT_EXCLUSIVE
+      primary: false
+      default: VAT_INCLUSIVE
+      notnull: false
+      autoincrement: false
+    tax_expanded_withheld_id:
+      type: integer(8)
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: false
+      autoincrement: false
+    tax_final_withheld_id:
+      type: integer(8)
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: false
+      autoincrement: false
+    total:
+      type: 'decimal(12, 2)'
+      fixed: false
+      unsigned: false
+      primary: false
+      default: '0.00'
+      notnull: true
+      autoincrement: false
+    created_at:
+      type: timestamp(25)
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: true
+      autoincrement: false
+    updated_at:
+      type: timestamp(25)
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: true
+      autoincrement: false
+  relations:
+    CheckVoucher:
+      local: check_voucher_id
+      foreign: id
+      type: one
+    TaxExpandedWithheld:
+      local: tax_expanded_withheld_id
+      foreign: id
+      type: one
+    TaxFinalWithheld:
+      local: tax_final_withheld_id
+      foreign: id
+      type: one
+ClientStatus:
+  connection: doctrine
+  tableName: client_status
+  columns:
+    id:
+      type: integer(8)
+      fixed: false
+      unsigned: false
+      primary: true
+      autoincrement: true
+    name:
+      type: string(60)
+      fixed: false
+      unsigned: false
+      primary: false
+      default: ''
+      notnull: true
+      autoincrement: false
+    description:
+      type: string()
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: false
+      autoincrement: false
+    created_at:
+      type: timestamp(25)
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: true
+      autoincrement: false
+    updated_at:
+      type: timestamp(25)
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: true
+      autoincrement: false
+  relations:
+    GeneralLibrary:
+      local: id
+      foreign: status_id
+      type: many
+ClientType:
+  connection: doctrine
+  tableName: client_type
+  columns:
+    id:
+      type: integer(8)
+      fixed: false
+      unsigned: false
+      primary: true
+      autoincrement: true
+    name:
+      type: string(60)
+      fixed: false
+      unsigned: false
+      primary: false
+      default: ''
+      notnull: true
+      autoincrement: false
+    description:
+      type: string()
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: false
+      autoincrement: false
+    created_at:
+      type: timestamp(25)
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: true
+      autoincrement: false
+    updated_at:
+      type: timestamp(25)
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: true
+      autoincrement: false
+  relations:
+    GeneralLibrary:
+      local: id
+      foreign: client_type_id
+      type: many
+Country:
+  connection: doctrine
+  tableName: country
+  columns:
+    id:
+      type: integer(8)
+      fixed: false
+      unsigned: false
+      primary: true
+      autoincrement: true
+    code:
+      type: string(50)
+      fixed: false
+      unsigned: false
+      primary: false
+      default: ''
+      notnull: true
+      autoincrement: false
+    name:
+      type: string(100)
+      fixed: false
+      unsigned: false
+      primary: false
+      default: ''
+      notnull: true
+      autoincrement: false
+    created_at:
+      type: timestamp(25)
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: true
+      autoincrement: false
+    updated_at:
+      type: timestamp(25)
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: true
+      autoincrement: false
+  relations:
+    GeneralLibrary:
+      local: id
+      foreign: country_id
+      type: many
+    GeneralLibraryBillingInfo:
+      local: id
+      foreign: country_id
+      type: many
+    Organization:
+      local: id
+      foreign: country_id
+      type: many
+Currency:
+  connection: doctrine
+  tableName: currency
+  columns:
+    id:
+      type: integer(8)
+      fixed: false
+      unsigned: false
+      primary: true
+      autoincrement: true
+    symbol:
+      type: string(3)
+      fixed: false
+      unsigned: false
+      primary: false
+      default: ''
+      notnull: true
+      autoincrement: false
+    title:
+      type: string(50)
+      fixed: false
+      unsigned: false
+      primary: false
+      default: ''
+      notnull: true
+      autoincrement: false
+    description:
+      type: string(100)
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: false
+      autoincrement: false
+    is_base:
+      type: integer(1)
+      fixed: false
+      unsigned: false
+      primary: false
+      default: '0'
+      notnull: true
+      autoincrement: false
+    unit_per_base:
+      type: 'decimal(12, 2)'
+      fixed: false
+      unsigned: false
+      primary: false
+      default: '0.00'
+      notnull: true
+      autoincrement: false
+    date:
+      type: date(25)
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: false
+      autoincrement: false
+    notes:
+      type: string(100)
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: false
+      autoincrement: false
+    created_at:
+      type: timestamp(25)
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: true
+      autoincrement: false
+    updated_at:
+      type: timestamp(25)
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: true
+      autoincrement: false
+  relations:
+    AccountsPayableBeginningBalance:
+      local: id
+      foreign: currency_id
+      type: many
+    AccountsPayableVoucher:
+      local: id
+      foreign: currency_id
+      type: many
+    AccountsReceivableBeginningBalance:
+      local: id
+      foreign: currency_id
+      type: many
+    CheckVoucher:
+      local: id
+      foreign: currency_id
+      type: many
+    DebitCreditMemo:
+      local: id
+      foreign: currency_id
+      type: many
+    FinancialSetting:
+      local: id
+      foreign: currency_id
+      type: many
+    Invoice:
+      local: id
+      foreign: currency_id
+      type: many
+    JournalVoucher:
+      local: id
+      foreign: currency_id
+      type: many
+    PettyCashVoucher:
+      local: id
+      foreign: currency_id
+      type: many
+    PettyCashVoucherVoucher:
+      local: id
+      foreign: currency_id
+      type: many
+    Receipt:
+      local: id
+      foreign: currency_id
+      type: many
+DebitCreditMemo:
+  connection: doctrine
+  tableName: debit_credit_memo
+  columns:
+    id:
+      type: integer(8)
+      fixed: false
+      unsigned: false
+      primary: true
+      autoincrement: true
+    book_id:
+      type: integer(8)
+      fixed: false
+      unsigned: false
+      primary: false
+      default: '0'
+      notnull: true
+      autoincrement: false
+    voucher_number:
+      type: string(50)
+      fixed: false
+      unsigned: false
+      primary: false
+      default: ''
+      notnull: true
+      autoincrement: false
+    general_library_id:
+      type: integer(8)
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: false
+      autoincrement: false
+    currency_id:
+      type: integer(8)
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: false
+      autoincrement: false
+    period:
+      type: date(25)
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: false
+      autoincrement: false
+    header_message:
+      type: string()
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: false
+      autoincrement: false
+    footer_message:
+      type: string()
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: false
+      autoincrement: false
+    total_amount:
+      type: 'decimal(12, 2)'
+      fixed: false
+      unsigned: false
+      primary: false
+      default: '0.00'
+      notnull: true
+      autoincrement: false
+    status:
+      type: enum(12)
+      fixed: false
+      unsigned: false
+      values:
+        - UNPAID
+        - PARTIAL_PAID
+        - 'FULL PAID'
+      primary: false
+      default: UNPAID
+      notnull: false
+      autoincrement: false
+    created_at:
+      type: timestamp(25)
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: true
+      autoincrement: false
+    updated_at:
+      type: timestamp(25)
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: true
+      autoincrement: false
+  relations:
+    Book:
+      local: book_id
+      foreign: id
+      type: one
+    Currency:
+      local: currency_id
+      foreign: id
+      type: one
+    GeneralLibrary:
+      local: general_library_id
+      foreign: id
+      type: one
+    DebitCreditMemoAccountEntry:
+      local: id
+      foreign: debit_credit_memo_id
+      type: many
+    DebitCreditMemoParticularEntry:
+      local: id
+      foreign: debit_credit_memo_id
+      type: many
+DebitCreditMemoAccountEntry:
+  connection: doctrine
+  tableName: debit_credit_memo_account_entry
+  columns:
+    id:
+      type: integer(8)
+      fixed: false
+      unsigned: false
+      primary: true
+      autoincrement: true
+    debit_credit_memo_id:
+      type: integer(8)
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: true
+      autoincrement: false
+    chart_of_account_id:
+      type: integer(8)
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: false
+      autoincrement: false
+    general_library_id:
+      type: integer(8)
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: false
+      autoincrement: false
+    dn_reference:
+      type: string(50)
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: false
+      autoincrement: false
+    debit:
+      type: 'decimal(12, 2)'
+      fixed: false
+      unsigned: false
+      primary: false
+      default: '0.00'
+      notnull: true
+      autoincrement: false
+    credit:
+      type: 'decimal(12, 2)'
+      fixed: false
+      unsigned: false
+      primary: false
+      default: '0.00'
+      notnull: true
+      autoincrement: false
+    created_at:
+      type: timestamp(25)
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: true
+      autoincrement: false
+    updated_at:
+      type: timestamp(25)
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: true
+      autoincrement: false
+  relations:
+    ChartOfAccount:
+      local: chart_of_account_id
+      foreign: id
+      type: one
+    DebitCreditMemo:
+      local: debit_credit_memo_id
+      foreign: id
+      type: one
+    GeneralLibrary:
+      local: general_library_id
+      foreign: id
+      type: one
+DebitCreditMemoAccountEntryOutputVat:
+  connection: doctrine
+  tableName: debit_credit_memo_account_entry_output_vat
+  columns:
+    id:
+      type: integer(8)
+      fixed: false
+      unsigned: false
+      primary: true
+      autoincrement: true
+    journal_voucher_number:
+      type: integer(8)
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: false
+      autoincrement: false
+    chart_of_account_id:
+      type: integer(8)
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: false
+      autoincrement: false
+    general_library_id:
+      type: integer(8)
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: false
+      autoincrement: false
+    tin_number:
+      type: string(60)
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: false
+      autoincrement: false
+    created_at:
+      type: timestamp(25)
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: true
+      autoincrement: false
+    updated_at:
+      type: timestamp(25)
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: true
+      autoincrement: false
+  relations:
+    ChartOfAccount:
+      local: chart_of_account_id
+      foreign: id
+      type: one
+    GeneralLibrary:
+      local: general_library_id
+      foreign: id
+      type: one
+    DebitCreditMemoAccountEntryOutputVatEntry:
+      local: id
+      foreign: journal_voucher_account_entry_output_vat_id
+      type: many
+DebitCreditMemoAccountEntryOutputVatEntry:
+  connection: doctrine
+  tableName: debit_credit_memo_account_entry_output_vat_entry
+  columns:
+    id:
+      type: integer(8)
+      fixed: false
+      unsigned: false
+      primary: true
+      autoincrement: true
+    journal_voucher_account_entry_output_vat_id:
+      type: integer(8)
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: false
+      autoincrement: false
+    tax_rate_id:
+      type: integer(8)
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: false
+      autoincrement: false
+    gross_purchased:
+      type: 'decimal(12, 2)'
+      fixed: false
+      unsigned: false
+      primary: false
+      default: '0.00'
+      notnull: true
+      autoincrement: false
+    vat_received:
+      type: 'decimal(12, 2)'
+      fixed: false
+      unsigned: false
+      primary: false
+      default: '0.00'
+      notnull: true
+      autoincrement: false
+    net_sales:
+      type: 'decimal(12, 2)'
+      fixed: false
+      unsigned: false
+      primary: false
+      default: '0.00'
+      notnull: true
+      autoincrement: false
+    created_at:
+      type: timestamp(25)
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: true
+      autoincrement: false
+    updated_at:
+      type: timestamp(25)
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: true
+      autoincrement: false
+  relations:
+    DebitCreditMemoAccountEntryOutputVat:
+      local: journal_voucher_account_entry_output_vat_id
+      foreign: id
+      type: one
+    TaxRate:
+      local: tax_rate_id
+      foreign: id
+      type: one
+DebitCreditMemoParticularEntry:
+  connection: doctrine
+  tableName: debit_credit_memo_particular_entry
+  columns:
+    id:
+      type: integer(8)
+      fixed: false
+      unsigned: false
+      primary: true
+      autoincrement: true
+    debit_credit_memo_id:
+      type: integer(8)
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: true
+      autoincrement: false
+    title:
+      type: string(150)
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: false
+      autoincrement: false
+    amount:
+      type: 'decimal(12, 2)'
+      fixed: false
+      unsigned: false
+      primary: false
+      default: '0.00'
+      notnull: true
+      autoincrement: false
+    vat_application:
+      type: enum(16)
+      fixed: false
+      unsigned: false
+      values:
+        - VAT_EXEMPT
+        - VAT_ZERO_PERCENT
+        - VAT_INCLUSIVE
+        - VAT_EXCLUSIVE
+      primary: false
+      default: VAT_INCLUSIVE
+      notnull: false
+      autoincrement: false
+    tax_expanded_withheld_id:
+      type: integer(8)
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: false
+      autoincrement: false
+    tax_final_withheld_id:
+      type: integer(8)
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: false
+      autoincrement: false
+    total:
+      type: 'decimal(12, 2)'
+      fixed: false
+      unsigned: false
+      primary: false
+      default: '0.00'
+      notnull: true
+      autoincrement: false
+    created_at:
+      type: timestamp(25)
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: true
+      autoincrement: false
+    updated_at:
+      type: timestamp(25)
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: true
+      autoincrement: false
+  relations:
+    DebitCreditMemo:
+      local: debit_credit_memo_id
+      foreign: id
+      type: one
+    TaxExpandedWithheld:
+      local: tax_expanded_withheld_id
+      foreign: id
+      type: one
+    TaxFinalWithheld:
+      local: tax_final_withheld_id
+      foreign: id
+      type: one
+Department:
+  connection: doctrine
+  tableName: department
+  columns:
+    id:
+      type: integer(8)
+      fixed: false
+      unsigned: false
+      primary: true
+      autoincrement: true
+    code:
+      type: string(50)
+      fixed: false
+      unsigned: false
+      primary: false
+      default: ''
+      notnull: true
+      autoincrement: false
+    title:
+      type: string(60)
+      fixed: false
+      unsigned: false
+      primary: false
+      default: ''
+      notnull: true
+      autoincrement: false
+    description:
+      type: string()
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: false
+      autoincrement: false
+    created_at:
+      type: timestamp(25)
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: true
+      autoincrement: false
+    updated_at:
+      type: timestamp(25)
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: true
+      autoincrement: false
+  relations:
+    AccountsPayableBeginningBalance:
+      local: id
+      foreign: department_id
+      type: many
+    AccountsReceivableBeginningBalance:
+      local: id
+      foreign: department_id
+      type: many
+    GeneralLedgerBeginningBalance:
+      local: id
+      foreign: department_id
+      type: many
+    InvoiceAccountEntry:
+      local: id
+      foreign: department_id
+      type: many
+    JournalBookTemplate:
+      local: id
+      foreign: department_id
+      type: many
+    ParticularTemplate:
+      local: id
+      foreign: department_id
+      type: many
+FinancialSetting:
+  connection: doctrine
+  tableName: financial_setting
+  columns:
+    id:
+      type: integer(8)
+      fixed: false
+      unsigned: false
+      primary: true
+      autoincrement: true
+    currency_id:
+      type: integer(8)
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: false
+      autoincrement: false
+    financial_yearend_day:
+      type: integer(2)
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: false
+      autoincrement: false
+    financial_yearend_month:
+      type: integer(2)
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: false
+      autoincrement: false
+    created_at:
+      type: timestamp(25)
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: true
+      autoincrement: false
+    updated_at:
+      type: timestamp(25)
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: true
+      autoincrement: false
+  relations:
+    Currency:
+      local: currency_id
+      foreign: id
+      type: one
+FixAssetAccount:
+  connection: doctrine
+  tableName: fix_asset_account
+  columns:
+    id:
+      type: integer(8)
+      fixed: false
+      unsigned: false
+      primary: true
+      autoincrement: true
+    chart_of_account_id:
+      type: integer(8)
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: false
+      autoincrement: false
+    code:
+      type: string(50)
+      fixed: false
+      unsigned: false
+      primary: false
+      default: ''
+      notnull: true
+      autoincrement: false
+    title:
+      type: string(50)
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: false
+      autoincrement: false
+    description:
+      type: string()
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: false
+      autoincrement: false
+    created_at:
+      type: timestamp(25)
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: true
+      autoincrement: false
+    updated_at:
+      type: timestamp(25)
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: true
+      autoincrement: false
+  relations:
+    ChartOfAccount:
+      local: chart_of_account_id
+      foreign: id
+      type: one
+GeneralLedgerBeginningBalance:
+  connection: doctrine
+  tableName: general_ledger_beginning_balance
+  columns:
+    id:
+      type: integer(8)
+      fixed: false
+      unsigned: false
+      primary: true
+      autoincrement: true
+    chart_of_account_id:
+      type: integer(8)
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: false
+      autoincrement: false
+    project_id:
+      type: integer(8)
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: false
+      autoincrement: false
+    department_id:
+      type: integer(8)
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: false
+      autoincrement: false
+    debit:
+      type: 'decimal(12, 2)'
+      fixed: false
+      unsigned: false
+      primary: false
+      default: '0.00'
+      notnull: true
+      autoincrement: false
+    credit:
+      type: 'decimal(12, 2)'
+      fixed: false
+      unsigned: false
+      primary: false
+      default: '0.00'
+      notnull: true
+      autoincrement: false
+    created_at:
+      type: timestamp(25)
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: true
+      autoincrement: false
+    updated_at:
+      type: timestamp(25)
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: true
+      autoincrement: false
+  relations:
+    ChartOfAccount:
+      local: chart_of_account_id
+      foreign: id
+      type: one
+    Department:
+      local: department_id
+      foreign: id
+      type: one
+    Project:
+      local: project_id
+      foreign: id
+      type: one
+GeneralLibrary:
+  connection: doctrine
+  tableName: general_library
+  columns:
+    id:
+      type: integer(8)
+      fixed: false
+      unsigned: false
+      primary: true
+      autoincrement: true
+    client_type_id:
+      type: integer(8)
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: false
+      autoincrement: false
+    status_id:
+      type: integer(8)
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: false
+      autoincrement: false
+    category_id:
+      type: integer(8)
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: false
+      autoincrement: false
+    code:
+      type: string(8)
+      fixed: false
+      unsigned: false
+      primary: false
+      default: ''
+      notnull: true
+      autoincrement: false
+    name:
+      type: string(50)
+      fixed: false
+      unsigned: false
+      primary: false
+      default: ''
+      notnull: true
+      autoincrement: false
+    building_no:
+      type: string(50)
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: false
+      autoincrement: false
+    street_1:
+      type: string(50)
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: false
+      autoincrement: false
+    street_2:
+      type: string(50)
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: false
+      autoincrement: false
+    city:
+      type: string(50)
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: false
+      autoincrement: false
+    postal_code:
+      type: string(50)
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: false
+      autoincrement: false
+    province:
+      type: string(50)
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: false
+      autoincrement: false
+    country_id:
+      type: integer(8)
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: false
+      autoincrement: false
+    attention:
+      type: string(50)
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: false
+      autoincrement: false
+    position:
+      type: string(50)
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: false
+      autoincrement: false
+    telephone_no:
+      type: string(50)
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: false
+      autoincrement: false
+    fax_no:
+      type: string(50)
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: false
+      autoincrement: false
+    mobile_no:
+      type: string(50)
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: false
+      autoincrement: false
+    email:
+      type: string(50)
+      fixed: false
+      unsigned: false
+      primary: false
+      default: ''
+      notnull: true
+      autoincrement: false
+    website:
+      type: string(150)
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: false
+      autoincrement: false
+    created_at:
+      type: timestamp(25)
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: true
+      autoincrement: false
+    updated_at:
+      type: timestamp(25)
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: true
+      autoincrement: false
+  relations:
+    GeneralLibraryCategory:
+      local: category_id
+      foreign: id
+      type: one
+    ClientType:
+      local: client_type_id
+      foreign: id
+      type: one
+    Country:
+      local: country_id
+      foreign: id
+      type: one
+    ClientStatus:
+      local: status_id
+      foreign: id
+      type: one
+    AccountsPayableBeginningBalance:
+      local: id
+      foreign: general_library_id
+      type: many
+    AccountsPayableVoucher:
+      local: id
+      foreign: general_library_id
+      type: many
+    AccountsPayableVoucherAccountEntry:
+      local: id
+      foreign: general_library_id
+      type: many
+    AccountsPayableVoucherAccountEntryOutputVat:
+      local: id
+      foreign: general_library_id
+      type: many
+    AccountsReceivableBeginningBalance:
+      local: id
+      foreign: general_library_id
+      type: many
+    CheckVoucher:
+      local: id
+      foreign: general_library_id
+      type: many
+    CheckVoucherAccountEntry:
+      local: id
+      foreign: general_library_id
+      type: many
+    CheckVoucherAccountEntryOutputVat:
+      local: id
+      foreign: general_library_id
+      type: many
+    CheckVoucherEntry:
+      local: id
+      foreign: general_library_id
+      type: many
+    DebitCreditMemo:
+      local: id
+      foreign: general_library_id
+      type: many
+    DebitCreditMemoAccountEntry:
+      local: id
+      foreign: general_library_id
+      type: many
+    DebitCreditMemoAccountEntryOutputVat:
+      local: id
+      foreign: general_library_id
+      type: many
+    GeneralLibraryAdditionInfo:
+      local: id
+      foreign: general_library_id
+      type: many
+    GeneralLibraryBillingInfo:
+      local: id
+      foreign: general_library_id
+      type: many
+    Invoice:
+      local: id
+      foreign: general_library_id
+      type: many
+    InvoiceAccountEntry:
+      local: id
+      foreign: general_library_id
+      type: many
+    InvoiceAccountEntryOutputVat:
+      local: id
+      foreign: general_library_id
+      type: many
+    JournalBookTemplateEntry:
+      local: id
+      foreign: general_library_id
+      type: many
+    JournalVoucher:
+      local: id
+      foreign: general_library_id
+      type: many
+    JournalVoucherAccountEntry:
+      local: id
+      foreign: general_library_id
+      type: many
+    JournalVoucherAccountEntryOutputVat:
+      local: id
+      foreign: general_library_id
+      type: many
+    PettyCashVoucher:
+      local: id
+      foreign: general_library_id
+      type: many
+    PettyCashVoucherAccountEntry:
+      local: id
+      foreign: general_library_id
+      type: many
+    PettyCashVoucherAccountEntryOutputVat:
+      local: id
+      foreign: general_library_id
+      type: many
+    PettyCashVoucherVoucher:
+      local: id
+      foreign: general_library_id
+      type: many
+    PettyCashVoucherVoucherAccountEntry:
+      local: id
+      foreign: general_library_id
+      type: many
+    PettyCashVoucherVoucherAccountEntryOutputVat:
+      local: id
+      foreign: general_library_id
+      type: many
+    Receipt:
+      local: id
+      foreign: general_library_id
+      type: many
+    ReceiptAccountEntry:
+      local: id
+      foreign: general_library_id
+      type: many
+    ReceiptAccountEntryOutputVat:
+      local: id
+      foreign: general_library_id
+      type: many
+    ReceiptCashEntry:
+      local: id
+      foreign: general_library_id
+      type: many
+    ReceiptCheckEntry:
+      local: id
+      foreign: general_library_id
+      type: many
+GeneralLibraryAdditionInfo:
+  connection: doctrine
+  tableName: general_library_addition_info
+  columns:
+    id:
+      type: integer(8)
+      fixed: false
+      unsigned: false
+      primary: true
+      autoincrement: true
+    general_library_id:
+      type: integer(8)
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: false
+      autoincrement: false
+    industry_id:
+      type: integer(8)
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: false
+      autoincrement: false
+    term_id:
+      type: integer(8)
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: false
+      autoincrement: false
+    no_days:
+      type: integer(8)
+      fixed: false
+      unsigned: false
+      primary: false
+      default: '0'
+      notnull: true
+      autoincrement: false
+    percent_discount:
+      type: 'decimal(12, 2)'
+      fixed: false
+      unsigned: false
+      primary: false
+      default: '0.00'
+      notnull: true
+      autoincrement: false
+    credit_limit_amount:
+      type: 'decimal(12, 2)'
+      fixed: false
+      unsigned: false
+      primary: false
+      default: '0.00'
+      notnull: true
+      autoincrement: false
+    restricted:
+      type: integer(1)
+      fixed: false
+      unsigned: false
+      primary: false
+      default: '1'
+      notnull: false
+      autoincrement: false
+    remarks:
+      type: string(50)
+      fixed: false
+      unsigned: false
+      primary: false
+      default: ''
+      notnull: true
+      autoincrement: false
+    vat_no:
+      type: string(50)
+      fixed: false
+      unsigned: false
+      primary: false
+      default: ''
+      notnull: true
+      autoincrement: false
+    tin:
+      type: string(50)
+      fixed: false
+      unsigned: false
+      primary: false
+      default: ''
+      notnull: true
+      autoincrement: false
+    created_at:
+      type: timestamp(25)
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: true
+      autoincrement: false
+    updated_at:
+      type: timestamp(25)
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: true
+      autoincrement: false
+  relations:
+    Industry:
+      local: industry_id
+      foreign: id
+      type: one
+    GeneralLibraryTerms:
+      local: term_id
+      foreign: id
+      type: one
+    GeneralLibrary:
+      local: general_library_id
+      foreign: id
+      type: one
+GeneralLibraryBillingInfo:
+  connection: doctrine
+  tableName: general_library_billing_info
+  columns:
+    id:
+      type: integer(8)
+      fixed: false
+      unsigned: false
+      primary: true
+      autoincrement: true
+    general_library_id:
+      type: integer(8)
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: false
+      autoincrement: false
+    drawing_no:
+      type: string(50)
+      fixed: false
+      unsigned: false
+      primary: false
+      default: ''
+      notnull: true
+      autoincrement: false
+    specs_no:
+      type: string(50)
+      fixed: false
+      unsigned: false
+      primary: false
+      default: ''
+      notnull: true
+      autoincrement: false
+    bill_to:
+      type: string(50)
+      fixed: false
+      unsigned: false
+      primary: false
+      default: ''
+      notnull: true
+      autoincrement: false
+    building_no:
+      type: string(50)
+      fixed: false
+      unsigned: false
+      primary: false
+      default: ''
+      notnull: true
+      autoincrement: false
+    street_1:
+      type: string(50)
+      fixed: false
+      unsigned: false
+      primary: false
+      default: ''
+      notnull: true
+      autoincrement: false
+    street_2:
+      type: string(50)
+      fixed: false
+      unsigned: false
+      primary: false
+      default: ''
+      notnull: true
+      autoincrement: false
+    city:
+      type: string(50)
+      fixed: false
+      unsigned: false
+      primary: false
+      default: ''
+      notnull: true
+      autoincrement: false
+    postal_code:
+      type: string(50)
+      fixed: false
+      unsigned: false
+      primary: false
+      default: ''
+      notnull: true
+      autoincrement: false
+    province:
+      type: string(50)
+      fixed: false
+      unsigned: false
+      primary: false
+      default: ''
+      notnull: true
+      autoincrement: false
+    country_id:
+      type: integer(8)
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: false
+      autoincrement: false
+    attention:
+      type: string(50)
+      fixed: false
+      unsigned: false
+      primary: false
+      default: ''
+      notnull: true
+      autoincrement: false
+    created_at:
+      type: timestamp(25)
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: true
+      autoincrement: false
+    updated_at:
+      type: timestamp(25)
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: true
+      autoincrement: false
+  relations:
+    Country:
+      local: country_id
+      foreign: id
+      type: one
+    GeneralLibrary:
+      local: general_library_id
+      foreign: id
+      type: one
+GeneralLibraryCategory:
+  connection: doctrine
+  tableName: general_library_category
+  columns:
+    id:
+      type: integer(8)
+      fixed: false
+      unsigned: false
+      primary: true
+      autoincrement: true
+    name:
+      type: string(60)
+      fixed: false
+      unsigned: false
+      primary: false
+      default: ''
+      notnull: true
+      autoincrement: false
+    description:
+      type: string()
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: false
+      autoincrement: false
+    created_at:
+      type: timestamp(25)
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: true
+      autoincrement: false
+    updated_at:
+      type: timestamp(25)
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: true
+      autoincrement: false
+  relations:
+    GeneralLibrary:
+      local: id
+      foreign: category_id
+      type: many
+GeneralLibraryTerms:
+  connection: doctrine
+  tableName: general_library_terms
+  columns:
+    id:
+      type: integer(8)
+      fixed: false
+      unsigned: false
+      primary: true
+      autoincrement: true
+    name:
+      type: string(60)
+      fixed: false
+      unsigned: false
+      primary: false
+      default: ''
+      notnull: true
+      autoincrement: false
+    term_value:
+      type: integer(8)
+      fixed: false
+      unsigned: false
+      primary: false
+      default: '0'
+      notnull: true
+      autoincrement: false
+    actual_value:
+      type: integer(8)
+      fixed: false
+      unsigned: false
+      primary: false
+      default: '0'
+      notnull: true
+      autoincrement: false
+    description:
+      type: string()
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: false
+      autoincrement: false
+    created_at:
+      type: timestamp(25)
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: true
+      autoincrement: false
+    updated_at:
+      type: timestamp(25)
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: true
+      autoincrement: false
+  relations:
+    GeneralLibraryAdditionInfo:
+      local: id
+      foreign: term_id
+      type: many
+GroupCode:
+  connection: doctrine
+  tableName: group_code
+  columns:
+    id:
+      type: integer(8)
+      fixed: false
+      unsigned: false
+      primary: true
+      autoincrement: true
+    code:
+      type: string(50)
+      fixed: false
+      unsigned: false
+      primary: false
+      default: ''
+      notnull: true
+      autoincrement: false
+    title:
+      type: string(60)
+      fixed: false
+      unsigned: false
+      primary: false
+      default: ''
+      notnull: true
+      autoincrement: false
+    description:
+      type: string()
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: false
+      autoincrement: false
+    created_at:
+      type: timestamp(25)
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: true
+      autoincrement: false
+    updated_at:
+      type: timestamp(25)
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: true
+      autoincrement: false
+  relations:
+    ChartOfAccountGroupCode:
+      local: id
+      foreign: group_code_id
+      type: many
+Industry:
+  connection: doctrine
+  tableName: industry
+  columns:
+    id:
+      type: integer(8)
+      fixed: false
+      unsigned: false
+      primary: true
+      autoincrement: true
+    code:
+      type: string(50)
+      fixed: false
+      unsigned: false
+      primary: false
+      default: ''
+      notnull: true
+      autoincrement: false
+    title:
+      type: string(50)
+      fixed: false
+      unsigned: false
+      primary: false
+      default: ''
+      notnull: true
+      autoincrement: false
+    description:
+      type: string()
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: false
+      autoincrement: false
+    created_at:
+      type: timestamp(25)
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: true
+      autoincrement: false
+    updated_at:
+      type: timestamp(25)
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: true
+      autoincrement: false
+  relations:
+    GeneralLibraryAdditionInfo:
+      local: id
+      foreign: industry_id
+      type: many
+Invoice:
+  connection: doctrine
+  tableName: invoice
+  columns:
+    id:
+      type: integer(8)
+      fixed: false
+      unsigned: false
+      primary: true
+      autoincrement: true
+    book_id:
+      type: integer(8)
+      fixed: false
+      unsigned: false
+      primary: false
+      default: '0'
+      notnull: true
+      autoincrement: false
+    status:
+      type: enum(7)
+      fixed: false
+      unsigned: false
+      values:
+        - UNPAID
+        - PAID
+        - DUE
+        - OVERDUE
+      primary: false
+      default: UNPAID
+      notnull: false
+      autoincrement: false
+    invoice_number:
+      type: string(50)
+      fixed: false
+      unsigned: false
+      primary: false
+      default: ''
+      notnull: true
+      autoincrement: false
+    general_library_id:
+      type: integer(8)
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: false
+      autoincrement: false
+    currency_id:
+      type: integer(8)
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: false
+      autoincrement: false
+    purchase_order_number:
+      type: string(50)
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: false
+      autoincrement: false
+    date_receive:
+      type: date(25)
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: false
+      autoincrement: false
+    period:
+      type: date(25)
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: false
+      autoincrement: false
+    terms_of_payment_id:
+      type: integer(8)
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: false
+      autoincrement: false
+    due_date:
+      type: date(25)
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: false
+      autoincrement: false
+    header_message:
+      type: string()
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: false
+      autoincrement: false
+    footer_message:
+      type: string()
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: false
+      autoincrement: false
+    total_amount:
+      type: 'decimal(12, 2)'
+      fixed: false
+      unsigned: false
+      primary: false
+      default: '0.00'
+      notnull: true
+      autoincrement: false
+    created_at:
+      type: timestamp(25)
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: true
+      autoincrement: false
+    updated_at:
+      type: timestamp(25)
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: true
+      autoincrement: false
+  relations:
+    Book:
+      local: book_id
+      foreign: id
+      type: one
+    Currency:
+      local: currency_id
+      foreign: id
+      type: one
+    GeneralLibrary:
+      local: general_library_id
+      foreign: id
+      type: one
+    TermsOfPayment:
+      local: terms_of_payment_id
+      foreign: id
+      type: one
+    InvoiceAccountEntry:
+      local: id
+      foreign: invoice_id
+      type: many
+    InvoiceParticularEntry:
+      local: id
+      foreign: invoice_id
+      type: many
+InvoiceAccountEntry:
+  connection: doctrine
+  tableName: invoice_account_entry
+  columns:
+    id:
+      type: integer(8)
+      fixed: false
+      unsigned: false
+      primary: true
+      autoincrement: true
+    invoice_id:
+      type: integer(8)
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: true
+      autoincrement: false
+    chart_of_account_id:
+      type: integer(8)
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: false
+      autoincrement: false
+    project_id:
+      type: integer(8)
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: false
+      autoincrement: false
+    department_id:
+      type: integer(8)
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: false
+      autoincrement: false
+    dn_reference:
+      type: string(50)
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: false
+      autoincrement: false
+    general_library_id:
+      type: integer(8)
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: false
+      autoincrement: false
+    debit:
+      type: 'decimal(12, 2)'
+      fixed: false
+      unsigned: false
+      primary: false
+      default: '0.00'
+      notnull: true
+      autoincrement: false
+    credit:
+      type: 'decimal(12, 2)'
+      fixed: false
+      unsigned: false
+      primary: false
+      default: '0.00'
+      notnull: true
+      autoincrement: false
+    created_at:
+      type: timestamp(25)
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: true
+      autoincrement: false
+    updated_at:
+      type: timestamp(25)
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: true
+      autoincrement: false
+  relations:
+    ChartOfAccount:
+      local: chart_of_account_id
+      foreign: id
+      type: one
+    Department:
+      local: department_id
+      foreign: id
+      type: one
+    GeneralLibrary:
+      local: general_library_id
+      foreign: id
+      type: one
+    Invoice:
+      local: invoice_id
+      foreign: id
+      type: one
+    Project:
+      local: project_id
+      foreign: id
+      type: one
+    InvoiceAccountEntryOutputVat:
+      local: id
+      foreign: invoice_account_entry_id
+      type: many
+InvoiceAccountEntryOutputVat:
+  connection: doctrine
+  tableName: invoice_account_entry_output_vat
+  columns:
+    id:
+      type: integer(8)
+      fixed: false
+      unsigned: false
+      primary: true
+      autoincrement: true
+    invoice_account_entry_id:
+      type: integer(8)
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: false
+      autoincrement: false
+    general_library_id:
+      type: integer(8)
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: false
+      autoincrement: false
+    tin_number:
+      type: string(60)
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: false
+      autoincrement: false
+    created_at:
+      type: timestamp(25)
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: true
+      autoincrement: false
+    updated_at:
+      type: timestamp(25)
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: true
+      autoincrement: false
+  relations:
+    GeneralLibrary:
+      local: general_library_id
+      foreign: id
+      type: one
+    InvoiceAccountEntry:
+      local: invoice_account_entry_id
+      foreign: id
+      type: one
+    InvoiceAccountEntryOutputVatEntry:
+      local: id
+      foreign: invoice_account_entry_output_vat_id
+      type: many
+InvoiceAccountEntryOutputVatEntry:
+  connection: doctrine
+  tableName: invoice_account_entry_output_vat_entry
+  columns:
+    id:
+      type: integer(8)
+      fixed: false
+      unsigned: false
+      primary: true
+      autoincrement: true
+    invoice_account_entry_output_vat_id:
+      type: integer(8)
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: false
+      autoincrement: false
+    tax_rate_id:
+      type: integer(8)
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: false
+      autoincrement: false
+    gross_purchased:
+      type: 'decimal(12, 2)'
+      fixed: false
+      unsigned: false
+      primary: false
+      default: '0.00'
+      notnull: true
+      autoincrement: false
+    vat_received:
+      type: 'decimal(12, 2)'
+      fixed: false
+      unsigned: false
+      primary: false
+      default: '0.00'
+      notnull: true
+      autoincrement: false
+    net_sales:
+      type: 'decimal(12, 2)'
+      fixed: false
+      unsigned: false
+      primary: false
+      default: '0.00'
+      notnull: true
+      autoincrement: false
+    created_at:
+      type: timestamp(25)
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: true
+      autoincrement: false
+    updated_at:
+      type: timestamp(25)
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: true
+      autoincrement: false
+  relations:
+    InvoiceAccountEntryOutputVat:
+      local: invoice_account_entry_output_vat_id
+      foreign: id
+      type: one
+    TaxRate:
+      local: tax_rate_id
+      foreign: id
+      type: one
+InvoiceParticularEntry:
+  connection: doctrine
+  tableName: invoice_particular_entry
+  columns:
+    id:
+      type: integer(8)
+      fixed: false
+      unsigned: false
+      primary: true
+      autoincrement: true
+    invoice_id:
+      type: integer(8)
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: true
+      autoincrement: false
+    title:
+      type: string(150)
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: false
+      autoincrement: false
+    amount:
+      type: 'decimal(12, 2)'
+      fixed: false
+      unsigned: false
+      primary: false
+      default: '0.00'
+      notnull: true
+      autoincrement: false
+    vat_application:
+      type: enum(16)
+      fixed: false
+      unsigned: false
+      values:
+        - VAT_EXEMPT
+        - VAT_ZERO_PERCENT
+        - VAT_INCLUSIVE
+        - VAT_EXCLUSIVE
+      primary: false
+      default: VAT_INCLUSIVE
+      notnull: false
+      autoincrement: false
+    tax_expanded_withheld_id:
+      type: integer(8)
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: false
+      autoincrement: false
+    tax_final_withheld_id:
+      type: integer(8)
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: false
+      autoincrement: false
+    total:
+      type: 'decimal(12, 2)'
+      fixed: false
+      unsigned: false
+      primary: false
+      default: '0.00'
+      notnull: true
+      autoincrement: false
+    created_at:
+      type: timestamp(25)
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: true
+      autoincrement: false
+    updated_at:
+      type: timestamp(25)
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: true
+      autoincrement: false
+  relations:
+    Invoice:
+      local: invoice_id
+      foreign: id
+      type: one
+    TaxExpandedWithheld:
+      local: tax_expanded_withheld_id
+      foreign: id
+      type: one
+    TaxFinalWithheld:
+      local: tax_final_withheld_id
+      foreign: id
+      type: one
+JournalBook:
+  connection: doctrine
+  tableName: journal_book
+  columns:
+    id:
+      type: integer(8)
+      fixed: false
+      unsigned: false
+      primary: true
+      autoincrement: true
+    code:
+      type: string(50)
+      fixed: false
+      unsigned: false
+      primary: false
+      default: ''
+      notnull: true
+      autoincrement: false
+    name:
+      type: string(60)
+      fixed: false
+      unsigned: false
+      primary: false
+      default: ''
+      notnull: true
+      autoincrement: false
+    description:
+      type: string()
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: false
+      autoincrement: false
+    sanumber_label:
+      type: string()
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: false
+      autoincrement: false
+    label:
+      type: string()
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: false
+      autoincrement: false
+    person_label:
+      type: string()
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: false
+      autoincrement: false
+    date_enabled:
+      type: integer(1)
+      fixed: false
+      unsigned: false
+      primary: false
+      default: '0'
+      notnull: false
+      autoincrement: false
+    ref_doc:
+      type: string()
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: false
+      autoincrement: false
+    date:
+      type: string()
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: false
+      autoincrement: false
+    configurations:
+      type: string()
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: false
+      autoincrement: false
+    created_at:
+      type: timestamp(25)
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: true
+      autoincrement: false
+    updated_at:
+      type: timestamp(25)
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: true
+      autoincrement: false
+  relations:
+    JournalBookBookTemplate:
+      local: id
+      foreign: journal_book_id
+      type: many
+    JournalBookParticularTemplate:
+      local: id
+      foreign: journal_book_id
+      type: many
+JournalBookBookTemplate:
+  connection: doctrine
+  tableName: journal_book_book_template
+  columns:
+    id:
+      type: integer(8)
+      fixed: false
+      unsigned: false
+      primary: true
+      autoincrement: true
+    journal_book_id:
+      type: integer(8)
+      fixed: false
+      unsigned: false
+      primary: false
+      default: '0'
+      notnull: true
+      autoincrement: false
+    journal_book_template_id:
+      type: integer(8)
+      fixed: false
+      unsigned: false
+      primary: false
+      default: '0'
+      notnull: true
+      autoincrement: false
+    created_at:
+      type: timestamp(25)
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: true
+      autoincrement: false
+    updated_at:
+      type: timestamp(25)
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: true
+      autoincrement: false
+  relations:
+    JournalBookTemplate:
+      local: journal_book_template_id
+      foreign: id
+      type: one
+    JournalBook:
+      local: journal_book_id
+      foreign: id
+      type: one
+JournalBookParticularTemplate:
+  connection: doctrine
+  tableName: journal_book_particular_template
+  columns:
+    id:
+      type: integer(8)
+      fixed: false
+      unsigned: false
+      primary: true
+      autoincrement: true
+    journal_book_id:
+      type: integer(8)
+      fixed: false
+      unsigned: false
+      primary: false
+      default: '0'
+      notnull: true
+      autoincrement: false
+    particular_template_id:
+      type: integer(8)
+      fixed: false
+      unsigned: false
+      primary: false
+      default: '0'
+      notnull: true
+      autoincrement: false
+    created_at:
+      type: timestamp(25)
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: true
+      autoincrement: false
+    updated_at:
+      type: timestamp(25)
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: true
+      autoincrement: false
+  relations:
+    JournalBook:
+      local: journal_book_id
+      foreign: id
+      type: one
+    ParticularTemplate:
+      local: particular_template_id
+      foreign: id
+      type: one
+JournalBookTemplate:
+  connection: doctrine
+  tableName: journal_book_template
+  columns:
+    id:
+      type: integer(8)
+      fixed: false
+      unsigned: false
+      primary: true
+      autoincrement: true
+    code:
+      type: string(50)
+      fixed: false
+      unsigned: false
+      primary: false
+      default: ''
+      notnull: true
+      autoincrement: false
+    name:
+      type: string(50)
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: false
+      autoincrement: false
+    project_id:
+      type: integer(8)
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: false
+      autoincrement: false
+    department_id:
+      type: integer(8)
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: false
+      autoincrement: false
+    created_at:
+      type: timestamp(25)
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: true
+      autoincrement: false
+    updated_at:
+      type: timestamp(25)
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: true
+      autoincrement: false
+  relations:
+    Department:
+      local: department_id
+      foreign: id
+      type: one
+    Project:
+      local: project_id
+      foreign: id
+      type: one
+    JournalBookBookTemplate:
+      local: id
+      foreign: journal_book_template_id
+      type: many
+    JournalBookTemplateEntry:
+      local: id
+      foreign: journal_book_template_id
+      type: many
+JournalBookTemplateEntry:
+  connection: doctrine
+  tableName: journal_book_template_entry
+  columns:
+    id:
+      type: integer(8)
+      fixed: false
+      unsigned: false
+      primary: true
+      autoincrement: true
+    journal_book_template_id:
+      type: integer(8)
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: true
+      autoincrement: false
+    chart_of_account_id:
+      type: integer(8)
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: false
+      autoincrement: false
+    general_library_id:
+      type: integer(8)
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: false
+      autoincrement: false
+    debit:
+      type: 'decimal(12, 2)'
+      fixed: false
+      unsigned: false
+      primary: false
+      default: '0.00'
+      notnull: true
+      autoincrement: false
+    credit:
+      type: 'decimal(12, 2)'
+      fixed: false
+      unsigned: false
+      primary: false
+      default: '0.00'
+      notnull: true
+      autoincrement: false
+    created_at:
+      type: timestamp(25)
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: true
+      autoincrement: false
+    updated_at:
+      type: timestamp(25)
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: true
+      autoincrement: false
+  relations:
+    ChartOfAccount:
+      local: chart_of_account_id
+      foreign: id
+      type: one
+    GeneralLibrary:
+      local: general_library_id
+      foreign: id
+      type: one
+    JournalBookTemplate:
+      local: journal_book_template_id
+      foreign: id
+      type: one
+JournalVoucher:
+  connection: doctrine
+  tableName: journal_voucher
+  columns:
+    id:
+      type: integer(8)
+      fixed: false
+      unsigned: false
+      primary: true
+      autoincrement: true
+    book_id:
+      type: integer(8)
+      fixed: false
+      unsigned: false
+      primary: false
+      default: '0'
+      notnull: true
+      autoincrement: false
+    status:
+      type: enum(7)
+      fixed: false
+      unsigned: false
+      values:
+        - FULL
+        - PARTIAL
+      primary: false
+      default: FULL
+      notnull: false
+      autoincrement: false
+    voucher_number:
+      type: string(50)
+      fixed: false
+      unsigned: false
+      primary: false
+      default: ''
+      notnull: true
+      autoincrement: false
+    general_library_id:
+      type: integer(8)
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: false
+      autoincrement: false
+    currency_id:
+      type: integer(8)
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: false
+      autoincrement: false
+    date_received:
+      type: date(25)
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: false
+      autoincrement: false
+    period:
+      type: date(25)
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: false
+      autoincrement: false
+    due_date:
+      type: date(25)
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: false
+      autoincrement: false
+    header_message:
+      type: string()
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: false
+      autoincrement: false
+    footer_message:
+      type: string()
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: false
+      autoincrement: false
+    total_amount:
+      type: 'decimal(12, 2)'
+      fixed: false
+      unsigned: false
+      primary: false
+      default: '0.00'
+      notnull: true
+      autoincrement: false
+    created_at:
+      type: timestamp(25)
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: true
+      autoincrement: false
+    updated_at:
+      type: timestamp(25)
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: true
+      autoincrement: false
+  relations:
+    Book:
+      local: book_id
+      foreign: id
+      type: one
+    Currency:
+      local: currency_id
+      foreign: id
+      type: one
+    GeneralLibrary:
+      local: general_library_id
+      foreign: id
+      type: one
+    JournalVoucherAccountEntry:
+      local: id
+      foreign: journal_voucher_id
+      type: many
+    JournalVoucherParticularEntry:
+      local: id
+      foreign: journal_voucher_id
+      type: many
+JournalVoucherAccountEntry:
+  connection: doctrine
+  tableName: journal_voucher_account_entry
+  columns:
+    id:
+      type: integer(8)
+      fixed: false
+      unsigned: false
+      primary: true
+      autoincrement: true
+    journal_voucher_id:
+      type: integer(8)
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: true
+      autoincrement: false
+    chart_of_account_id:
+      type: integer(8)
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: false
+      autoincrement: false
+    general_library_id:
+      type: integer(8)
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: false
+      autoincrement: false
+    dn_reference:
+      type: string(50)
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: false
+      autoincrement: false
+    debit:
+      type: 'decimal(12, 2)'
+      fixed: false
+      unsigned: false
+      primary: false
+      default: '0.00'
+      notnull: true
+      autoincrement: false
+    credit:
+      type: 'decimal(12, 2)'
+      fixed: false
+      unsigned: false
+      primary: false
+      default: '0.00'
+      notnull: true
+      autoincrement: false
+    created_at:
+      type: timestamp(25)
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: true
+      autoincrement: false
+    updated_at:
+      type: timestamp(25)
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: true
+      autoincrement: false
+  relations:
+    ChartOfAccount:
+      local: chart_of_account_id
+      foreign: id
+      type: one
+    GeneralLibrary:
+      local: general_library_id
+      foreign: id
+      type: one
+    JournalVoucher:
+      local: journal_voucher_id
+      foreign: id
+      type: one
+JournalVoucherAccountEntryOutputVat:
+  connection: doctrine
+  tableName: journal_voucher_account_entry_output_vat
+  columns:
+    id:
+      type: integer(8)
+      fixed: false
+      unsigned: false
+      primary: true
+      autoincrement: true
+    journal_voucher_number:
+      type: integer(8)
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: false
+      autoincrement: false
+    chart_of_account_id:
+      type: integer(8)
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: false
+      autoincrement: false
+    general_library_id:
+      type: integer(8)
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: false
+      autoincrement: false
+    tin_number:
+      type: string(60)
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: false
+      autoincrement: false
+    created_at:
+      type: timestamp(25)
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: true
+      autoincrement: false
+    updated_at:
+      type: timestamp(25)
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: true
+      autoincrement: false
+  relations:
+    ChartOfAccount:
+      local: chart_of_account_id
+      foreign: id
+      type: one
+    GeneralLibrary:
+      local: general_library_id
+      foreign: id
+      type: one
+    JournalVoucherAccountEntryOutputVatEntry:
+      local: id
+      foreign: journal_voucher_account_entry_output_vat_id
+      type: many
+JournalVoucherAccountEntryOutputVatEntry:
+  connection: doctrine
+  tableName: journal_voucher_account_entry_output_vat_entry
+  columns:
+    id:
+      type: integer(8)
+      fixed: false
+      unsigned: false
+      primary: true
+      autoincrement: true
+    journal_voucher_account_entry_output_vat_id:
+      type: integer(8)
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: false
+      autoincrement: false
+    tax_rate_id:
+      type: integer(8)
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: false
+      autoincrement: false
+    gross_purchased:
+      type: 'decimal(12, 2)'
+      fixed: false
+      unsigned: false
+      primary: false
+      default: '0.00'
+      notnull: true
+      autoincrement: false
+    vat_received:
+      type: 'decimal(12, 2)'
+      fixed: false
+      unsigned: false
+      primary: false
+      default: '0.00'
+      notnull: true
+      autoincrement: false
+    net_sales:
+      type: 'decimal(12, 2)'
+      fixed: false
+      unsigned: false
+      primary: false
+      default: '0.00'
+      notnull: true
+      autoincrement: false
+    created_at:
+      type: timestamp(25)
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: true
+      autoincrement: false
+    updated_at:
+      type: timestamp(25)
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: true
+      autoincrement: false
+  relations:
+    JournalVoucherAccountEntryOutputVat:
+      local: journal_voucher_account_entry_output_vat_id
+      foreign: id
+      type: one
+    TaxRate:
+      local: tax_rate_id
+      foreign: id
+      type: one
+JournalVoucherParticularEntry:
+  connection: doctrine
+  tableName: journal_voucher_particular_entry
+  columns:
+    id:
+      type: integer(8)
+      fixed: false
+      unsigned: false
+      primary: true
+      autoincrement: true
+    journal_voucher_id:
+      type: integer(8)
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: true
+      autoincrement: false
+    title:
+      type: string(150)
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: false
+      autoincrement: false
+    amount:
+      type: 'decimal(12, 2)'
+      fixed: false
+      unsigned: false
+      primary: false
+      default: '0.00'
+      notnull: true
+      autoincrement: false
+    vat_application:
+      type: enum(16)
+      fixed: false
+      unsigned: false
+      values:
+        - VAT_EXEMPT
+        - VAT_ZERO_PERCENT
+        - VAT_INCLUSIVE
+        - VAT_EXCLUSIVE
+      primary: false
+      default: VAT_INCLUSIVE
+      notnull: false
+      autoincrement: false
+    tax_expanded_withheld_id:
+      type: integer(8)
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: false
+      autoincrement: false
+    tax_final_withheld_id:
+      type: integer(8)
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: false
+      autoincrement: false
+    total:
+      type: 'decimal(12, 2)'
+      fixed: false
+      unsigned: false
+      primary: false
+      default: '0.00'
+      notnull: true
+      autoincrement: false
+    created_at:
+      type: timestamp(25)
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: true
+      autoincrement: false
+    updated_at:
+      type: timestamp(25)
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: true
+      autoincrement: false
+  relations:
+    JournalVoucher:
+      local: journal_voucher_id
+      foreign: id
+      type: one
+    TaxExpandedWithheld:
+      local: tax_expanded_withheld_id
+      foreign: id
+      type: one
+    TaxFinalWithheld:
+      local: tax_final_withheld_id
+      foreign: id
+      type: one
+Organization:
+  connection: doctrine
+  tableName: organization
+  columns:
+    id:
+      type: integer(8)
+      fixed: false
+      unsigned: false
+      primary: true
+      autoincrement: true
+    display_name:
+      type: string(50)
+      fixed: false
+      unsigned: false
+      primary: false
+      default: ''
+      notnull: true
+      autoincrement: false
+    legal_name:
+      type: string(100)
+      fixed: false
+      unsigned: false
+      primary: false
+      default: ''
+      notnull: true
+      autoincrement: false
+    organization_type_id:
+      type: integer(8)
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: false
+      autoincrement: false
+    rdo_code:
+      type: string(10)
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: false
+      autoincrement: false
+    branch_code:
+      type: string(10)
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: false
+      autoincrement: false
+    tin:
+      type: string(12)
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: false
+      autoincrement: false
+    logo:
+      type: string(150)
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: false
+      autoincrement: false
+    street:
+      type: string()
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: false
+      autoincrement: false
+    city:
+      type: string(100)
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: false
+      autoincrement: false
+    code:
+      type: integer(8)
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: false
+      autoincrement: false
+    country_id:
+      type: integer(8)
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: false
+      autoincrement: false
+    telephone_number:
+      type: string(60)
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: false
+      autoincrement: false
+    fax:
+      type: string(60)
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: false
+      autoincrement: false
+    mobile_number:
+      type: string(50)
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: false
+      autoincrement: false
+    email:
+      type: string(60)
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: false
+      autoincrement: false
+    facebook_url:
+      type: string(150)
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: false
+      autoincrement: false
+    twitter_url:
+      type: string(150)
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: false
+      autoincrement: false
+    linkedln_url:
+      type: string(150)
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: false
+      autoincrement: false
+    googleplus_url:
+      type: string(150)
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: false
+      autoincrement: false
+    created_at:
+      type: timestamp(25)
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: true
+      autoincrement: false
+    updated_at:
+      type: timestamp(25)
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: true
+      autoincrement: false
+  relations:
+    Country:
+      local: country_id
+      foreign: id
+      type: one
+    OrganizationType:
+      local: organization_type_id
+      foreign: id
+      type: one
+OrganizationType:
+  connection: doctrine
+  tableName: organization_type
+  columns:
+    id:
+      type: integer(8)
+      fixed: false
+      unsigned: false
+      primary: true
+      autoincrement: true
+    title:
+      type: string(60)
+      fixed: false
+      unsigned: false
+      primary: false
+      default: ''
+      notnull: true
+      autoincrement: false
+    description:
+      type: string()
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: false
+      autoincrement: false
+    created_at:
+      type: timestamp(25)
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: true
+      autoincrement: false
+    updated_at:
+      type: timestamp(25)
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: true
+      autoincrement: false
+  relations:
+    Organization:
+      local: id
+      foreign: organization_type_id
+      type: many
+ParticularTemplate:
+  connection: doctrine
+  tableName: particular_template
+  columns:
+    id:
+      type: integer(8)
+      fixed: false
+      unsigned: false
+      primary: true
+      autoincrement: true
+    code:
+      type: string(50)
+      fixed: false
+      unsigned: false
+      primary: false
+      default: ''
+      notnull: true
+      autoincrement: false
+    name:
+      type: string(50)
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: false
+      autoincrement: false
+    particulars:
+      type: string()
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: false
+      autoincrement: false
+    header_message:
+      type: string()
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: false
+      autoincrement: false
+    footer_message:
+      type: string()
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: false
+      autoincrement: false
+    project_id:
+      type: integer(8)
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: false
+      autoincrement: false
+    department_id:
+      type: integer(8)
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: false
+      autoincrement: false
+    created_at:
+      type: timestamp(25)
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: true
+      autoincrement: false
+    updated_at:
+      type: timestamp(25)
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: true
+      autoincrement: false
+  relations:
+    Department:
+      local: department_id
+      foreign: id
+      type: one
+    Project:
+      local: project_id
+      foreign: id
+      type: one
+    JournalBookParticularTemplate:
+      local: id
+      foreign: particular_template_id
+      type: many
+    ParticularTemplateEntry:
+      local: id
+      foreign: particular_template_id
+      type: many
+ParticularTemplateEntry:
+  connection: doctrine
+  tableName: particular_template_entry
+  columns:
+    id:
+      type: integer(8)
+      fixed: false
+      unsigned: false
+      primary: true
+      autoincrement: true
+    particular_template_id:
+      type: integer(8)
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: true
+      autoincrement: false
+    title:
+      type: string(150)
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: false
+      autoincrement: false
+    amount:
+      type: 'decimal(12, 2)'
+      fixed: false
+      unsigned: false
+      primary: false
+      default: '0.00'
+      notnull: true
+      autoincrement: false
+    vat_application:
+      type: enum(16)
+      fixed: false
+      unsigned: false
+      values:
+        - VAT_EXEMPT
+        - VAT_ZERO_PERCENT
+        - VAT_INCLUSIVE
+        - VAT_EXCLUSIVE
+      primary: false
+      default: VAT_INCLUSIVE
+      notnull: false
+      autoincrement: false
+    tax_expanded_withheld_id:
+      type: integer(8)
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: false
+      autoincrement: false
+    tax_final_withheld_id:
+      type: integer(8)
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: false
+      autoincrement: false
+    total:
+      type: 'decimal(12, 2)'
+      fixed: false
+      unsigned: false
+      primary: false
+      default: '0.00'
+      notnull: true
+      autoincrement: false
+    created_at:
+      type: timestamp(25)
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: true
+      autoincrement: false
+    updated_at:
+      type: timestamp(25)
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: true
+      autoincrement: false
+  relations:
+    ParticularTemplate:
+      local: particular_template_id
+      foreign: id
+      type: one
+    TaxExpandedWithheld:
+      local: tax_expanded_withheld_id
+      foreign: id
+      type: one
+    TaxFinalWithheld:
+      local: tax_final_withheld_id
+      foreign: id
+      type: one
+PettyCashVoucher:
+  connection: doctrine
+  tableName: petty_cash_voucher
+  columns:
+    id:
+      type: integer(8)
+      fixed: false
+      unsigned: false
+      primary: true
+      autoincrement: true
+    book_id:
+      type: integer(8)
+      fixed: false
+      unsigned: false
+      primary: false
+      default: '0'
+      notnull: true
+      autoincrement: false
+    voucher_number:
+      type: string(50)
+      fixed: false
+      unsigned: false
+      primary: false
+      default: ''
+      notnull: true
+      autoincrement: false
+    general_library_id:
+      type: integer(8)
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: false
+      autoincrement: false
+    currency_id:
+      type: integer(8)
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: false
+      autoincrement: false
+    replenishment_date:
+      type: date(25)
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: false
+      autoincrement: false
+    period:
+      type: date(25)
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: false
+      autoincrement: false
+    header_message:
+      type: string()
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: false
+      autoincrement: false
+    footer_message:
+      type: string()
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: false
+      autoincrement: false
+    total_amount:
+      type: 'decimal(12, 2)'
+      fixed: false
+      unsigned: false
+      primary: false
+      default: '0.00'
+      notnull: true
+      autoincrement: false
+    status:
+      type: enum(12)
+      fixed: false
+      unsigned: false
+      values:
+        - UNPAID
+        - PARTIAL_PAID
+        - 'FULL PAID'
+      primary: false
+      default: UNPAID
+      notnull: false
+      autoincrement: false
+    created_at:
+      type: timestamp(25)
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: true
+      autoincrement: false
+    updated_at:
+      type: timestamp(25)
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: true
+      autoincrement: false
+  relations:
+    Book:
+      local: book_id
+      foreign: id
+      type: one
+    Currency:
+      local: currency_id
+      foreign: id
+      type: one
+    GeneralLibrary:
+      local: general_library_id
+      foreign: id
+      type: one
+    PettyCashVoucherAccountEntry:
+      local: id
+      foreign: petty_cash_voucher_id
+      type: many
+    PettyCashVoucherParticularEntry:
+      local: id
+      foreign: petty_cash_voucher_id
+      type: many
+PettyCashVoucherAccountEntry:
+  connection: doctrine
+  tableName: petty_cash_voucher_account_entry
+  columns:
+    id:
+      type: integer(8)
+      fixed: false
+      unsigned: false
+      primary: true
+      autoincrement: true
+    petty_cash_voucher_id:
+      type: integer(8)
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: true
+      autoincrement: false
+    chart_of_account_id:
+      type: integer(8)
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: false
+      autoincrement: false
+    general_library_id:
+      type: integer(8)
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: false
+      autoincrement: false
+    dn_reference:
+      type: string(50)
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: false
+      autoincrement: false
+    debit:
+      type: 'decimal(12, 2)'
+      fixed: false
+      unsigned: false
+      primary: false
+      default: '0.00'
+      notnull: true
+      autoincrement: false
+    credit:
+      type: 'decimal(12, 2)'
+      fixed: false
+      unsigned: false
+      primary: false
+      default: '0.00'
+      notnull: true
+      autoincrement: false
+    created_at:
+      type: timestamp(25)
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: true
+      autoincrement: false
+    updated_at:
+      type: timestamp(25)
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: true
+      autoincrement: false
+  relations:
+    ChartOfAccount:
+      local: chart_of_account_id
+      foreign: id
+      type: one
+    GeneralLibrary:
+      local: general_library_id
+      foreign: id
+      type: one
+    PettyCashVoucher:
+      local: petty_cash_voucher_id
+      foreign: id
+      type: one
+PettyCashVoucherAccountEntryOutputVat:
+  connection: doctrine
+  tableName: petty_cash_voucher_account_entry_output_vat
+  columns:
+    id:
+      type: integer(8)
+      fixed: false
+      unsigned: false
+      primary: true
+      autoincrement: true
+    petty_cash_voucher_number:
+      type: integer(8)
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: false
+      autoincrement: false
+    chart_of_account_id:
+      type: integer(8)
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: false
+      autoincrement: false
+    general_library_id:
+      type: integer(8)
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: false
+      autoincrement: false
+    tin_number:
+      type: string(60)
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: false
+      autoincrement: false
+    created_at:
+      type: timestamp(25)
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: true
+      autoincrement: false
+    updated_at:
+      type: timestamp(25)
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: true
+      autoincrement: false
+  relations:
+    ChartOfAccount:
+      local: chart_of_account_id
+      foreign: id
+      type: one
+    GeneralLibrary:
+      local: general_library_id
+      foreign: id
+      type: one
+    PettyCashVoucherAccountEntryOutputVatEntry:
+      local: id
+      foreign: petty_cash_voucher_account_entry_output_vat_id
+      type: many
+PettyCashVoucherAccountEntryOutputVatEntry:
+  connection: doctrine
+  tableName: petty_cash_voucher_account_entry_output_vat_entry
+  columns:
+    id:
+      type: integer(8)
+      fixed: false
+      unsigned: false
+      primary: true
+      autoincrement: true
+    petty_cash_voucher_account_entry_output_vat_id:
+      type: integer(8)
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: false
+      autoincrement: false
+    tax_rate_id:
+      type: integer(8)
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: false
+      autoincrement: false
+    gross_purchased:
+      type: 'decimal(12, 2)'
+      fixed: false
+      unsigned: false
+      primary: false
+      default: '0.00'
+      notnull: true
+      autoincrement: false
+    vat_received:
+      type: 'decimal(12, 2)'
+      fixed: false
+      unsigned: false
+      primary: false
+      default: '0.00'
+      notnull: true
+      autoincrement: false
+    net_sales:
+      type: 'decimal(12, 2)'
+      fixed: false
+      unsigned: false
+      primary: false
+      default: '0.00'
+      notnull: true
+      autoincrement: false
+    created_at:
+      type: timestamp(25)
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: true
+      autoincrement: false
+    updated_at:
+      type: timestamp(25)
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: true
+      autoincrement: false
+  relations:
+    PettyCashVoucherAccountEntryOutputVat:
+      local: petty_cash_voucher_account_entry_output_vat_id
+      foreign: id
+      type: one
+    TaxRate:
+      local: tax_rate_id
+      foreign: id
+      type: one
+PettyCashVoucherParticularEntry:
+  connection: doctrine
+  tableName: petty_cash_voucher_particular_entry
+  columns:
+    id:
+      type: integer(8)
+      fixed: false
+      unsigned: false
+      primary: true
+      autoincrement: true
+    petty_cash_voucher_id:
+      type: integer(8)
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: true
+      autoincrement: false
+    title:
+      type: string(150)
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: false
+      autoincrement: false
+    amount:
+      type: 'decimal(12, 2)'
+      fixed: false
+      unsigned: false
+      primary: false
+      default: '0.00'
+      notnull: true
+      autoincrement: false
+    vat_application:
+      type: enum(16)
+      fixed: false
+      unsigned: false
+      values:
+        - VAT_EXEMPT
+        - VAT_ZERO_PERCENT
+        - VAT_INCLUSIVE
+        - VAT_EXCLUSIVE
+      primary: false
+      default: VAT_INCLUSIVE
+      notnull: false
+      autoincrement: false
+    tax_expanded_withheld_id:
+      type: integer(8)
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: false
+      autoincrement: false
+    tax_final_withheld_id:
+      type: integer(8)
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: false
+      autoincrement: false
+    total:
+      type: 'decimal(12, 2)'
+      fixed: false
+      unsigned: false
+      primary: false
+      default: '0.00'
+      notnull: true
+      autoincrement: false
+    created_at:
+      type: timestamp(25)
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: true
+      autoincrement: false
+    updated_at:
+      type: timestamp(25)
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: true
+      autoincrement: false
+  relations:
+    PettyCashVoucher:
+      local: petty_cash_voucher_id
+      foreign: id
+      type: one
+    TaxExpandedWithheld:
+      local: tax_expanded_withheld_id
+      foreign: id
+      type: one
+    TaxFinalWithheld:
+      local: tax_final_withheld_id
+      foreign: id
+      type: one
+PettyCashVoucherVoucher:
+  connection: doctrine
+  tableName: petty_cash_voucher_voucher
+  columns:
+    id:
+      type: integer(8)
+      fixed: false
+      unsigned: false
+      primary: true
+      autoincrement: true
+    book_id:
+      type: integer(8)
+      fixed: false
+      unsigned: false
+      primary: false
+      default: '0'
+      notnull: true
+      autoincrement: false
+    voucher_number:
+      type: string(50)
+      fixed: false
+      unsigned: false
+      primary: false
+      default: ''
+      notnull: true
+      autoincrement: false
+    general_library_id:
+      type: integer(8)
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: false
+      autoincrement: false
+    currency_id:
+      type: integer(8)
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: false
+      autoincrement: false
+    replenishment_date:
+      type: date(25)
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: false
+      autoincrement: false
+    period:
+      type: date(25)
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: false
+      autoincrement: false
+    header_message:
+      type: string()
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: false
+      autoincrement: false
+    footer_message:
+      type: string()
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: false
+      autoincrement: false
+    total_amount:
+      type: 'decimal(12, 2)'
+      fixed: false
+      unsigned: false
+      primary: false
+      default: '0.00'
+      notnull: true
+      autoincrement: false
+    status:
+      type: enum(12)
+      fixed: false
+      unsigned: false
+      values:
+        - UNPAID
+        - PARTIAL_PAID
+        - 'FULL PAID'
+      primary: false
+      default: UNPAID
+      notnull: false
+      autoincrement: false
+    created_at:
+      type: timestamp(25)
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: true
+      autoincrement: false
+    updated_at:
+      type: timestamp(25)
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: true
+      autoincrement: false
+  relations:
+    Book:
+      local: book_id
+      foreign: id
+      type: one
+    Currency:
+      local: currency_id
+      foreign: id
+      type: one
+    GeneralLibrary:
+      local: general_library_id
+      foreign: id
+      type: one
+    PettyCashVoucherVoucherAccountEntry:
+      local: id
+      foreign: petty_cash_voucher_id
+      type: many
+    PettyCashVoucherVoucherParticularEntry:
+      local: id
+      foreign: petty_cash_voucher_id
+      type: many
+PettyCashVoucherVoucherAccountEntry:
+  connection: doctrine
+  tableName: petty_cash_voucher_voucher_account_entry
+  columns:
+    id:
+      type: integer(8)
+      fixed: false
+      unsigned: false
+      primary: true
+      autoincrement: true
+    petty_cash_voucher_id:
+      type: integer(8)
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: true
+      autoincrement: false
+    chart_of_account_id:
+      type: integer(8)
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: false
+      autoincrement: false
+    general_library_id:
+      type: integer(8)
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: false
+      autoincrement: false
+    dn_reference:
+      type: string(50)
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: false
+      autoincrement: false
+    debit:
+      type: 'decimal(12, 2)'
+      fixed: false
+      unsigned: false
+      primary: false
+      default: '0.00'
+      notnull: true
+      autoincrement: false
+    credit:
+      type: 'decimal(12, 2)'
+      fixed: false
+      unsigned: false
+      primary: false
+      default: '0.00'
+      notnull: true
+      autoincrement: false
+    created_at:
+      type: timestamp(25)
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: true
+      autoincrement: false
+    updated_at:
+      type: timestamp(25)
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: true
+      autoincrement: false
+  relations:
+    ChartOfAccount:
+      local: chart_of_account_id
+      foreign: id
+      type: one
+    GeneralLibrary:
+      local: general_library_id
+      foreign: id
+      type: one
+    PettyCashVoucherVoucher:
+      local: petty_cash_voucher_id
+      foreign: id
+      type: one
+PettyCashVoucherVoucherAccountEntryOutputVat:
+  connection: doctrine
+  tableName: petty_cash_voucher_voucher_account_entry_output_vat
+  columns:
+    id:
+      type: integer(8)
+      fixed: false
+      unsigned: false
+      primary: true
+      autoincrement: true
+    petty_cash_voucher_number:
+      type: integer(8)
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: false
+      autoincrement: false
+    chart_of_account_id:
+      type: integer(8)
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: false
+      autoincrement: false
+    general_library_id:
+      type: integer(8)
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: false
+      autoincrement: false
+    tin_number:
+      type: string(60)
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: false
+      autoincrement: false
+    created_at:
+      type: timestamp(25)
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: true
+      autoincrement: false
+    updated_at:
+      type: timestamp(25)
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: true
+      autoincrement: false
+  relations:
+    ChartOfAccount:
+      local: chart_of_account_id
+      foreign: id
+      type: one
+    GeneralLibrary:
+      local: general_library_id
+      foreign: id
+      type: one
+    PettyCashVoucherVoucherAccountEntryOutputVatEntry:
+      local: id
+      foreign: petty_cash_voucher_account_entry_output_vat_id
+      type: many
+PettyCashVoucherVoucherAccountEntryOutputVatEntry:
+  connection: doctrine
+  tableName: petty_cash_voucher_voucher_account_entry_output_vat_entry
+  columns:
+    id:
+      type: integer(8)
+      fixed: false
+      unsigned: false
+      primary: true
+      autoincrement: true
+    petty_cash_voucher_account_entry_output_vat_id:
+      type: integer(8)
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: false
+      autoincrement: false
+    tax_rate_id:
+      type: integer(8)
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: false
+      autoincrement: false
+    gross_purchased:
+      type: 'decimal(12, 2)'
+      fixed: false
+      unsigned: false
+      primary: false
+      default: '0.00'
+      notnull: true
+      autoincrement: false
+    vat_received:
+      type: 'decimal(12, 2)'
+      fixed: false
+      unsigned: false
+      primary: false
+      default: '0.00'
+      notnull: true
+      autoincrement: false
+    net_sales:
+      type: 'decimal(12, 2)'
+      fixed: false
+      unsigned: false
+      primary: false
+      default: '0.00'
+      notnull: true
+      autoincrement: false
+    created_at:
+      type: timestamp(25)
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: true
+      autoincrement: false
+    updated_at:
+      type: timestamp(25)
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: true
+      autoincrement: false
+  relations:
+    PettyCashVoucherVoucherAccountEntryOutputVat:
+      local: petty_cash_voucher_account_entry_output_vat_id
+      foreign: id
+      type: one
+    TaxRate:
+      local: tax_rate_id
+      foreign: id
+      type: one
+PettyCashVoucherVoucherParticularEntry:
+  connection: doctrine
+  tableName: petty_cash_voucher_voucher_particular_entry
+  columns:
+    id:
+      type: integer(8)
+      fixed: false
+      unsigned: false
+      primary: true
+      autoincrement: true
+    petty_cash_voucher_id:
+      type: integer(8)
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: true
+      autoincrement: false
+    title:
+      type: string(150)
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: false
+      autoincrement: false
+    amount:
+      type: 'decimal(12, 2)'
+      fixed: false
+      unsigned: false
+      primary: false
+      default: '0.00'
+      notnull: true
+      autoincrement: false
+    vat_application:
+      type: enum(16)
+      fixed: false
+      unsigned: false
+      values:
+        - VAT_EXEMPT
+        - VAT_ZERO_PERCENT
+        - VAT_INCLUSIVE
+        - VAT_EXCLUSIVE
+      primary: false
+      default: VAT_INCLUSIVE
+      notnull: false
+      autoincrement: false
+    tax_expanded_withheld_id:
+      type: integer(8)
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: false
+      autoincrement: false
+    tax_final_withheld_id:
+      type: integer(8)
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: false
+      autoincrement: false
+    total:
+      type: 'decimal(12, 2)'
+      fixed: false
+      unsigned: false
+      primary: false
+      default: '0.00'
+      notnull: true
+      autoincrement: false
+    created_at:
+      type: timestamp(25)
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: true
+      autoincrement: false
+    updated_at:
+      type: timestamp(25)
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: true
+      autoincrement: false
+  relations:
+    PettyCashVoucherVoucher:
+      local: petty_cash_voucher_id
+      foreign: id
+      type: one
+    TaxExpandedWithheld:
+      local: tax_expanded_withheld_id
+      foreign: id
+      type: one
+    TaxFinalWithheld:
+      local: tax_final_withheld_id
+      foreign: id
+      type: one
+PrepaymentAccount:
+  connection: doctrine
+  tableName: prepayment_account
+  columns:
+    id:
+      type: integer(8)
+      fixed: false
+      unsigned: false
+      primary: true
+      autoincrement: true
+    chart_of_account_id:
+      type: integer(8)
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: false
+      autoincrement: false
+    code:
+      type: string(50)
+      fixed: false
+      unsigned: false
+      primary: false
+      default: ''
+      notnull: true
+      autoincrement: false
+    title:
+      type: string(50)
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: false
+      autoincrement: false
+    description:
+      type: string()
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: false
+      autoincrement: false
+    created_at:
+      type: timestamp(25)
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: true
+      autoincrement: false
+    updated_at:
+      type: timestamp(25)
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: true
+      autoincrement: false
+  relations:
+    ChartOfAccount:
+      local: chart_of_account_id
+      foreign: id
+      type: one
+Project:
+  connection: doctrine
+  tableName: project
+  columns:
+    id:
+      type: integer(8)
+      fixed: false
+      unsigned: false
+      primary: true
+      autoincrement: true
+    code:
+      type: string(50)
+      fixed: false
+      unsigned: false
+      primary: false
+      default: ''
+      notnull: true
+      autoincrement: false
+    title:
+      type: string(60)
+      fixed: false
+      unsigned: false
+      primary: false
+      default: ''
+      notnull: true
+      autoincrement: false
+    description:
+      type: string()
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: false
+      autoincrement: false
+    created_at:
+      type: timestamp(25)
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: true
+      autoincrement: false
+    updated_at:
+      type: timestamp(25)
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: true
+      autoincrement: false
+  relations:
+    AccountsPayableBeginningBalance:
+      local: id
+      foreign: project_id
+      type: many
+    AccountsReceivableBeginningBalance:
+      local: id
+      foreign: project_id
+      type: many
+    GeneralLedgerBeginningBalance:
+      local: id
+      foreign: project_id
+      type: many
+    InvoiceAccountEntry:
+      local: id
+      foreign: project_id
+      type: many
+    JournalBookTemplate:
+      local: id
+      foreign: project_id
+      type: many
+    ParticularTemplate:
+      local: id
+      foreign: project_id
+      type: many
+Receipt:
+  connection: doctrine
+  tableName: receipt
+  columns:
+    id:
+      type: integer(8)
+      fixed: false
+      unsigned: false
+      primary: true
+      autoincrement: true
+    book_id:
+      type: integer(8)
+      fixed: false
+      unsigned: false
+      primary: false
+      default: '0'
+      notnull: true
+      autoincrement: false
+    status:
+      type: enum(12)
+      fixed: false
+      unsigned: false
+      values:
+        - UNPAID
+        - PARTIAL_PAID
+        - 'FULL PAID'
+      primary: false
+      default: UNPAID
+      notnull: false
+      autoincrement: false
+    receipt_number:
+      type: string(50)
+      fixed: false
+      unsigned: false
+      primary: false
+      default: ''
+      notnull: true
+      autoincrement: false
+    general_library_id:
+      type: integer(8)
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: false
+      autoincrement: false
+    currency_id:
+      type: integer(8)
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: false
+      autoincrement: false
+    purchase_order_number:
+      type: string(50)
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: false
+      autoincrement: false
+    date_receive:
+      type: date(25)
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: false
+      autoincrement: false
+    period:
+      type: date(25)
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: false
+      autoincrement: false
+    due_date:
+      type: date(25)
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: false
+      autoincrement: false
+    header_message:
+      type: string()
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: false
+      autoincrement: false
+    footer_message:
+      type: string()
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: false
+      autoincrement: false
+    total_amount:
+      type: 'decimal(12, 2)'
+      fixed: false
+      unsigned: false
+      primary: false
+      default: '0.00'
+      notnull: true
+      autoincrement: false
+    mode_payment:
+      type: enum(5)
+      fixed: false
+      unsigned: false
+      values:
+        - CASH
+        - CHECK
+      primary: false
+      default: CASH
+      notnull: false
+      autoincrement: false
+    created_at:
+      type: timestamp(25)
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: true
+      autoincrement: false
+    updated_at:
+      type: timestamp(25)
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: true
+      autoincrement: false
+  relations:
+    Book:
+      local: book_id
+      foreign: id
+      type: one
+    Currency:
+      local: currency_id
+      foreign: id
+      type: one
+    GeneralLibrary:
+      local: general_library_id
+      foreign: id
+      type: one
+    ReceiptAccountEntry:
+      local: id
+      foreign: receipt_id
+      type: many
+    ReceiptCashEntry:
+      local: id
+      foreign: receipt_id
+      type: many
+    ReceiptCheckEntry:
+      local: id
+      foreign: receipt_id
+      type: many
+    ReceiptParticularEntry:
+      local: id
+      foreign: receipt_id
+      type: many
+ReceiptAccountEntry:
+  connection: doctrine
+  tableName: receipt_account_entry
+  columns:
+    id:
+      type: integer(8)
+      fixed: false
+      unsigned: false
+      primary: true
+      autoincrement: true
+    receipt_id:
+      type: integer(8)
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: true
+      autoincrement: false
+    chart_of_account_id:
+      type: integer(8)
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: false
+      autoincrement: false
+    general_library_id:
+      type: integer(8)
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: false
+      autoincrement: false
+    dn_reference:
+      type: string(50)
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: false
+      autoincrement: false
+    debit:
+      type: 'decimal(12, 2)'
+      fixed: false
+      unsigned: false
+      primary: false
+      default: '0.00'
+      notnull: true
+      autoincrement: false
+    credit:
+      type: 'decimal(12, 2)'
+      fixed: false
+      unsigned: false
+      primary: false
+      default: '0.00'
+      notnull: true
+      autoincrement: false
+    created_at:
+      type: timestamp(25)
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: true
+      autoincrement: false
+    updated_at:
+      type: timestamp(25)
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: true
+      autoincrement: false
+  relations:
+    ChartOfAccount:
+      local: chart_of_account_id
+      foreign: id
+      type: one
+    GeneralLibrary:
+      local: general_library_id
+      foreign: id
+      type: one
+    Receipt:
+      local: receipt_id
+      foreign: id
+      type: one
+ReceiptAccountEntryOutputVat:
+  connection: doctrine
+  tableName: receipt_account_entry_output_vat
+  columns:
+    id:
+      type: integer(8)
+      fixed: false
+      unsigned: false
+      primary: true
+      autoincrement: true
+    receipt_number:
+      type: integer(8)
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: false
+      autoincrement: false
+    chart_of_account_id:
+      type: integer(8)
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: false
+      autoincrement: false
+    general_library_id:
+      type: integer(8)
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: false
+      autoincrement: false
+    tin_number:
+      type: string(60)
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: false
+      autoincrement: false
+    created_at:
+      type: timestamp(25)
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: true
+      autoincrement: false
+    updated_at:
+      type: timestamp(25)
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: true
+      autoincrement: false
+  relations:
+    ChartOfAccount:
+      local: chart_of_account_id
+      foreign: id
+      type: one
+    GeneralLibrary:
+      local: general_library_id
+      foreign: id
+      type: one
+    ReceiptAccountEntryOutputVatEntry:
+      local: id
+      foreign: receipt_account_entry_output_vat_id
+      type: many
+ReceiptAccountEntryOutputVatEntry:
+  connection: doctrine
+  tableName: receipt_account_entry_output_vat_entry
+  columns:
+    id:
+      type: integer(8)
+      fixed: false
+      unsigned: false
+      primary: true
+      autoincrement: true
+    receipt_account_entry_output_vat_id:
+      type: integer(8)
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: false
+      autoincrement: false
+    tax_rate_id:
+      type: integer(8)
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: false
+      autoincrement: false
+    gross_purchased:
+      type: 'decimal(12, 2)'
+      fixed: false
+      unsigned: false
+      primary: false
+      default: '0.00'
+      notnull: true
+      autoincrement: false
+    vat_received:
+      type: 'decimal(12, 2)'
+      fixed: false
+      unsigned: false
+      primary: false
+      default: '0.00'
+      notnull: true
+      autoincrement: false
+    net_sales:
+      type: 'decimal(12, 2)'
+      fixed: false
+      unsigned: false
+      primary: false
+      default: '0.00'
+      notnull: true
+      autoincrement: false
+    created_at:
+      type: timestamp(25)
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: true
+      autoincrement: false
+    updated_at:
+      type: timestamp(25)
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: true
+      autoincrement: false
+  relations:
+    TaxRate:
+      local: tax_rate_id
+      foreign: id
+      type: one
+    ReceiptAccountEntryOutputVat:
+      local: receipt_account_entry_output_vat_id
+      foreign: id
+      type: one
+ReceiptCashEntry:
+  connection: doctrine
+  tableName: receipt_cash_entry
+  columns:
+    id:
+      type: integer(8)
+      fixed: false
+      unsigned: false
+      primary: true
+      autoincrement: true
+    receipt_id:
+      type: integer(8)
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: false
+      autoincrement: false
+    general_library_id:
+      type: integer(8)
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: false
+      autoincrement: false
+    chart_of_account_id:
+      type: integer(8)
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: false
+      autoincrement: false
+    date:
+      type: date(25)
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: false
+      autoincrement: false
+    amount:
+      type: 'decimal(12, 2)'
+      fixed: false
+      unsigned: false
+      primary: false
+      default: '0.00'
+      notnull: true
+      autoincrement: false
+    created_at:
+      type: timestamp(25)
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: true
+      autoincrement: false
+    updated_at:
+      type: timestamp(25)
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: true
+      autoincrement: false
+  relations:
+    ChartOfAccount:
+      local: chart_of_account_id
+      foreign: id
+      type: one
+    GeneralLibrary:
+      local: general_library_id
+      foreign: id
+      type: one
+    Receipt:
+      local: receipt_id
+      foreign: id
+      type: one
+ReceiptCheckEntry:
+  connection: doctrine
+  tableName: receipt_check_entry
+  columns:
+    id:
+      type: integer(8)
+      fixed: false
+      unsigned: false
+      primary: true
+      autoincrement: true
+    check_number:
+      type: string(25)
+      fixed: false
+      unsigned: false
+      primary: false
+      default: '0'
+      notnull: true
+      autoincrement: false
+    check_date:
+      type: date(25)
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: false
+      autoincrement: false
+    receipt_id:
+      type: integer(8)
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: false
+      autoincrement: false
+    bank_id:
+      type: integer(8)
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: false
+      autoincrement: false
+    general_library_id:
+      type: integer(8)
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: false
+      autoincrement: false
+    chart_of_account_id:
+      type: integer(8)
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: false
+      autoincrement: false
+    is_cleared:
+      type: integer(1)
+      fixed: false
+      unsigned: false
+      primary: false
+      default: '0'
+      notnull: false
+      autoincrement: false
+    is_cleared_date:
+      type: date(25)
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: false
+      autoincrement: false
+    is_released:
+      type: integer(1)
+      fixed: false
+      unsigned: false
+      primary: false
+      default: '0'
+      notnull: false
+      autoincrement: false
+    is_released_date:
+      type: date(25)
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: false
+      autoincrement: false
+    is_cancelled:
+      type: integer(1)
+      fixed: false
+      unsigned: false
+      primary: false
+      default: '0'
+      notnull: false
+      autoincrement: false
+    is_cancelled_date:
+      type: date(25)
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: false
+      autoincrement: false
+    amount:
+      type: 'decimal(12, 2)'
+      fixed: false
+      unsigned: false
+      primary: false
+      default: '0.00'
+      notnull: true
+      autoincrement: false
+    created_at:
+      type: timestamp(25)
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: true
+      autoincrement: false
+    updated_at:
+      type: timestamp(25)
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: true
+      autoincrement: false
+  relations:
+    Bank:
+      local: bank_id
+      foreign: id
+      type: one
+    ChartOfAccount:
+      local: chart_of_account_id
+      foreign: id
+      type: one
+    GeneralLibrary:
+      local: general_library_id
+      foreign: id
+      type: one
+    Receipt:
+      local: receipt_id
+      foreign: id
+      type: one
+ReceiptParticularEntry:
+  connection: doctrine
+  tableName: receipt_particular_entry
+  columns:
+    id:
+      type: integer(8)
+      fixed: false
+      unsigned: false
+      primary: true
+      autoincrement: true
+    receipt_id:
+      type: integer(8)
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: true
+      autoincrement: false
+    title:
+      type: string(150)
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: false
+      autoincrement: false
+    amount:
+      type: 'decimal(12, 2)'
+      fixed: false
+      unsigned: false
+      primary: false
+      default: '0.00'
+      notnull: true
+      autoincrement: false
+    vat_application:
+      type: enum(16)
+      fixed: false
+      unsigned: false
+      values:
+        - VAT_EXEMPT
+        - VAT_ZERO_PERCENT
+        - VAT_INCLUSIVE
+        - VAT_EXCLUSIVE
+      primary: false
+      default: VAT_INCLUSIVE
+      notnull: false
+      autoincrement: false
+    tax_expanded_withheld_id:
+      type: integer(8)
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: false
+      autoincrement: false
+    tax_final_withheld_id:
+      type: integer(8)
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: false
+      autoincrement: false
+    total:
+      type: 'decimal(12, 2)'
+      fixed: false
+      unsigned: false
+      primary: false
+      default: '0.00'
+      notnull: true
+      autoincrement: false
+    created_at:
+      type: timestamp(25)
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: true
+      autoincrement: false
+    updated_at:
+      type: timestamp(25)
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: true
+      autoincrement: false
+  relations:
+    Receipt:
+      local: receipt_id
+      foreign: id
+      type: one
+    TaxExpandedWithheld:
+      local: tax_expanded_withheld_id
+      foreign: id
+      type: one
+    TaxFinalWithheld:
+      local: tax_final_withheld_id
+      foreign: id
+      type: one
+RolePrivilege:
+  connection: doctrine
+  tableName: role_privilege
+  columns:
+    id:
+      type: integer(8)
+      fixed: false
+      unsigned: false
+      primary: true
+      autoincrement: true
+    role_id:
+      type: string(3)
+      fixed: false
+      unsigned: false
+      primary: false
+      default: PHP
+      notnull: true
+      autoincrement: false
+    name:
+      type: string(50)
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: false
+      autoincrement: false
+    description:
+      type: string(15)
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: false
+      autoincrement: false
+    created_at:
+      type: timestamp(25)
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: true
+      autoincrement: false
+    updated_at:
+      type: timestamp(25)
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: true
+      autoincrement: false
+RolePrivileges:
+  connection: doctrine
+  tableName: role_privileges
+  columns:
+    id:
+      type: integer(8)
+      fixed: false
+      unsigned: false
+      primary: true
+      autoincrement: true
+    role_id:
+      type: string(3)
+      fixed: false
+      unsigned: false
+      primary: false
+      default: PHP
+      notnull: true
+      autoincrement: false
+    name:
+      type: string(50)
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: false
+      autoincrement: false
+    description:
+      type: string(15)
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: false
+      autoincrement: false
+    created_at:
+      type: timestamp(25)
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: true
+      autoincrement: false
+    updated_at:
+      type: timestamp(25)
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: true
+      autoincrement: false
+TaxClass:
+  connection: doctrine
+  tableName: tax_class
+  columns:
+    id:
+      type: integer(8)
+      fixed: false
+      unsigned: false
+      primary: true
+      autoincrement: true
+    code:
+      type: string(50)
+      fixed: false
+      unsigned: false
+      primary: false
+      default: ''
+      notnull: true
+      autoincrement: false
+    title:
+      type: string(60)
+      fixed: false
+      unsigned: false
+      primary: false
+      default: ''
+      notnull: true
+      autoincrement: false
+    description:
+      type: string()
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: false
+      autoincrement: false
+    tax_rate_percent:
+      type: 'decimal(4, 2)'
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: false
+      autoincrement: false
+    created_at:
+      type: timestamp(25)
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: true
+      autoincrement: false
+    updated_at:
+      type: timestamp(25)
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: true
+      autoincrement: false
+TaxExpandedWithheld:
+  connection: doctrine
+  tableName: tax_expanded_withheld
+  columns:
+    id:
+      type: integer(8)
+      fixed: false
+      unsigned: false
+      primary: true
+      autoincrement: true
+    code:
+      type: string(50)
+      fixed: false
+      unsigned: false
+      primary: false
+      default: ''
+      notnull: true
+      autoincrement: false
+    nature_income_payment:
+      type: string()
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: false
+      autoincrement: false
+    tax_rate_percent:
+      type: 'decimal(4, 2)'
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: false
+      autoincrement: false
+    created_at:
+      type: timestamp(25)
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: true
+      autoincrement: false
+    updated_at:
+      type: timestamp(25)
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: true
+      autoincrement: false
+  relations:
+    AccountsPayableVoucherParticularEntry:
+      local: id
+      foreign: tax_expanded_withheld_id
+      type: many
+    CheckVoucherParticularEntry:
+      local: id
+      foreign: tax_expanded_withheld_id
+      type: many
+    DebitCreditMemoParticularEntry:
+      local: id
+      foreign: tax_expanded_withheld_id
+      type: many
+    InvoiceParticularEntry:
+      local: id
+      foreign: tax_expanded_withheld_id
+      type: many
+    JournalVoucherParticularEntry:
+      local: id
+      foreign: tax_expanded_withheld_id
+      type: many
+    ParticularTemplateEntry:
+      local: id
+      foreign: tax_expanded_withheld_id
+      type: many
+    PettyCashVoucherParticularEntry:
+      local: id
+      foreign: tax_expanded_withheld_id
+      type: many
+    PettyCashVoucherVoucherParticularEntry:
+      local: id
+      foreign: tax_expanded_withheld_id
+      type: many
+    ReceiptParticularEntry:
+      local: id
+      foreign: tax_expanded_withheld_id
+      type: many
+TaxFinalWithheld:
+  connection: doctrine
+  tableName: tax_final_withheld
+  columns:
+    id:
+      type: integer(8)
+      fixed: false
+      unsigned: false
+      primary: true
+      autoincrement: true
+    code:
+      type: string(50)
+      fixed: false
+      unsigned: false
+      primary: false
+      default: ''
+      notnull: true
+      autoincrement: false
+    nature_income_payment:
+      type: string()
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: false
+      autoincrement: false
+    tax_rate_percent:
+      type: 'decimal(4, 2)'
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: false
+      autoincrement: false
+    created_at:
+      type: timestamp(25)
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: true
+      autoincrement: false
+    updated_at:
+      type: timestamp(25)
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: true
+      autoincrement: false
+  relations:
+    AccountsPayableVoucherParticularEntry:
+      local: id
+      foreign: tax_final_withheld_id
+      type: many
+    CheckVoucherParticularEntry:
+      local: id
+      foreign: tax_final_withheld_id
+      type: many
+    DebitCreditMemoParticularEntry:
+      local: id
+      foreign: tax_final_withheld_id
+      type: many
+    InvoiceParticularEntry:
+      local: id
+      foreign: tax_final_withheld_id
+      type: many
+    JournalVoucherParticularEntry:
+      local: id
+      foreign: tax_final_withheld_id
+      type: many
+    ParticularTemplateEntry:
+      local: id
+      foreign: tax_final_withheld_id
+      type: many
+    PettyCashVoucherParticularEntry:
+      local: id
+      foreign: tax_final_withheld_id
+      type: many
+    PettyCashVoucherVoucherParticularEntry:
+      local: id
+      foreign: tax_final_withheld_id
+      type: many
+    ReceiptParticularEntry:
+      local: id
+      foreign: tax_final_withheld_id
+      type: many
+TaxRate:
+  connection: doctrine
+  tableName: tax_rate
+  columns:
+    id:
+      type: integer(8)
+      fixed: false
+      unsigned: false
+      primary: true
+      autoincrement: true
+    rate:
+      type: 'decimal(4, 2)'
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: false
+      autoincrement: false
+    effectivity_date:
+      type: date(25)
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: false
+      autoincrement: false
+    type:
+      type: enum(6)
+      fixed: false
+      unsigned: false
+      values:
+        - INPUT
+        - OUTPUT
+      primary: false
+      default: INPUT
+      notnull: true
+      autoincrement: false
+    created_at:
+      type: timestamp(25)
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: true
+      autoincrement: false
+    updated_at:
+      type: timestamp(25)
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: true
+      autoincrement: false
+  relations:
+    AccountsPayableVoucherAccountEntryOutputVatEntry:
+      local: id
+      foreign: tax_rate_id
+      type: many
+    CheckVoucherAccountEntryOutputVatEntry:
+      local: id
+      foreign: tax_rate_id
+      type: many
+    DebitCreditMemoAccountEntryOutputVatEntry:
+      local: id
+      foreign: tax_rate_id
+      type: many
+    InvoiceAccountEntryOutputVatEntry:
+      local: id
+      foreign: tax_rate_id
+      type: many
+    JournalVoucherAccountEntryOutputVatEntry:
+      local: id
+      foreign: tax_rate_id
+      type: many
+    PettyCashVoucherAccountEntryOutputVatEntry:
+      local: id
+      foreign: tax_rate_id
+      type: many
+    PettyCashVoucherVoucherAccountEntryOutputVatEntry:
+      local: id
+      foreign: tax_rate_id
+      type: many
+    ReceiptAccountEntryOutputVatEntry:
+      local: id
+      foreign: tax_rate_id
+      type: many
+TermsOfPayment:
+  connection: doctrine
+  tableName: terms_of_payment
+  columns:
+    id:
+      type: integer(8)
+      fixed: false
+      unsigned: false
+      primary: true
+      autoincrement: true
+    title:
+      type: integer(8)
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: false
+      autoincrement: false
+    number_of_days:
+      type: integer(8)
+      fixed: false
+      unsigned: false
+      primary: false
+      default: '0'
+      notnull: true
+      autoincrement: false
+    created_at:
+      type: timestamp(25)
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: true
+      autoincrement: false
+    updated_at:
+      type: timestamp(25)
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: true
+      autoincrement: false
+  relations:
+    AccountsPayableVoucher:
+      local: id
+      foreign: terms_of_payment_id
+      type: many
+    Invoice:
+      local: id
+      foreign: terms_of_payment_id
+      type: many
+User:
+  connection: doctrine
+  tableName: user
+  columns:
+    id:
+      type: integer(8)
+      fixed: false
+      unsigned: false
+      primary: true
+      autoincrement: true
+    code:
+      type: string(255)
+      fixed: false
+      unsigned: false
+      primary: false
+      default: USR
+      notnull: true
+      autoincrement: false
+    first_name:
+      type: string(60)
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: false
+      autoincrement: false
+    last_name:
+      type: string(60)
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: false
+      autoincrement: false
+    middle_name:
+      type: string(60)
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: false
+      autoincrement: false
+    username:
+      type: string(60)
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: false
+      autoincrement: false
+    password:
+      type: string(255)
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: false
+      autoincrement: false
+    email:
+      type: string(255)
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: false
+      autoincrement: false
+    picture:
+      type: string(15)
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: false
+      autoincrement: false
+    position_id:
+      type: integer(8)
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: false
+      autoincrement: false
+    role_id:
+      type: integer(8)
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: false
+      autoincrement: false
+    is_active:
+      type: integer(1)
+      fixed: false
+      unsigned: false
+      primary: false
+      default: '0'
+      notnull: false
+      autoincrement: false
+    status_id:
+      type: integer(8)
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: false
+      autoincrement: false
+    created_at:
+      type: timestamp(25)
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: true
+      autoincrement: false
+    updated_at:
+      type: timestamp(25)
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: true
+      autoincrement: false
+  relations:
+    UserPosition:
+      local: position_id
+      foreign: id
+      type: one
+    UserRole:
+      local: role_id
+      foreign: id
+      type: one
+    UserStatus:
+      local: status_id
+      foreign: id
+      type: one
+UserPosition:
+  connection: doctrine
+  tableName: user_position
+  columns:
+    id:
+      type: integer(8)
+      fixed: false
+      unsigned: false
+      primary: true
+      autoincrement: true
+    code:
+      type: string(3)
+      fixed: false
+      unsigned: false
+      primary: false
+      default: PHP
+      notnull: true
+      autoincrement: false
+    title:
+      type: string(50)
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: false
+      autoincrement: false
+    created_at:
+      type: timestamp(25)
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: true
+      autoincrement: false
+    updated_at:
+      type: timestamp(25)
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: true
+      autoincrement: false
+  relations:
+    User:
+      local: id
+      foreign: position_id
+      type: many
+UserPositions:
+  connection: doctrine
+  tableName: user_positions
+  columns:
+    id:
+      type: integer(8)
+      fixed: false
+      unsigned: false
+      primary: true
+      autoincrement: true
+    code:
+      type: string(3)
+      fixed: false
+      unsigned: false
+      primary: false
+      default: PHP
+      notnull: true
+      autoincrement: false
+    title:
+      type: string(50)
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: false
+      autoincrement: false
+    created_at:
+      type: timestamp(25)
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: true
+      autoincrement: false
+    updated_at:
+      type: timestamp(25)
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: true
+      autoincrement: false
+  relations:
+    Users:
+      local: id
+      foreign: position_id
+      type: many
+UserRole:
+  connection: doctrine
+  tableName: user_role
+  columns:
+    id:
+      type: integer(8)
+      fixed: false
+      unsigned: false
+      primary: true
+      autoincrement: true
+    code:
+      type: string(3)
+      fixed: false
+      unsigned: false
+      primary: false
+      default: PHP
+      notnull: true
+      autoincrement: false
+    name:
+      type: string(50)
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: false
+      autoincrement: false
+    status:
+      type: string(15)
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: false
+      autoincrement: false
+    created_at:
+      type: timestamp(25)
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: true
+      autoincrement: false
+    updated_at:
+      type: timestamp(25)
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: true
+      autoincrement: false
+  relations:
+    User:
+      local: id
+      foreign: role_id
+      type: many
+UserRoles:
+  connection: doctrine
+  tableName: user_roles
+  columns:
+    id:
+      type: integer(8)
+      fixed: false
+      unsigned: false
+      primary: true
+      autoincrement: true
+    code:
+      type: string(3)
+      fixed: false
+      unsigned: false
+      primary: false
+      default: PHP
+      notnull: true
+      autoincrement: false
+    name:
+      type: string(50)
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: false
+      autoincrement: false
+    status:
+      type: string(15)
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: false
+      autoincrement: false
+    created_at:
+      type: timestamp(25)
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: true
+      autoincrement: false
+    updated_at:
+      type: timestamp(25)
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: true
+      autoincrement: false
+  relations:
+    Users:
+      local: id
+      foreign: role_id
+      type: many
+UserStatus:
+  connection: doctrine
+  tableName: user_status
+  columns:
+    id:
+      type: integer(8)
+      fixed: false
+      unsigned: false
+      primary: true
+      autoincrement: true
+    name:
+      type: string(60)
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: false
+      autoincrement: false
+    description:
+      type: string(60)
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: false
+      autoincrement: false
+    created_at:
+      type: timestamp(25)
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: true
+      autoincrement: false
+    updated_at:
+      type: timestamp(25)
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: true
+      autoincrement: false
+  relations:
+    User:
+      local: id
+      foreign: status_id
+      type: many
+    Users:
+      local: id
+      foreign: status_id
+      type: many
+Users:
+  connection: doctrine
+  tableName: users
+  columns:
+    id:
+      type: integer(8)
+      fixed: false
+      unsigned: false
+      primary: true
+      autoincrement: true
+    code:
+      type: string(255)
+      fixed: false
+      unsigned: false
+      primary: false
+      default: USR
+      notnull: true
+      autoincrement: false
+    first_name:
+      type: string(60)
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: false
+      autoincrement: false
+    last_name:
+      type: string(60)
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: false
+      autoincrement: false
+    middle_name:
+      type: string(60)
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: false
+      autoincrement: false
+    username:
+      type: string(60)
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: false
+      autoincrement: false
+    password:
+      type: string(255)
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: false
+      autoincrement: false
+    email:
+      type: string(255)
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: false
+      autoincrement: false
+    picture:
+      type: string(15)
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: false
+      autoincrement: false
+    position_id:
+      type: integer(8)
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: false
+      autoincrement: false
+    role_id:
+      type: integer(8)
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: false
+      autoincrement: false
+    is_active:
+      type: integer(1)
+      fixed: false
+      unsigned: false
+      primary: false
+      default: '0'
+      notnull: false
+      autoincrement: false
+    status_id:
+      type: integer(8)
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: false
+      autoincrement: false
+    created_at:
+      type: timestamp(25)
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: true
+      autoincrement: false
+    updated_at:
+      type: timestamp(25)
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: true
+      autoincrement: false
+  relations:
+    UserPositions:
+      local: position_id
+      foreign: id
+      type: one
+    UserRoles:
+      local: role_id
+      foreign: id
+      type: one
+    UserStatus:
+      local: status_id
+      foreign: id
+      type: one
+Validation:
+  connection: doctrine
+  tableName: validation
+  columns:
+    id:
+      type: integer(8)
+      fixed: false
+      unsigned: false
+      primary: true
+      autoincrement: true
+    code:
+      type: string(60)
+      fixed: false
+      unsigned: false
+      primary: false
+      default: ''
+      notnull: true
+      autoincrement: false
+    name:
+      type: string(60)
+      fixed: false
+      unsigned: false
+      primary: false
+      default: ''
+      notnull: true
+      autoincrement: false
+    description:
+      type: string()
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: false
+      autoincrement: false
+    status:
+      type: integer(1)
+      fixed: false
+      unsigned: false
+      primary: false
+      default: '1'
+      notnull: true
+      autoincrement: false
+    created_at:
+      type: timestamp(25)
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: true
+      autoincrement: false
+    updated_at:
+      type: timestamp(25)
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: true
+      autoincrement: false
+  relations:
+    ChartOfAccountTypeValidation:
+      local: id
+      foreign: validation_id
+      type: many
+    ChartOfAccountValidation:
+      local: id
+      foreign: validation_id
+      type: many

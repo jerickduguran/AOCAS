@@ -1,0 +1,4 @@
+login:
+    is_secure: false
+loginpost:
+    is_secure: false

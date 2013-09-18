@@ -58,14 +58,9 @@ class ReceiptForm extends BaseReceiptForm
 
 	$this->validatorSchema->setOption('allow_extra_fields', true);
     $this->widgetSchema->setNameFormat('receipt[%s]');
-	
-	//$this->addNewParticularEntry();
-	//$this->addNewAccountEntry(); 
-	
+	  
 	$this->embedRelation("ReceiptParticularEntry");
-	$this->embedRelation("ReceiptAccountEntry"); 
-	$this->embedRelation("ReceiptCashEntry"); 
-	$this->embedRelation("ReceiptCheckEntry"); 
+	$this->embedRelation("ReceiptAccountEntry");  
   }
    public function addNewParticularEntry($number = 1)
    {

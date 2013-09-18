@@ -12,8 +12,11 @@
  * @property int $general_library_id
  * @property int $chart_of_account_id
  * @property boolean $is_cleared
+ * @property date $is_cleared_date
  * @property boolean $is_released
+ * @property date $is_released_date
  * @property boolean $is_cancelled
+ * @property date $is_cancelled_date
  * @property decimal $amount
  * @property Receipt $Receipt
  * @property ChartOfAccount $ChartOfAccount
@@ -27,8 +30,11 @@
  * @method int               getGeneralLibraryId()    Returns the current record's "general_library_id" value
  * @method int               getChartOfAccountId()    Returns the current record's "chart_of_account_id" value
  * @method boolean           getIsCleared()           Returns the current record's "is_cleared" value
+ * @method date              getIsClearedDate()       Returns the current record's "is_cleared_date" value
  * @method boolean           getIsReleased()          Returns the current record's "is_released" value
+ * @method date              getIsReleasedDate()      Returns the current record's "is_released_date" value
  * @method boolean           getIsCancelled()         Returns the current record's "is_cancelled" value
+ * @method date              getIsCancelledDate()     Returns the current record's "is_cancelled_date" value
  * @method decimal           getAmount()              Returns the current record's "amount" value
  * @method Receipt           getReceipt()             Returns the current record's "Receipt" value
  * @method ChartOfAccount    getChartOfAccount()      Returns the current record's "ChartOfAccount" value
@@ -41,8 +47,11 @@
  * @method ReceiptCheckEntry setGeneralLibraryId()    Sets the current record's "general_library_id" value
  * @method ReceiptCheckEntry setChartOfAccountId()    Sets the current record's "chart_of_account_id" value
  * @method ReceiptCheckEntry setIsCleared()           Sets the current record's "is_cleared" value
+ * @method ReceiptCheckEntry setIsClearedDate()       Sets the current record's "is_cleared_date" value
  * @method ReceiptCheckEntry setIsReleased()          Sets the current record's "is_released" value
+ * @method ReceiptCheckEntry setIsReleasedDate()      Sets the current record's "is_released_date" value
  * @method ReceiptCheckEntry setIsCancelled()         Sets the current record's "is_cancelled" value
+ * @method ReceiptCheckEntry setIsCancelledDate()     Sets the current record's "is_cancelled_date" value
  * @method ReceiptCheckEntry setAmount()              Sets the current record's "amount" value
  * @method ReceiptCheckEntry setReceipt()             Sets the current record's "Receipt" value
  * @method ReceiptCheckEntry setChartOfAccount()      Sets the current record's "ChartOfAccount" value
@@ -59,8 +68,11 @@ abstract class BaseReceiptCheckEntry extends sfDoctrineRecord
     public function setTableDefinition()
     {
         $this->setTableName('receipt_check_entry');
-        $this->hasColumn('check_number', 'string', null, array(
+        $this->hasColumn('check_number', 'string', 25, array(
              'type' => 'string',
+             'notnull' => true,
+             'default' => 0,
+             'length' => 25,
              ));
         $this->hasColumn('check_date', 'date', null, array(
              'type' => 'date',
@@ -85,13 +97,22 @@ abstract class BaseReceiptCheckEntry extends sfDoctrineRecord
              'type' => 'boolean',
              'default' => false,
              ));
+        $this->hasColumn('is_cleared_date', 'date', null, array(
+             'type' => 'date',
+             ));
         $this->hasColumn('is_released', 'boolean', null, array(
              'type' => 'boolean',
              'default' => false,
              ));
+        $this->hasColumn('is_released_date', 'date', null, array(
+             'type' => 'date',
+             ));
         $this->hasColumn('is_cancelled', 'boolean', null, array(
              'type' => 'boolean',
              'default' => false,
+             ));
+        $this->hasColumn('is_cancelled_date', 'date', null, array(
+             'type' => 'date',
              ));
         $this->hasColumn('amount', 'decimal', 12, array(
              'type' => 'decimal',

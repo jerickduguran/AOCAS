@@ -37,34 +37,33 @@
 					 
 		<!-- ***** DETAILS OF ENTRY HERE ***** -->
 			<?php if(count($form['ReceiptCashEntry']) > 0 ):?>
-					<?php $total_acct = 0;?>
-					<?php foreach($form['ReceiptCashEntry'] as $a_cash_entry_form):?>
-						<?php $total_acct ++;?>
-							<div class="entryBorder cash_row">
-								<div class="entryChart5">  
-									<?php echo $a_cash_entry_form['general_library_id']->render(array('class'=>'entrySelect'));?>
-								</div>      
-								<div class="entryCode4"> 
-									<?php echo $a_cash_entry_form['chart_of_account_id']->render(array('class'=>'entrySelect'));?>
+						<?php $total_entry = 1;?>
+						<?php foreach($form['ReceiptCashEntry'] as $a_cash_entry_form):?>
+								<div class="entryBorder cash_row">
+									<?php echo $a_cash_entry_form->renderHiddenFields();?>
+									<div class="entryChart5">  
+										<?php echo $a_cash_entry_form['general_library_id']->render(array('class'=>'entrySelect'));?>
+									</div>      
+									<div class="entryCode4"> 
+										<?php echo $a_cash_entry_form['chart_of_account_id']->render(array('class'=>'entrySelect'));?>
+									</div>
+									<div class="entryCode5">
+										<?php echo $a_cash_entry_form['date']->render();?>
+									</div>
+									<div class="entryCode5">
+										 <?php echo $a_cash_entry_form['amount']->render();?>
+									</div>
+									
+									<div class="entryAction">
+										<?php echo $total_entry !=1 ? image_tag("trash.png",array("class" => "removecashentry","style"=>"text-align:center;")) : '';?>
+									</div> 
 								</div>
-								<div class="entryCode5">
-									<?php echo $a_cash_entry_form['date']->render();?>
-								</div>
-								<div class="entryCode5">
-									 <?php echo $a_cash_entry_form['amount']->render();?>
-								</div>
-								
-								<div class="entryAction">
-									<?php echo $total_acct !=1 ? image_tag("trash.png",array("class" => "removecashentry","style"=>"text-align:center;")) : '';?>
-								</div> 
-							</div>
-					
-					<?php endforeach;?>  
+							<?php $total_entry ++;?> 
+						<?php endforeach;?>  
 					<?php else:?> 
 							<?Php $form->addNewCashEntry(1);?>  
-							<?php $total_acct = 0;?>
+							<?php $total_entry = 1;?>
 							<?php foreach($form['cash_entries'] as $a_cash_entry_form):?>
-								<?php $total_acct++;?>
 								 <div class="entryBorder cash_row">
 									<div class="entryChart5">  
 										<?php echo $a_cash_entry_form['general_library_id']->render(array('class'=>'entrySelect'));?>
@@ -80,9 +79,10 @@
 									</div>
 									
 									<div class="entryAction">
-										<?php echo $total_acct !=1 ? image_tag("trash.png",array("class" => "removecashentry","style"=>"text-align:center;")) : '';?>
+										<?php echo $total_entry !=1 ? image_tag("trash.png",array("class" => "removecashentry","style"=>"text-align:center;")) : '';?>
 									</div> 
 								</div>
+								<?php $total_entry++;?>
 						<?php endforeach;?>  
 					<?php endif;?>	
 					</form>					
@@ -111,15 +111,22 @@
         </div> 
 		 <div class="formControlBtn" align="right">
 			<a href="javascript:void(0);" class="btnCancel">Reset</a>
-			<a href="javascript:void(0);" class="btnSave">Save</a>      
-			<a href="javascript:void(0);" class="btnCancel closeCashEntry">Cancel</a>      
+			<a href="javascript:void(0);" id="btnSave_cashentry" class="btnSave">Save</a>      
+			<a href="javascript:void(0);" class="btnCancel closeCashCheckEntry">Cancel</a>      
 		</div>
     </div>
 <script>
-	var new_cash_count = <?php echo 1;?>;
+	var new_cash_count = <?php echo $total_entry;?>;
+	var removeNewCashEntry = function(){
+	  $('.removecashentry').click(function(e){
+		e.preventDefault();
+		$(this).parent().parent().remove();
+	  })
+	};
+	
 	$(document).ready(function(){	
 		removeNewCashEntry();
-		$(".btnSave").click(function(){ 
+		$("#btnSave_cashentry").click(function(){ 	
 			$.ajax({
 				url: '<?php echo url_for("or/savecashentries?id=").$receipt->getId();?>',
 				method: 'POST',
@@ -128,7 +135,7 @@
 				success: function(resp){
 					var _resp = eval(resp);
 					if(_resp.save){
-						$(".closeCashEntry").trigger('click');
+						$(".closeCashCheckEntry").trigger('click');
 					}else{
 						console.log(_resp.errors);
 					}
@@ -144,7 +151,7 @@
 	function addNewCashEntry()
 	{
 			$.ajax({
-					url: '<?php echo url_for("or/addCashEntry?num=");?>'+ (new_cash_count + 1),
+					url: '<?php echo url_for("or/addCashEntry?num=");?>'+ (new_cash_count),
 					type: 'POST',
 					dataType: 'json',
 					success: function(resp){ 
@@ -167,14 +174,6 @@
 		}else{
 			$("."+_parent+"").find("div.popupEntryHeader").after(content);
 		} 
-	}
-	
-	var removeNewCashEntry = function(){
-	  $('.removecashentry').click(function(e){
-		e.preventDefault();
-		$(this).parent().parent().remove();
-	  })
-	};
-	
+	} 
 	
 </script>

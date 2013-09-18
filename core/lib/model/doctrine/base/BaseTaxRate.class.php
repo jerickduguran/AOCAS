@@ -9,21 +9,33 @@
  * @property date $effectivity_date
  * @property enum $type
  * @property Doctrine_Collection $CheckVoucherAccountEntryOutputVatEntry
- * @property Doctrine_Collection $InvoiceAccountEntryOutputVatEntry
+ * @property Doctrine_Collection $AccountsPayableVoucherAccountEntryOutputVatEntry
+ * @property Doctrine_Collection $DebitCreditMemoAccountEntryOutputVatEntry
  * @property Doctrine_Collection $ReceiptAccountEntryOutputVatEntry
+ * @property Doctrine_Collection $InvoiceAccountEntryOutputVatEntry
+ * @property Doctrine_Collection $JournalVoucherAccountEntryOutputVatEntry
+ * @property Doctrine_Collection $PettyCashVoucherAccountEntryOutputVatEntry
  * 
- * @method decimal             getRate()                                   Returns the current record's "rate" value
- * @method date                getEffectivityDate()                        Returns the current record's "effectivity_date" value
- * @method enum                getType()                                   Returns the current record's "type" value
- * @method Doctrine_Collection getCheckVoucherAccountEntryOutputVatEntry() Returns the current record's "CheckVoucherAccountEntryOutputVatEntry" collection
- * @method Doctrine_Collection getInvoiceAccountEntryOutputVatEntry()      Returns the current record's "InvoiceAccountEntryOutputVatEntry" collection
- * @method Doctrine_Collection getReceiptAccountEntryOutputVatEntry()      Returns the current record's "ReceiptAccountEntryOutputVatEntry" collection
- * @method TaxRate             setRate()                                   Sets the current record's "rate" value
- * @method TaxRate             setEffectivityDate()                        Sets the current record's "effectivity_date" value
- * @method TaxRate             setType()                                   Sets the current record's "type" value
- * @method TaxRate             setCheckVoucherAccountEntryOutputVatEntry() Sets the current record's "CheckVoucherAccountEntryOutputVatEntry" collection
- * @method TaxRate             setInvoiceAccountEntryOutputVatEntry()      Sets the current record's "InvoiceAccountEntryOutputVatEntry" collection
- * @method TaxRate             setReceiptAccountEntryOutputVatEntry()      Sets the current record's "ReceiptAccountEntryOutputVatEntry" collection
+ * @method decimal             getRate()                                             Returns the current record's "rate" value
+ * @method date                getEffectivityDate()                                  Returns the current record's "effectivity_date" value
+ * @method enum                getType()                                             Returns the current record's "type" value
+ * @method Doctrine_Collection getCheckVoucherAccountEntryOutputVatEntry()           Returns the current record's "CheckVoucherAccountEntryOutputVatEntry" collection
+ * @method Doctrine_Collection getAccountsPayableVoucherAccountEntryOutputVatEntry() Returns the current record's "AccountsPayableVoucherAccountEntryOutputVatEntry" collection
+ * @method Doctrine_Collection getDebitCreditMemoAccountEntryOutputVatEntry()        Returns the current record's "DebitCreditMemoAccountEntryOutputVatEntry" collection
+ * @method Doctrine_Collection getReceiptAccountEntryOutputVatEntry()                Returns the current record's "ReceiptAccountEntryOutputVatEntry" collection
+ * @method Doctrine_Collection getInvoiceAccountEntryOutputVatEntry()                Returns the current record's "InvoiceAccountEntryOutputVatEntry" collection
+ * @method Doctrine_Collection getJournalVoucherAccountEntryOutputVatEntry()         Returns the current record's "JournalVoucherAccountEntryOutputVatEntry" collection
+ * @method Doctrine_Collection getPettyCashVoucherAccountEntryOutputVatEntry()       Returns the current record's "PettyCashVoucherAccountEntryOutputVatEntry" collection
+ * @method TaxRate             setRate()                                             Sets the current record's "rate" value
+ * @method TaxRate             setEffectivityDate()                                  Sets the current record's "effectivity_date" value
+ * @method TaxRate             setType()                                             Sets the current record's "type" value
+ * @method TaxRate             setCheckVoucherAccountEntryOutputVatEntry()           Sets the current record's "CheckVoucherAccountEntryOutputVatEntry" collection
+ * @method TaxRate             setAccountsPayableVoucherAccountEntryOutputVatEntry() Sets the current record's "AccountsPayableVoucherAccountEntryOutputVatEntry" collection
+ * @method TaxRate             setDebitCreditMemoAccountEntryOutputVatEntry()        Sets the current record's "DebitCreditMemoAccountEntryOutputVatEntry" collection
+ * @method TaxRate             setReceiptAccountEntryOutputVatEntry()                Sets the current record's "ReceiptAccountEntryOutputVatEntry" collection
+ * @method TaxRate             setInvoiceAccountEntryOutputVatEntry()                Sets the current record's "InvoiceAccountEntryOutputVatEntry" collection
+ * @method TaxRate             setJournalVoucherAccountEntryOutputVatEntry()         Sets the current record's "JournalVoucherAccountEntryOutputVatEntry" collection
+ * @method TaxRate             setPettyCashVoucherAccountEntryOutputVatEntry()       Sets the current record's "PettyCashVoucherAccountEntryOutputVatEntry" collection
  * 
  * @package    Gcross Accounting System
  * @subpackage model
@@ -62,11 +74,27 @@ abstract class BaseTaxRate extends sfDoctrineRecord
              'local' => 'id',
              'foreign' => 'tax_rate_id'));
 
-        $this->hasMany('InvoiceAccountEntryOutputVatEntry', array(
+        $this->hasMany('AccountsPayableVoucherAccountEntryOutputVatEntry', array(
+             'local' => 'id',
+             'foreign' => 'tax_rate_id'));
+
+        $this->hasMany('DebitCreditMemoAccountEntryOutputVatEntry', array(
              'local' => 'id',
              'foreign' => 'tax_rate_id'));
 
         $this->hasMany('ReceiptAccountEntryOutputVatEntry', array(
+             'local' => 'id',
+             'foreign' => 'tax_rate_id'));
+
+        $this->hasMany('InvoiceAccountEntryOutputVatEntry', array(
+             'local' => 'id',
+             'foreign' => 'tax_rate_id'));
+
+        $this->hasMany('JournalVoucherAccountEntryOutputVatEntry', array(
+             'local' => 'id',
+             'foreign' => 'tax_rate_id'));
+
+        $this->hasMany('PettyCashVoucherAccountEntryOutputVatEntry', array(
              'local' => 'id',
              'foreign' => 'tax_rate_id'));
 

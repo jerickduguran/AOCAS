@@ -11,9 +11,9 @@
  * @property Doctrine_Collection $AccountsReceivableBeginningBalance
  * @property Doctrine_Collection $AccountsPayableBeginningBalance
  * @property Doctrine_Collection $GeneralLedgerBeginningBalance
- * @property Doctrine_Collection $InvoiceAccountEntry
  * @property Doctrine_Collection $JournalBookTemplate
  * @property Doctrine_Collection $ParticularTemplate
+ * @property Doctrine_Collection $InvoiceAccountEntry
  * 
  * @method string              getCode()                               Returns the current record's "code" value
  * @method string              getTitle()                              Returns the current record's "title" value
@@ -21,18 +21,18 @@
  * @method Doctrine_Collection getAccountsReceivableBeginningBalance() Returns the current record's "AccountsReceivableBeginningBalance" collection
  * @method Doctrine_Collection getAccountsPayableBeginningBalance()    Returns the current record's "AccountsPayableBeginningBalance" collection
  * @method Doctrine_Collection getGeneralLedgerBeginningBalance()      Returns the current record's "GeneralLedgerBeginningBalance" collection
- * @method Doctrine_Collection getInvoiceAccountEntry()                Returns the current record's "InvoiceAccountEntry" collection
  * @method Doctrine_Collection getJournalBookTemplate()                Returns the current record's "JournalBookTemplate" collection
  * @method Doctrine_Collection getParticularTemplate()                 Returns the current record's "ParticularTemplate" collection
+ * @method Doctrine_Collection getInvoiceAccountEntry()                Returns the current record's "InvoiceAccountEntry" collection
  * @method Project             setCode()                               Sets the current record's "code" value
  * @method Project             setTitle()                              Sets the current record's "title" value
  * @method Project             setDescription()                        Sets the current record's "description" value
  * @method Project             setAccountsReceivableBeginningBalance() Sets the current record's "AccountsReceivableBeginningBalance" collection
  * @method Project             setAccountsPayableBeginningBalance()    Sets the current record's "AccountsPayableBeginningBalance" collection
  * @method Project             setGeneralLedgerBeginningBalance()      Sets the current record's "GeneralLedgerBeginningBalance" collection
- * @method Project             setInvoiceAccountEntry()                Sets the current record's "InvoiceAccountEntry" collection
  * @method Project             setJournalBookTemplate()                Sets the current record's "JournalBookTemplate" collection
  * @method Project             setParticularTemplate()                 Sets the current record's "ParticularTemplate" collection
+ * @method Project             setInvoiceAccountEntry()                Sets the current record's "InvoiceAccountEntry" collection
  * 
  * @package    Gcross Accounting System
  * @subpackage model
@@ -77,15 +77,15 @@ abstract class BaseProject extends sfDoctrineRecord
              'local' => 'id',
              'foreign' => 'project_id'));
 
-        $this->hasMany('InvoiceAccountEntry', array(
-             'local' => 'id',
-             'foreign' => 'project_id'));
-
         $this->hasMany('JournalBookTemplate', array(
              'local' => 'id',
              'foreign' => 'project_id'));
 
         $this->hasMany('ParticularTemplate', array(
+             'local' => 'id',
+             'foreign' => 'project_id'));
+
+        $this->hasMany('InvoiceAccountEntry', array(
              'local' => 'id',
              'foreign' => 'project_id'));
 

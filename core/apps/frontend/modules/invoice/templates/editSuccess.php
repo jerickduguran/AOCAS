@@ -1,5 +1,5 @@
  <?php slot("content_title");?>
-Invoice: Edit
+Invoice: Update
 <?php end_slot();?> 
     <div class="formBodyTransaction">
 
@@ -14,7 +14,8 @@ Invoice: Edit
                 </div> 
             
             	<div class="formTransaction">
-					<div class="reference">
+                
+                	<div class="reference">
 						<div class="refBody">
                         	Book: <?php echo $form['book_id']->render(array('readonly'=>'readonly'));?> 
                         </div>
@@ -26,6 +27,7 @@ Invoice: Edit
                             <input type="text" readonly disabled value="INCOME BOOK"/>
                         </div>
                     </div>
+                
                 	<div class="transBodyLeft">
                     
                     	<div class="transBodyContent">
@@ -82,7 +84,7 @@ Invoice: Edit
                            		Date Received:
                             </div>
                             <div class="transBodyInfo">
-                                <?php echo $form['date_receive']->render();?>
+                                <?php echo $form['date_receive']->render(array('class'=>'datepicker_s'));?>
                             </div>  
                         </div> 
                         
@@ -100,7 +102,7 @@ Invoice: Edit
                            		Due Date:
                             </div>
                             <div class="transBodyInfo">
-                                <?php echo $form['due_date']->render();?>
+                                <?php echo $form['due_date']->render(array('class'=>'datepicker_s'));?>
                             </div>  
                         </div> 
 						
@@ -114,7 +116,8 @@ Invoice: Edit
                         </div> 
                           
                     
-                    </div> 
+                    </div>
+					
 					
 			<div class="entryForm"> 
                 	<div class="formControlTitle">
@@ -201,9 +204,8 @@ Invoice: Edit
 												<?php echo $p_entry_form['total']->render(array('class'=>'entryBox total_entry'));?>
 											</div> 
 										</div> 
-										<div class="entryAction">
-											<?php //echo image_tag("icons/DeleteRed.png");?>
-											<?php echo $total_part != 1 ? image_tag("trash.png",array("class" => "removenewparticular")) : '';?>
+										<div class="entryAction"> 
+											<?php echo $total_part != 1 ? image_tag("icons/trash.png",array("class" => "removenewparticular")) : '';?>
 										</div> 
 									</div> 
 								<?php endforeach;?>
@@ -246,7 +248,7 @@ Invoice: Edit
 										</div> 
 										<div class="entryAction">
 											<?php //echo image_tag("icons/DeleteRed.png");?>
-											<?php echo $total_part != 1 ? image_tag("trash.png",array("class" => "removenewparticular")) : '';?>
+											<?php echo $total_part != 1 ? image_tag("icons/DeleteRed.png",array("class" => "removenewparticular")) : '';?>
 										</div> 
 									</div> 
 								<?php endforeach;?>
@@ -256,21 +258,10 @@ Invoice: Edit
 								<a href="javascript:void(0);" class="buttons addPartEntry"><u>A</u>dd New Line</a>
 								<a href="javascript:void(0);" class="buttons previewEntry"><u>P</u>review Particular</a>
 							</div> 
-                    </div>  
-                  </div> 
+                    </div>                 
                     
-                    	
-                        
-                                              
-                        
-                        	
-                        
-<?php /*** END PARTICULAR TEMPLATES ****/?>		
-		
-<?php /*** END PARTICULAR ENTRIES ****/?>			
-
-			
-
+                    
+                    </div> 
 			<div class="entryForm"> 
                 	<div class="formControlTitle">
                 		<h2>ACCOUNT ENTRIES</h2>
@@ -281,93 +272,102 @@ Invoice: Edit
                     		Use Book Template:        
 						<?php echo $form['book_template']->render(array('class'=>'formTranSelect2'));?>     
                 		</div>
-            		</div>
-                    
-                    
-                    
-                    <div class="entryForm account_part"> 
-						<div class="entryControl">
-							<div class="entryChart">    
-								<div class="formEntryTitle">
-									Account Code
-								</div>         
+            		</div> 
+					<div class="particularHeader">   
+						<div class="account_part"> 
+							<div class="entryControl">
+								<div class="entryChartOR">    
+									<div class="formEntryTitle">
+										Account Code
+									</div>         
+								</div>
+								<div class="entryRef">
+									<div class="formEntryTitle">
+										General Reference
+									</div>                
+								</div> 
+								<div class="entryRef">
+									<div class="formEntryTitle">
+										DN Ref
+									</div>                
+								</div>
+								<div class="entryDC"> 
+									<div class="formEntryTitle">
+										Debit
+									</div>     
+								</div>
+								<div class="entryDC" style="width:16%">
+									<div class="formEntryTitle">
+										Credit
+									</div>            
+								</div>
+								<div class="entryAction" style="width:5%;">
+									<div class="formEntryTitle">
+										
+									</div>            
+								</div>
 							</div>
-							<div class="entryCode">
-								<div class="formEntryTitle">
-									Project Code
-								</div>                
-							</div>
-							<div class="entryCode">
-								<div class="formEntryTitle">
-									Department Code
-								</div>               
-							</div>
-							<div class="entryCode">
-								<div class="formEntryTitle">
-									DN Ref
-								</div>                       
-							</div>
-							<div class="entryDC"> 
-								<div class="formEntryTitle">
-									Debit
-								</div>     
-							</div>
-							<div class="entryDC">
-								<div class="formEntryTitle">
-									Credit
-								</div>            
-							</div>
-							<div class="entryAction">
-								<div class="formEntryTitle">
-									
-								</div>            
+							<?php if(count($form['InvoiceAccountEntry']) > 0 ):?>
+								<?php $total_acct = 0;?>
+								<?php foreach($form['InvoiceAccountEntry'] as $a_enrty_form):?>
+									<?php $total_acct ++;?>
+									<div class="entryBorder account_entry_row" id="row-<?php echo $total_acct;?>">
+										<div class="entryChartOR"> 
+											<div id="account_type_id_<?php echo $a_enrty_form['id']->getValue();?>"> 
+												<?php echo $a_enrty_form['chart_of_account_id']->render(array('class'=>'entrySelect invoice-account-entry-coa'));?> 
+											</div> 
+										</div>                     
+										<div class="entryRef">  
+												<?php echo $a_enrty_form['general_library_id']->render(array('class'=>'entrySelect'));?>  
+										</div>                
+										<div class="entryRef">  
+												<?php echo $a_enrty_form['dn_reference']->render(array('class'=>'entryBox'));?>  
+										</div>  
+										<div class="entryDC"> 
+											<?php echo $a_enrty_form['debit']->render(array('class'=>'entryBox'));?>  
+										</div>
+										<div class="entryDC" style="width:16%"> 
+											<?php echo $a_enrty_form['credit']->render(array('class'=>'entryBox'));?>  
+										</div>
+										<div class="entryAction" style="width:5%" rel="<?php echo $a_enrty_form['chart_of_account_id']->getValue();?>">  
+											<a href="javascript:void(0);" rel="<?php echo $a_enrty_form['id']->getValue();?>" class="configure_outputvat_entries" title="Output VAT Entries" > <?php echo image_tag("trash.png");?></a>
+										</div> 
+									</div>
+								<?php endforeach;?> 
+							
+							<?php else:?> 
+									<?Php $form->addNewAccountEntry(1);?>  
+									<?php $total_acct = 0;?>
+									<?php foreach($form['account_entries'] as $a_enrty_form):?>
+										<?php $total_acct++;?>
+										<div class="entryBorder account_entry_row" id="row-<?php echo $total_acct;?>">
+											<div class="entryChartInvoice"> 
+												<div> 
+												<?php echo $a_enrty_form['chart_of_account_id']->render(array('class'=>'entrySelect invoice-account-entry-coa'));?> 
+												</div> 
+											</div>                     
+											<div class="entryChart">  
+													<?php echo $a_enrty_form['general_library_id']->render(array('class'=>'entrySelect'));?>  
+											</div> 
+											<div class="entryDC"> 
+												<?php echo $a_enrty_form['debit']->render(array('class'=>''));?>  
+											</div>
+											<div class="entryDC"> 
+												<?php echo $a_enrty_form['credit']->render(array('class'=>''));?>  
+											</div>
+											<div class="entryAction"> 
+													<?php //echo image_tag("icons/DeleteRed.png");?>
+											</div> 
+										</div>
+									<?php endforeach;?>  
+							<?php endif;?>						
+							<div class="addLine">
+								<a href="javascript:void(0);" class="buttons addAccountEntry"><u>A</u>dd Line</a>
+								<a href="javascript:void(0);" class="buttons"><u>P</u>review</a>
 							</div>
 						</div>
-						<?php $total_acct = 0;?>
-						<?php foreach($form['InvoiceAccountEntry'] as $a_enrty_form):?>
-						<?php $total_acct++;?>
-						<div class="entryBorder account_entry_row" id="row-<?php echo $total_acct;?>">
-							<div class="entryChart"> 
-								<div> 
-								<?php echo $a_enrty_form['chart_of_account_id']->render(array('class'=>'entrySelect'));?> 
-								</div> 
-							</div>                     
-							<div class="entryCode"> 
-								<div>
-								<?php echo $a_enrty_form['project_id']->render(array('class'=>'entrySelect'));?> 
-								</div> 
-							</div>
-							<div class="entryCode">
-								<div>
-								<?php echo $a_enrty_form['department_id']->render(array('class'=>'entrySelect'));?> 
-								</div>  
-							</div>
-							<div class="entryCode">
-								<div>
-								<?php echo $a_enrty_form['dn_reference']->render(array('class'=>'entryBox'));?> 
-								</div>  
-							</div>
-							<div class="entryDC">
-								<div>
-								<?php echo $a_enrty_form['debit']->render(array('class'=>'entryBox'));?> 
-								</div> 
-							</div>
-							<div class="entryDC">
-								<div>
-								<?php echo $a_enrty_form['credit']->render(array('class'=>'entryBox'));?> 
-								</div> 
-							</div>
-							<div class="entryAction"> 
-									<?php echo $total_acct != 1 ? image_tag("icons/DeleteRed.png",array("class" => "removenewaccount")) : '';?>
-							</div> 
-						</div>
-						<?php endforeach;?> 
                     </div>
                     
-					<div class="addLine">
-						<a href="javascript:void(0);" class="buttons addAccountEntry"><u>A</u>dd Line</a>
-						<a href="javascript:void(0);" class="buttons"><u>P</u>review</a>
-					</div>
 					
 					<div class="total">
 						<div class="totalTitle">
@@ -400,15 +400,22 @@ Invoice: Edit
                 
                </form> 
                 </div>
+				
+<div style="display:none;">
+	<div class="outputvat_popup"></div>
+</div>
 <script type="text/javascript">
  
-    var new_particular_entry_count = <?php echo $total_part;?>;
-    var new_account_entry_count    = <?php echo $total_acct;?>;
+    var new_particular_entry_count = 1;
+    var new_account_entry_count    = 1;
  
 	$(document).ready(function(){
 	
+		$("#<?php echo $form['period']->renderId();?>").datepicker({dateFormat: "MM d, yy"});
 		$("#<?php echo $form['total_amount']->renderId();?>").gcrossNumberToWords({word_element: 'total_amount_in_words'});	
-	
+		$(".datepicker_s").each(function(){
+			$(this).datepicker({dateFormat: "yy-mm-dd"});
+		});
 		$.validator.setDefaults({
 			errorElement: 'span'
 		}); 
@@ -486,7 +493,9 @@ Invoice: Edit
 						var response_data = eval(resp);
 						if(response_data.status){ 
 							$('#<?php echo $form['header_message']->renderId();?>').val(response_data.header); 
-							$('#<?php echo $form['footer_message']->renderId();?>').val(response_data.footer); 
+							$('#<?php echo $form['footer_message']->renderId();?>').val(response_data.footer);
+							$('.parent_part').html(response_data.entries); 
+							new_particular_entry_count = response_data.nextCount;
 						}
 					} 
 				});
@@ -515,10 +524,42 @@ Invoice: Edit
 			calculate($(this),'atc_entry'); 
 		});	
 		
-		removeNewParticular();
-		removeNewAccount();
+		$(".account_part").delegate(".configure_outputvat_entries",'click',function(e){ 
+			checkAccountType($(this));
+		}); 
 	});	
-function calculate(obj,_type)
+	
+	function checkAccountType(obj)
+	{
+		var account_id     			= obj.attr('rel'); 
+		var current_account_id      = obj.parent().attr('rel'); 
+		var selected_account_id 	= obj.parent().parent().find('#account_type_id_'+account_id).find("select").val();
+		
+		$.ajax({
+			url: '<?php echo url_for("invoice/checkAccountType");?>',
+		    type: 'json',
+			data: {"account_id" 		 : account_id,
+			       "selected_account_id" : selected_account_id,
+			       "current_account_id"  : current_account_id,
+				   'invoice_number' 	 : $("#<?php echo $form['invoice_number']->renderId();?>").val(),
+				   'client'				 : $("#<?php echo $form['general_library_id']->renderId();?>").val()
+				   },
+			method: 'POST',
+			success: function(resp){
+				var _resp =  eval("("+resp+")");				
+				if(_resp.has_data){	
+					$(".outputvat_popup").html(_resp.data);
+					$('.outputvat_popup .popupVATBody').bPopup({modalColor: '#C821A1',modalClose: false,closeClass:'closeAccountEntry'},  function() {
+						$(".popupVATBody").css("height","auto");
+					});	
+				}				
+			}
+		});
+	}
+	
+	
+	
+	function calculate(obj,_type)
 	{
 		if(_type == 'amount_entry'){ 
 			var el_amount = $(obj);
@@ -580,25 +621,6 @@ function calculate(obj,_type)
 				});
 	}	
 	
-	function addNewParticularEntry()
-	{
-			$.ajax({
-					url: '<?php echo url_for("invoice/addParticularEntry?num=");?>'+ (new_particular_entry_count + 1),
-					type: 'POST',
-					dataType: 'json',
-					success: function(resp){ 
-						var response_data = eval(resp);
-						if(response_data.added)
-						{  
-							new_particular_entry_count = new_particular_entry_count + 1;	
-							setLastOccurenceContent("parent_part","particular_entry_row",response_data.new);
-							$('.removenewparticular').unbind('click');
-							removeNewParticular();
-						}
-					} 
-				});
-	}	
-	
 	function addNewAccountEntryField()
 	{
 			$.ajax({
@@ -641,4 +663,9 @@ function calculate(obj,_type)
 		$(this).parent().parent().remove();
 	  })
 	};
+	
+	function calculateTotalParticularEntry(elem,type)
+	{
+		var amount = $(elem).val();
+	}
 </script>
